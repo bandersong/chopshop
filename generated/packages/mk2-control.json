@@ -1,0 +1,54 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "mk2-control",
+ "device": "mk2",
+ "os": "1.73",
+ "title": "Control build (no mods)",
+ "summary": "Elektron's own MKII code, only unpacked and packed again by this tool. Flash it first.",
+ "status": "Same file as the project's MKII 1_CONTROL. Not yet run on an MKII.",
+ "features": [],
+ "mods": [],
+ "params": {},
+ "stock": {
+  "syx_sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52",
+  "mainos_sha256": "28d9ef40c895e03f17dfce096543109adaf708947392db72818fc2a412d685d6",
+  "mainos_size": 3005432,
+  "section": 3,
+  "other_sections": {
+   "section_1_FPGA.bin": "7c8bff3cb411ed93434b3a4eab846738be6241d64aeb23b4061eb11a8aa29b2f",
+   "section_2_bootstrap.bin": "1b8d3b7288df118512740ac7c59d8dd9f71f44e6633a29628bcb068d756e2ed8",
+   "section_5_meta.raw": "760128764787e148ed16af6987765618289616e4a44ad2f37a32297e5732659d",
+   "section_8_?.bin": "6943b2f27773f40f1e7857ea6fa7a121269e930bd403098e6b6c00002327dc20"
+  }
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded device firmware",
+   1076660052,
+   1076676892
+  ]
+ ],
+ "regions": [],
+ "edits": [],
+ "stock_copies": [],
+ "detours": [],
+ "output": {
+  "name": "ARMK2_OS1.73_control.syx",
+  "sha256": "f3f6aad0cad09a7c3d531fb36a34fc78ed45bee126b9aab84cfed93e51d99c04",
+  "size": 1788320,
+  "mainos_sha256": "28d9ef40c895e03f17dfce096543109adaf708947392db72818fc2a412d685d6"
+ },
+ "counts": {
+  "edits": 0,
+  "mod_bytes": 0,
+  "stock_reference_bytes": 0,
+  "stock_copies": 0
+ },
+ "provenance": {
+  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "manifest_sha256": "b5db3cfe1dad01ea074ec2b8ce7eb991d27498f9f1e54b165f1b5922cddfc3e5",
+  "generator": "web/tools/mkpackages.py"
+ }
+}

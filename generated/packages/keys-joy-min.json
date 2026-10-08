@@ -1,0 +1,123 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "keys-joy-min",
+ "device": "keys",
+ "os": "1.56",
+ "title": "JOY RANDOM only",
+ "summary": "Only the joystick roll (FUNCTION + OCTAVE DOWN), without chord memory.",
+ "status": "Built and checked on a computer; not yet run on an Analog Keys.",
+ "features": [
+  "joy"
+ ],
+ "mods": [
+  "0011-joyrand"
+ ],
+ "params": {},
+ "stock": {
+  "syx_sha256": "cda4459d14bfba40635440ad9dfa8fc183e5317e5e3ffa7116704f307fdf7010",
+  "mainos_sha256": "cc19347b11d220aba73e4fd7203b2ce4e6d6d9553308d713648885682c714c26",
+  "mainos_size": 2372584,
+  "section": 3,
+  "other_sections": {}
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded bootstrap",
+   1075998440,
+   1076051904
+  ],
+  [
+   "embedded UI-board firmware",
+   1075546770,
+   1075552214
+  ]
+ ],
+ "regions": [
+  [
+   1074503270,
+   6,
+   "detour/0011-joyrand"
+  ],
+  [
+   1076055388,
+   676,
+   "cave/0011-joyrand"
+  ]
+ ],
+ "edits": [
+  {
+   "kind": "detour",
+   "owner": "0011-joyrand",
+   "addr": 1074503270,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "626b7b06c901cdbf14fff9c436c97724e7ccc6139f54bc2fa264bc6a0bcb3bd2",
+   "parts": [
+    [
+     "data",
+     "TvlAI01c"
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0011-joyrand",
+   "section": ".text",
+   "addr": 1076055388,
+   "len": 557,
+   "expect_len": 557,
+   "expect": "2dfe7719a60b75ed8c5263ac1e31906ec0dc94298fbbac35b85ff189c513f063",
+   "parts": [
+    [
+     "stock",
+     1074503270,
+     6
+    ],
+    [
+     "data",
+     "ZhQgQiAoABByC8CBcgOwgWYEYQAADg=="
+    ],
+    [
+     "stock",
+     1074503270,
+     6
+    ],
+    [
+     "data",
+     "TvlAC55sT+//xEjvPPwAFE65QBLokC4ALwBOuUAKIfYugE65QAqreFiPLABwBbCGZQABHmYIQfoBtWAAARhJ+gFGejVwBLCGZgZJ+gFveiYvB065QAoiLliPLgB4AEf6AQ4gWyYbLwYvB06QUI8qQEqAZwAAyiAVDIBAFvugZgAAvi8NTrlAAe88WI9yBbKAZgAArHQAtINsFC8CLw1OuUAB795Qjy+ALABSgmDoTrlACSPkgMVCQEhAJABwABA0KAAvAE65QABzWliPcgCyg2wUsLccAGcEUoFg8lKCtIVl2nQAYNYvgDwAcAAQNCgALwAvAy8NTrlAAfF+T+8ADE65QAkj5CQAciiAwUJASEAGgAAAABgCggAAQABnAkSA4YgvAC8DLw1OuUAB8DJP7wAMUoRSg3AFtoBtAP9yt/xAI08EZgD/HEH6AJdKhGYEQfoAqi8ILyoAbE65QAIXdFCPTO88/AAUT+8APE51QAmiKgAAAAFACaHEAAAAAEAJopAAAAAAKiwvMDE3OTw9PkNISUpLTE1OT1FSU1RWWFlaW1xeX2BhZGVmZ2ttbm9wcXV3eHp/gYKEiYuNjo+QkpOUlZeYmZqcnZ6foKGjpaaoqaqrrK2ur7Cxs7i6u73CxEpPWTogUkFORE9NAEpPWTogTk9UIE9OIENWAEpPWTogTk8gQ0hBTkdFAA=="
+    ]
+   ]
+  }
+ ],
+ "stock_copies": [],
+ "detours": [
+  {
+   "owner": "0011-joyrand",
+   "addr": 1074503270,
+   "entry": "joy_key_gate",
+   "target": 1076055388,
+   "displaced_len": 6,
+   "rejoin": 1074503276,
+   "reemit": true
+  }
+ ],
+ "output": {
+  "name": "AKEYS_OS1.56_0011.syx",
+  "sha256": "7797f97486ac25ee5a7896fe108b02511333f63ea99ef66a93d3b3b4c747d469",
+  "size": 1090848,
+  "mainos_sha256": "115fb080e00cbb50639e31784c263d09e4f9bf0b9fa4bf160b67c37689f5d110"
+ },
+ "counts": {
+  "edits": 2,
+  "mod_bytes": 551,
+  "stock_reference_bytes": 12,
+  "stock_copies": 0
+ },
+ "provenance": {
+  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "manifest_sha256": "a24e2e1d1b989b74b3279b2f93c174ce9516c28cac2bf27236cde8270f53e6af",
+  "generator": "web/tools/mkpackages.py"
+ }
+}

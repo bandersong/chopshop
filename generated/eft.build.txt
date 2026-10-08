@@ -1,0 +1,21 @@
+emcc: emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.10-git
+flags: -std=c11 -O2 -Wall -Wextra -sMODULARIZE=1 -sEXPORT_NAME=createEFT -sINVOKE_RUN=0 -sEXIT_RUNTIME=0 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=33554432 -sMAXIMUM_MEMORY=2147483648 -sSTACK_SIZE=1048576 -sSINGLE_FILE=1 -sENVIRONMENT=web,worker,node -sFORCE_FILESYSTEM=1 -sEXPORTED_FUNCTIONS=_main,_eft_identify,_malloc,_free -sEXPORTED_RUNTIME_METHODS=callMain,FS,UTF8ToString,ccall
+sources (sha256):
+  7f4b86a2b39814268a76111cb6a9679313b3f4e2a4d7466d9249af2343e7636a  third_party/elektron-firmware-tool/aplib.c
+  f52f3d09ad90c8d6d12a82465909a966795bd8830a7d304ea486306af2053d6e  third_party/elektron-firmware-tool/container.c
+  bc1321239d5b6ab0ed4bc2e71f5cc0e303de91d7333884e74b7b23fa4626f2ae  third_party/elektron-firmware-tool/device.c
+  6c892183cbd3f1d07f631fa3a0d42dff9c3031dd2fb2c91bde4366d90e6c19e3  third_party/elektron-firmware-tool/firmware.c
+  20d4acab61894da3a3afca59b6a3e782e64717de4400ed03a15dde12fa7a44cf  third_party/elektron-firmware-tool/integrity.c
+  a1a4df98379d5dd4084488ac2dd2cb66d6dd8bbf848c4afcedb61ef8e282d350  third_party/elektron-firmware-tool/main.c
+  628625183c6e48b5626ab5902c50743b33617852f16f738808477c330d0e7d49  third_party/elektron-firmware-tool/report.c
+  b381be24b08d650e3aae8b33fc77305e5ecaef16c9a2cf5d46cd5f0ae6839e2a  third_party/elektron-firmware-tool/transport.c
+  c41e0da75225217987e9f509134b21461673b1d1869fc9be2cdc0e8a1e36091e  third_party/elektron-firmware-tool/aplib.h
+  d45e3f6c9abe9e93edfab5ca995cb5f68b57f2463bcf83bf8086940ef474043e  third_party/elektron-firmware-tool/container.h
+  2e962bd7abc9f94de341f6896fab631d27461245e278a0851d1423b85de9eb49  third_party/elektron-firmware-tool/device.h
+  691aa88f492aa1c2bce3fba490176199daf17fa625593f08bb17d30fb5a09cc7  third_party/elektron-firmware-tool/firmware.h
+  99dd1926a011b89df3ac084be95fde4be9b3a0d29a2be1ccd98e32cd2e02ae7d  third_party/elektron-firmware-tool/integrity.h
+  a1e6126fc8db7dcb00c5832fc93f56cede2abb3a9aeb833ce6b6e0bc0542b57f  third_party/elektron-firmware-tool/report.h
+  b8c5a048767904af3a883cae5fc16d4ee9cc2fa2db9c387c6f314e463f62d2bb  third_party/elektron-firmware-tool/transport.h
+  c1e6e00c2311243cf61a50219948c12134bc125d50771a64c67906cbee6fa81a  third_party/elektron-firmware-tool/util.h
+  c29c67630abe6992b02bc252424f32872ea0d86da3350b7787ca5feaf6734cee  src/wasm/eft_api.c
+output: 13568ecd8171e71d738515752bbfa4799a5393ce3f2e8eea5d6813064c2fb95d  generated/eft.js

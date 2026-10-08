@@ -1,0 +1,1238 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "mk1-samplefocus",
+ "device": "mk1",
+ "os": "1.73",
+ "title": "CHOP / Sample Focus",
+ "summary": "A CHOP page on SAMPLE (press SAMPLE, pause, SAMPLE again): the 12 pads play one track's sample from 12 start markers; hi-res markers, END, DIV, LAY, RND; step-lock in GRID REC.",
+ "status": "Built and checked on a computer; this exact file has not run on a Rytm yet (the earlier CHOP builds did).",
+ "features": [
+  "chop"
+ ],
+ "mods": [
+  "0000-shared",
+  "0001-chop"
+ ],
+ "params": {
+  "0000-shared": {
+   "lean": 0
+  },
+  "0001-chop": {
+   "shared_lean": 0
+  }
+ },
+ "stock": {
+  "syx_sha256": "9115c3888354bb388f90410e0445cd312bf020593ed99f768a99e475d1d6157c",
+  "mainos_sha256": "3db73d3a5524d10db110f6e50d722274cd0b72a01292f4a97032165e4f97e175",
+  "mainos_size": 2824228,
+  "section": 3,
+  "other_sections": {}
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded bootstrap",
+   1076414216,
+   1076501284
+  ]
+ ],
+ "regions": [
+  [
+   1073968868,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1073971616,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1073972022,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1073972472,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074405090,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074405158,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074419976,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074557282,
+   2,
+   "patch/0001-chop"
+  ],
+  [
+   1074557288,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1074586808,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074759478,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1075372196,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372204,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372232,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372236,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372240,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372248,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372256,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372284,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372288,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372292,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372300,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372308,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372336,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372340,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372344,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372612,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372620,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372648,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372652,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372656,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372664,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372672,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372700,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372704,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372708,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372716,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372724,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372752,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372756,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372760,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372768,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372776,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372804,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372808,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372812,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1076158136,
+   84,
+   "cave/0001-chop"
+  ],
+  [
+   1076502236,
+   292,
+   "cave/0001-chop"
+  ],
+  [
+   1076504448,
+   1464,
+   "cave/0001-chop"
+  ],
+  [
+   1076505912,
+   236,
+   "cave/0000-shared"
+  ],
+  [
+   1076506148,
+   476,
+   "cave/0001-chop"
+  ]
+ ],
+ "edits": [
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073968868,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "80f9616f42abe528ce213fbc24aadaae5d9fcda4d16db9d878a7a4986ae1c624",
+   "parts": [
+    [
+     "data",
+     "TvlAKifk"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073971616,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "802bfd59372d862f188ada28f67704ac60db31c8e4e632aab6508efebb575840",
+   "parts": [
+    [
+     "data",
+     "TvlAKifG"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073972022,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "1d97d172c992bad43d09c82cad3b9e4180c18f6c33ea6498fdd194f984e957e7",
+   "parts": [
+    [
+     "data",
+     "TvlAKinq"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073972472,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "4ccc9068d4ca40c4c8f4306b909577400c9a5d7b6afc707c06a884297849fad6",
+   "parts": [
+    [
+     "data",
+     "TvlAKi/W"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074405090,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "b5d362db9cfc5f6a38fce7dd2a6941c9dd9be98ab12c00291629a407124d171d",
+   "parts": [
+    [
+     "data",
+     "TvlAKh7c"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074405158,
+   "len": 6,
+   "expect_len": 10,
+   "expect": "60d8ef064e40d8b0379e4f77c35cad0443f5bc38aa4795eda6213541e6caac5a",
+   "parts": [
+    [
+     "data",
+     "TvlAKh9A"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074419976,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "e84a03eda699117fcb074b610176ba7bfc89db7cfa86bc02b0d9860186273969",
+   "parts": [
+    [
+     "data",
+     "TvlAKiju"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1074557282,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "f4746f59ce0b2aae55d09cb639636d253e4db6775b53970a8cc5b07ab5a4e4f5",
+   "parts": [
+    [
+     "data",
+     "cgI="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1074557288,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "398af23bcdc38c86e5133f061e9e9eb4656f9ca5d1a5e8878ec8b1ecbe61fa9a",
+   "parts": [
+    [
+     "data",
+     "QCTeuA=="
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074586808,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "0284971a4db5438f2a860c8cd56fd99709e0da46ebc34bd975f82f7df5ca28e8",
+   "parts": [
+    [
+     "data",
+     "TvlAKilk"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074759478,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "11de1c98f73679bd16718cc04a9e607326ca0c6602d60d08ab5c778783a45855",
+   "parts": [
+    [
+     "data",
+     "TvlAKieA"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372196,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "a13a3fbb8e5c7fd393e5dec31665d43163efe6c7d357424902fc91e510d4ba60",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372204,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "57fad20078d85f9bacd78b1a76db830537e2d28dd181341d1b971554e0fe962c",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372232,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "b547fba29796c7f89ad8cc5caf71a8b76a18bfdb4dc270eefc80cb5e1a8d0019",
+   "parts": [
+    [
+     "data",
+     "QCos6g=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372236,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "0a56ac3801686d8e41254301f10cd10dec53662aa94778692373a5a6f21e152f",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372240,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "bb010a9cf0a5bfbd37ee8191a684f03a633f48a687551c4cec4d3416a70ce023",
+   "parts": [
+    [
+     "data",
+     "QCTe6Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372248,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "1190dd3170c7221affeb147f75332426f7432ae684e560375387db7913df2088",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372256,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "7a7b3c30c658a40a9d8d033d60db890f103851fd1dec7901880afe8fd048a936",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372284,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "db70a9c629e05fa5caa175dfb715e28e51dc37408f6ceb66a8d8976215dc7dce",
+   "parts": [
+    [
+     "data",
+     "QCos8w=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372288,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "34de51d870dfd559ba7351daccc843907688d432270b2941a843b670b1a91b3e",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372292,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "f3a4d00d2de264cc157a38610e464a766e64c543f2661609064a20632d950532",
+   "parts": [
+    [
+     "data",
+     "QCTe7Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372300,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "2612c62f5507839b3d79da6e8301adb499ab9cabde95f0964e1bdebcf8c4ce6a",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372308,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "34dbbeea176d40dd52c3aed9bebd4451435e14ad045733249806c4aac2d33f3f",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372336,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "5b951f4abc8142c03ac6cdb927c0ece295c04f959013d6a04f758078f7a55447",
+   "parts": [
+    [
+     "data",
+     "QCos/Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372340,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "94a34e5e5cbfde95f5ab66f795ea8e883daefda712ce8da4f615ae89e3daeae0",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372344,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "682bc088be35f7c05870c60927ce65e901ca51df24dee687eb5cf42d5841e7c8",
+   "parts": [
+    [
+     "data",
+     "QCTe8Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372612,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "8cc47020a712e7eb4d2b1729d5dc63e7ff907c89df6530fe1cb01fd1119b3a2c",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372620,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "3ca59eb7d688336b581a1cbd227239b8829087c1b5efc47bc988e10418d7295f",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372648,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "1de7ba7a0d8a34b3c931e31e5d7fbcd574065b966042908aa33a2197c490e30d",
+   "parts": [
+    [
+     "data",
+     "QCotBw=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372652,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "76957b565e6537384a22abba1e50b1352b8c77562bf169ce44ba8950435701bb",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372656,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "acad7781914843eb0d99ac856c4df534925cf50f7398eb1472fa6058a7d8385e",
+   "parts": [
+    [
+     "data",
+     "QCTe9Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372664,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "776f4ebfe3c1e684c2d8397ae7bfc66d3a2ae60bcec64e9807f84d7ce2fb2333",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372672,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "9b37757a99ec39c09e6bae8e31aac12487fad586566ce3fce4528b41bc51ba01",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372700,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "7652f78e0fcf4da88643d299bbb57b9b08b114b248fd32028686c5068787a205",
+   "parts": [
+    [
+     "data",
+     "QCotEQ=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372704,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "cc660e241e9ecea77bcffe1d5402dc0909ce5f1be29446a378e4d4fe0bb48ee3",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372708,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "63b5e1966699ffbe56fb1870856a0f9f7d2a51b33fb0422e6580efacfd5fab07",
+   "parts": [
+    [
+     "data",
+     "QCTe+Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372716,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "18140d92585dc25ae47dae9b850fd234ee7d4abb53098db158fde3abfe01aec2",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372724,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "7677bf30e54f06f70c748c3844e680aa962aa7df7d32492b2c2fa50918b35760",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372752,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "dc0e15667357fefd85672fdd56d6ebbbd604ce86dc67c67b79a0b903f7f24009",
+   "parts": [
+    [
+     "data",
+     "QCotGA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372756,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "5b7477f713eacec07b67c55af86f94fefa1a4454e96b23f18745e2ac218697bc",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372760,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "ef5afc256620f2d5f7a41ee472a0d05ab0224311ade164252b5bf7e0770377cc",
+   "parts": [
+    [
+     "data",
+     "QCTe/Q=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372768,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "e293772e5362f0245b5fdd492824da55b30209fe1c81ca0f3d69ddf6689562e2",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372776,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "8eaa55067baa6828bf923cd635be90d77373bb43b9bfffeecd324d121ef967f6",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372804,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "bf596b21d1993d191f09d9dd4babe7783d51c433b868bb71adf5637801f8fc07",
+   "parts": [
+    [
+     "data",
+     "QCotIA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372808,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "2a3090873a8d8dfb11b20f04710927dc65ff6ee50821f94ca3e703b570babb34",
+   "parts": [
+    [
+     "data",
+     "QCTe5A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372812,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "019a88d0bebf21b3f63f9f4925f73cf15861708dbb70667ee3d6c74cb3008296",
+   "parts": [
+    [
+     "data",
+     "QCTfAQ=="
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0001-chop",
+   "section": ".cave3",
+   "addr": 1076158136,
+   "len": 77,
+   "expect_len": 77,
+   "expect": "b74b65f860f6bca5530fc6548f2ba7ccb2bf6fd2cb6232e56db691a8d586bfc7",
+   "parts": [
+    [
+     "data",
+     "AAAABAAAAAtAJN7kAAAAAwAAAAQAAAAF"
+    ],
+    [
+     "stock",
+     1075370288,
+     19
+    ],
+    [
+     "data",
+     "AENIT1AAUEFEAFNUQQBDSFAARU5EAERJVgBMQVkAUk5EAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0001-chop",
+   "section": ".chst",
+   "addr": 1076502236,
+   "len": 280,
+   "expect_len": 280,
+   "expect": "aa75bba0e39e3a675e22d87bcf175e18cbf28345a1e8ee210dd76246fe78b7c2",
+   "parts": [
+    [
+     "data",
+     "ICoABHILsIFiTkH6APjRwEo6ANZmBnL/EIFgPHIAEjoAyRCBE8BAKh/GQfoAwHfwCgAgASIDYQAPEEqAZhBwABA6AKciA2EACuxhAAvEcAAQOgCXJUAABA=="
+    ],
+    [
+     "stock",
+     1074405090,
+     6
+    ],
+    [
+     "data",
+     "TvlACh7oICoABHILsIFiGkH6AJTRwHAAEBAMgAAAAP9nCCVAAARy/xCB"
+    ],
+    [
+     "stock",
+     1074405158,
+     10
+    ],
+    [
+     "data",
+     "TvlACh8wSoBmCnAAEDoASlKAYDxTgGYQcgASOgA8QfoAOnHwGgBOdVOAZghwABA6ACZgHFOAZghwABA6AB1gEFOAZghwABA6ADZgBHAATnXhiE51AAAAAAAAAAAKABQAHgAoADIAPABGAFAAWgBkAG4A////////////////DAAAAF7tAAE="
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0001-chop",
+   "section": ".text",
+   "addr": 1076504448,
+   "len": 1448,
+   "expect_len": 1448,
+   "expect": "fba6cfecd2cf74ee71520a9362922716dbdb5fb5f9d90bf947280e523256441d",
+   "parts": [
+    [
+     "data",
+     "cAuwrwAEZjJOuUAPPPxB+UAbowBKAGcGQflAG6OMI9hBamwII9hBamwMI9BBamwQQflAJN7AIAhOdQ=="
+    ],
+    [
+     "stock",
+     1074759478,
+     6
+    ],
+    [
+     "data",
+     "TvlAD4c8IC8ACGEAAlBKgGsEYAD3oA=="
+    ],
+    [
+     "stock",
+     1073971616,
+     8
+    ],
+    [
+     "data",
+     "TvlAA4GoIC8AFGEAAjJKgGsAAPIkLwAYJgBTgGc04IJnAADYSoNnEHICtoFnAACAYQADIGAAALpwABA5QCofxtCCcgthAAIME8BAKh/GYAAAoHIAEjlAKh/G0oFB+UAqH8jRwXHQSi8AH2ceQgAiPAAAAQBKgmoCRIHQgSIvACBnECJBcgESgWAISoJnAABs0IIiPAAAeABhAAG4JABOuUAPPPxKAGcCQgIwgmBCSoJuDGEAAnRCOUAqH8RgMi8qAHROuUALOgRYj3ILsIFiICQAcgASOUAqH8WwgWcEYQACSBPCQCofxXABE8BAKh/ELwpOuUAHbBRYj0zXBAxP7wAMTnU="
+    ],
+    [
+     "stock",
+     1073968868,
+     6
+    ],
+    [
+     "data",
+     "TvlAA3bqIARhAAEqSoBrAABeJABhAPZ2Im8AJEH6AUhyABIwKABnKHYCsoNnHEqAZwoS/ABPEvwATmAmEvwATxL8AEYS/ABGYBgS/AAtYBIvCS8AQqdOuUAPTLxP7wAMYAJCEUzXDBxP7wAUTnU="
+    ],
+    [
+     "stock",
+     1074419976,
+     8
+    ],
+    [
+     "data",
+     "TvlAClkQLwJOuUAHBvBYj0qAZkJKOUCgdWlnYi8CTrlABwbAWI9KgGdULwJOuUAHBvxYj0qAZkZyMrKqAIhmPkhqAgBOuUAXjthYj0oAZy5O+UAM4/QvAk65QAcG/FiPSoBmGkhqAgBOuUAXjthYj0oAVsByAcCBE8BAoHVp"
+    ],
+    [
+     "stock",
+     1074586808,
+     8
+    ],
+    [
+     "data",
+     "TvlADOTAIC8ACGEAACxKgGsMcgawgWcABVhwAE51"
+    ],
+    [
+     "stock",
+     1073972022,
+     8
+    ],
+    [
+     "data",
+     "TvlAA4M+MHwAKzJ8AAFgAAA8cg+wgWIKQfoAGnEwCABOdXD/TnVKgGoCQoCwgW8CIAFOdf///wABAv//////AwQFBv8AAAEBAAICAAyAAAAAC2IyT+//8EjXDAwkACYBJEgmSWEiSHgAAS8LLwIvAy8KLwBOuUAKYxZP7wAYTNcMDE/vABBOdS8ATrlAFVbMLwBOuUAKtwYugE65QAo5+lCPTnUvAE65QA+HGFiPIEAgEAgAAAhOdS8CQflAKh/Ic/AKACA8AAB4AEPoABh12LSBYwa0gGQCIAKxyWXwJB9OdUo5QCofx2c6cAAQOUAqH8ZhxCIAMnwAAWAYSjlAKh/EZyBKOUAqH8dnGCI8AAB4AJPJcAAQOUAqH8UwfAAsYAD/Kk51cAO2gGYYSoJvCnABE8BAKh/HTnVhwEI5QCofx051cAW2gGcAAGBwBLaAZiJwABA5QCof7CYA0IJTgHILYQD+wlKAsINnCBPAQCof7GACTnVyABI5QCof7EqBZyYvAkH5QCofyEPoABhwACQAxPx4AITBMMJSgLCBZQJwALHJZeokH051SoJvAAEwSjlAKh/EZwABJk/v/+BI1xj8fgAeOUAqH8VwC76AYgABBk65QBVWzChALwBOuUAKts4ugE65QAs6BFiPsIdmAADmLwxOuUAKwuhYjyZASoBnAADULwtOuUAL3pZYj3EAcgGwgWcAAMBwK2EA/ohmAAC2fP9KOUAqH8dnCnAsYQD+dGYCfAAvDE65QAq3Bi6HLwBOuUAKOfpQjyhALwtOuUAL1UxYjyoAbwAAfHgAGDlAKh/suIVjAigFSoRnAABodgAkA8TFhMR1wkh4AAEvAi8LTrlAC8qgT+8ADEoAZjZIeAABLwIvC065QAv2wE/vAAwgBmsGIANhAP4OLwBB+UAqH8hx8DoALwAvDC8CYQACVk/vABBSg7aEZaYvCk65QAdsTFiPTNcY/E/vACBOdUNob3AgUGFkAFBhZCBTdGFydABDaG9wIE1vZGUAU2xpY2UgRW5kAERpdmlkZQBMYXkgT3V0AFNodWZmbGUA"
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0000-shared",
+   "section": ".text",
+   "addr": 1076505912,
+   "len": 234,
+   "expect_len": 234,
+   "expect": "c65035cb6f2d328db5343fda6b8378930419f3916f22f559206a4b1fbcf89fdd",
+   "parts": [
+    [
+     "data",
+     "AAECAwQGCAoMEBQYICgwQAAIERkiKjM7RExVXWZud3+A/AAKSkBnBnIw0oASwUhAcjDSgBLBQhFOdS8BIBAiPEHGTm1MAQgAUoAggEhAIhfSgVKBTEEAASABkJ9OdU65QBVWzCBASGgAME65QAs6BFiPLwBOuUAVVswgQEhoAOhOuUAKPQhQjy8AIEAiUCJpAChOkViPIEBKgE51IFIgaACgLzz/////LwpOkFCPIkAgCWckIEAibwAEIC8ACCIoAAggaAAELwAvCS8BLwhOuUADNDhP7wAQTnU="
+    ],
+    [
+     "stock",
+     1074405158,
+     10
+    ],
+    [
+     "data",
+     "WI9KgE51"
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0001-chop",
+   "section": ".cave2",
+   "addr": 1076506148,
+   "len": 464,
+   "expect_len": 464,
+   "expect": "409cff2895cb72b5cb32a2d1f6c6136ed9a35d70cbd8b284830e11e9f2752fc4",
+   "parts": [
+    [
+     "data",
+     "Q/oA4E/v/+BI1wQML0kAGCQAJgFOuUAVc7YkQC8KTrlAA2USWI9KgGYAAKwvCk65QANmoliPSgBnAACccAu0gGI="
+    ],
+    [
+     "stock",
+     1074641517,
+     17
+    ],
+    [
+     "data",
+     "LoBOuUALOgRYj7CCZgAAdnArYQD8JGYAAGwgAmEA+/4vQwAML0AAEEH6ALAvSAAUdv9KOUAqH8dnFnAsYQD7+mYOcAAQOUAqH8ZhAPwAJgAvQwAcSHgAAS8KTrlAA2AWUI9B7wAMQqcvCC8KTrlAA2g8T+8ADC8KTrlAA2EUWI9wAWACcABM1wQMT+8AIE51IG8ABC8oABAvEC8oAAQvLwAUYQZP7wAQTnUiLwAMcCthDCIvABBrBHAsYQJOdS8vAAgvAS8AIm8AGC8JIFEgaABATpBP7wAQTnVwAE51SjlAKh/EZxJwABA5QCofxXIAQ/oACmEA/rxwAE51LwJB+UAqH/AiPAAAf/9OuUAqLXIGgAAAf/9yABI5QCof7GYCcgyAwUhAdcBw/yBvAAhKqAAQawYgAmEA+xQvAEH5QCofyHHwKgAvACBvABAvKAAELy8AGGEA/1RP7wAQJB9OdSAvAAhhAPpASoBrBHAATnU="
+    ],
+    [
+     "stock",
+     1073972472,
+     8
+    ],
+    [
+     "data",
+     "TvlAA4UA"
+    ]
+   ]
+  }
+ ],
+ "stock_copies": [
+  {
+   "addr": 1074641517,
+   "len": 17,
+   "expect": "f2ad8c02a52e9d1bc140480e83009f529e808e271a36559f423f7b912738018f"
+  },
+  {
+   "addr": 1075370288,
+   "len": 19,
+   "expect": "75bfa554b9f75be95edc329d2d6d3eb7da9f7acda7418cb76e5c8eeabf8e33b0"
+  }
+ ],
+ "detours": [
+  {
+   "owner": "0001-chop",
+   "addr": 1074759478,
+   "entry": "page_info_gate",
+   "target": 1076504448,
+   "displaced_len": 6,
+   "rejoin": 1074759484,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073971616,
+   "entry": "get_gate",
+   "target": 1076504518,
+   "displaced_len": 8,
+   "rejoin": 1073971624,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073968868,
+   "entry": "delta_gate",
+   "target": 1076504548,
+   "displaced_len": 6,
+   "rejoin": 1073968874,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074419976,
+   "entry": "text_gate",
+   "target": 1076504814,
+   "displaced_len": 8,
+   "rejoin": 1074419984,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074586808,
+   "entry": "sample_key_gate",
+   "target": 1076504932,
+   "displaced_len": 8,
+   "rejoin": 1074586816,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074405090,
+   "entry": "pad_on_gate",
+   "target": 1076502236,
+   "displaced_len": 6,
+   "rejoin": 1074405096,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074405158,
+   "entry": "pad_off_gate",
+   "target": 1076502336,
+   "displaced_len": 10,
+   "rejoin": 1074405168,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073972022,
+   "entry": "lock_gate",
+   "target": 1076505066,
+   "displaced_len": 8,
+   "rejoin": 1073972030,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073972472,
+   "entry": "press_gate",
+   "target": 1076506582,
+   "displaced_len": 8,
+   "rejoin": 1073972480,
+   "reemit": true
+  }
+ ],
+ "output": {
+  "name": "AR1_OS1.73_0000_0001.syx",
+  "sha256": "76a2f4d058daadd0629d44cb62f2608a17f7a66e8f1e95357880b15f1c481422",
+  "size": 1548576,
+  "mainos_sha256": "7c4eb00cd1cd1875fa840cfca9c190863a780e03dd2d0ea54ebfccada3a3af76"
+ },
+ "counts": {
+  "edits": 51,
+  "mod_bytes": 2589,
+  "stock_reference_bytes": 114,
+  "stock_copies": 2
+ },
+ "provenance": {
+  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "manifest_sha256": "ae525792d5ba33714a6e83e492bc863754294d76ef1c3c04f23811e3c1e6bd5c",
+  "generator": "web/tools/mkpackages.py"
+ }
+}

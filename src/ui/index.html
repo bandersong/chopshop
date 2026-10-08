@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rytm &amp; Keys Mod Installer</title>
+<meta name="description" content="Build unofficial Analog Rytm and Analog Keys mods from Elektron's own OS file in your browser, check them, and send them over MIDI.">
+<style>/*@CSS@*/</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>Rytm &amp; Keys Mod Installer <span class="tag">working name</span></h1>
+  <p class="lede">Builds unofficial mods for the Elektron <b>Analog Rytm</b> (MK1 and MKII, OS 1.73) and the <b>Analog Keys</b> (OS 1.56) from Elektron's own OS file, right here in your browser. Then it can send the result to your unit over MIDI.</p>
+  <p class="fine">Nothing is uploaded: your file never leaves this computer, and the page works offline. Unofficial: not made, checked or endorsed by Elektron. Changing your unit's firmware is at your own risk.</p>
+</header>
+
+<main class="wrap">
+<section id="s1">
+  <h2><span class="n">1</span> Your Elektron OS file</h2>
+  <p>Drop Elektron's original OS update file here: the <code>.syx</code> file, or the <code>_dist.zip</code> it came in.</p>
+  <div id="drop" class="drop" tabindex="0" role="button" aria-describedby="dropHelp">
+    <p><b>Drop the file here</b></p>
+    <p id="dropHelp">or <label class="pick"><input type="file" id="file" accept=".syx,.zip"> choose it on your computer</label></p>
+  </div>
+  <div id="idResult" class="card hidden" aria-live="polite"></div>
+  <details>
+    <summary>Which file do I need?</summary>
+    <ul>
+      <li><b>Analog Rytm MK1:</b> Elektron's OS <b>1.73</b> file (<code>Analog-Rytm_OS1.73.syx</code>).</li>
+      <li><b>Analog Rytm MKII:</b> Elektron's OS <b>1.73</b> file for the MKII (<code>Analog-Rytm_MKII_OS1.73.syx</code>).</li>
+      <li><b>Analog Keys:</b> Elektron's OS <b>1.56</b> file for the Analog Four / Analog Keys.</li>
+    </ul>
+    <p>The page recognises these files by their exact checksum, so a renamed file is fine and a changed one is refused. Your unit must run the same OS version as the file.</p>
+    <p><b>OS 1.74 is not supported yet.</b> In October 2026 Elektron's site offers only 1.74 for the Rytm. If your Rytm is on 1.73, don't update it: going back to an older OS is a downgrade, which Elektron does not support.</p>
+  </details>
+</section>
+
+<section id="s2" class="locked" aria-disabled="true">
+  <h2><span class="n">2</span> Choose mods</h2>
+  <p class="when-locked">First drop your OS file above.</p>
+  <div class="when-open">
+    <fieldset id="features"><legend>Mods for your unit</legend></fieldset>
+    <div id="recipeCard" class="card" aria-live="polite"></div>
+    <p class="tip"><b>First time?</b> Leave every box empty: that gives the <b>Control build</b>, Elektron's own code repacked by this tool and nothing else. Flash it first. If your unit starts and plays normally, the whole route works, and you can come back for the mods.</p>
+  </div>
+</section>
+
+<section id="s3" class="locked" aria-disabled="true">
+  <h2><span class="n">3</span> Build and check</h2>
+  <p class="when-locked">First drop your OS file and choose.</p>
+  <div class="when-open">
+    <p>The page unpacks your file, adds the mods, packs it again and then checks the result: the recovery code untouched, nothing changed outside the mods, and the finished file identical, byte for byte, to the one the project published. It takes from a few seconds to a minute, depending on the computer. The download only appears when every check has passed.</p>
+    <p><button id="buildBtn" class="primary">Build</button> <span id="buildStatus" aria-live="polite"></span></p>
+    <progress id="buildBar" class="hidden" max="8" value="0"></progress>
+    <details id="checksBox" class="hidden"><summary>The checks</summary><pre id="checks"></pre></details>
+    <div id="dlBox" class="card hidden">
+      <p><b id="dlName"></b> <span class="ok-badge">all checks passed</span></p>
+      <p class="mono" id="dlSha"></p>
+      <p><a id="dlLink" class="button primary" download>Download</a></p>
+      <p class="fine">You can flash this file with Elektron Transfer (its normal drop page, over USB) or with step 4 below. Keep Elektron's original file too: it is your way back.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <h2><span class="n">4</span> Send it to your unit over MIDI</h2>
+  <p>This uses the unit's own startup menu (<b>OS UPGRADE</b>), the same way Elektron's recovery works. It also works when the unit no longer starts normally.</p>
+
+  <div class="card">
+    <h3>You need</h3>
+    <ul>
+      <li><b>Chrome or Edge</b> on a computer. Firefox only with an extra add-on; Safari can't send MIDI from a web page. <span id="midiSupport" class="pill"></span></li>
+      <li>A <b>DIN MIDI interface</b> (the round 5-pin MIDI plugs) and a MIDI cable. <b>USB does not work in the startup menu</b>: the unit only listens on its MIDI IN socket there.</li>
+      <li>About 10 to 15 minutes at the recommended pause, with the computer awake and this page in front.</li>
+    </ul>
+  </div>
+
+  <div class="card warn">
+    <h3>Before you start</h3>
+    <ul>
+      <li><b>Back up your projects</b> first (in Elektron Transfer).</li>
+      <li><b>Close Elektron Transfer</b> and any music app that might use the MIDI interface.</li>
+      <li><b>Turn off sleep</b> on the computer and keep it plugged in. Keep this tab open and in front: browsers slow down tabs in the background, which can pause the transfer.</li>
+      <li><b>Don't power off the unit</b> while it installs, or during the first start after it.</li>
+    </ul>
+  </div>
+
+  <ol class="steps" id="routeSteps">
+    <li>Switch the unit <b>off</b>.</li>
+    <li>Connect your interface's <b>MIDI OUT</b> to the unit's <b>MIDI IN</b> with a MIDI cable.</li>
+    <li>Hold <b id="funcKey">FUNC (FUNCTION on the Analog Keys)</b> while you switch the unit on. It shows the <b>startup menu</b>.</li>
+    <li>Press <b>TRIG 4</b> (OS UPGRADE). The unit now waits for the file.</li>
+    <li>Below: allow MIDI, pick your interface's output, tick the boxes and press send.</li>
+    <li>Wait. When the whole file has arrived, the unit installs it and restarts by itself.</li>
+  </ol>
+
+  <div class="card">
+    <p><button id="midiBtn">Allow MIDI access</button> <span id="midiStatus" aria-live="polite"></span></p>
+    <p><label>Send to <select id="portSel" disabled><option>(allow MIDI first)</option></select></label> <span id="portWarn" class="warn-text"></span></p>
+    <p><label>Pause between messages
+      <select id="gapSel">
+        <option value="5">5 ms (fast)</option>
+        <option value="10">10 ms</option>
+        <option value="20" selected>20 ms (recommended)</option>
+        <option value="40">40 ms</option>
+        <option value="80">80 ms (slow interfaces)</option>
+      </select></label>
+      <span id="estimate" class="fine"></span></p>
+    <p class="fine">Never faster than the MIDI cable itself (31250 baud). If a transfer fails, try again with a longer pause.</p>
+    <fieldset id="confirms">
+      <legend>Tick each one</legend>
+      <label><input type="checkbox" class="cf"> My projects are backed up.</label>
+      <label><input type="checkbox" class="cf"> The unit shows the startup menu's OS UPGRADE screen (<span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> held at power-on, then TRIG 4).</label>
+      <label><input type="checkbox" class="cf"> A MIDI cable runs from my interface's MIDI OUT to the unit's MIDI IN (not USB).</label>
+      <label><input type="checkbox" class="cf"> Transfer and other music apps are closed, and this computer won't go to sleep.</label>
+    </fieldset>
+    <p>
+      <button id="sendBuild" class="primary" disabled>Send the build</button>
+      <button id="sendStock" disabled>Recover: send Elektron's original file</button>
+    </p>
+    <p class="fine" id="sendWhat"></p>
+    <div id="sendBox" class="hidden">
+      <progress id="sendBar" max="1" value="0"></progress>
+      <p><span id="sendStatus" aria-live="polite"></span> <button id="abortBtn">Stop</button></p>
+    </div>
+    <p id="bgWarn" class="warn-text hidden">This tab is in the background. Bring it back to the front: browsers slow down background tabs, which can pause the transfer.</p>
+    <p id="sendDone" class="card hidden" aria-live="polite"></p>
+  </div>
+
+  <details>
+    <summary>What this page can and can't see</summary>
+    <p>It sends the file's own MIDI messages, unchanged and in order, with the pause you chose. It is not known whether the startup menu answers over MIDI, and this page does not listen for an answer, so it can't tell whether the unit received everything: watch the unit's screen.</p>
+    <p><b>Next, not in this version:</b> sending over USB while the unit runs normally (the way Transfer's drop page does).</p>
+  </details>
+</section>
+
+<section id="s5">
+  <h2>If something goes wrong</h2>
+  <ul>
+    <li><b>The unit shows an error, or nothing happens:</b> switch it off, then start again from step 1 of section 4. Try a longer pause. Check the cable goes into MIDI IN.</li>
+    <li><b>You stopped the transfer:</b> if the unit is still waiting or receiving, switch it off and start again. If its screen says it is upgrading, don't switch it off: wait.</li>
+    <li><b>The unit doesn't start after flashing:</b> use the same steps with <b>Recover: send Elektron's original file</b>. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
+    <li>Only send a file to the unit it was built for. The page builds Rytm files only from Rytm files, and Keys files only from the Keys file.</li>
+  </ul>
+</section>
+</main>
+
+<footer class="wrap fine">
+  <p>Free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT) and on gdeo607/rytm1_mods. The packages carry only the mods' own bytes; Elektron's code comes from your own file. See README, LICENSE and NOTICE.</p>
+  <p>Elektron, Analog Rytm, Analog Four, Analog Keys and Overbridge are trademarks of Elektron Music Machines. This project is not affiliated with Elektron.</p>
+</footer>
+<script>/*@SCRIPTS@*/</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+diff --git a/container.c b/container.c
+index 9afb5bd..aa54479 100644
+--- a/container.c
++++ b/container.c
+@@ -402,7 +402,7 @@ static size_t build_ele2(const bin_info *b, uint8_t *nc, size_t cap, const overr
+     memcpy(nc + ELE2_SECT_OFF, sdata, slen);
+     free(packed);
+     size_t pos = ELE2_SECT_OFF + slen;
+-    return pos + (pos & 1);
++    return (pos + 3) & ~(size_t)3; /* Analog Rytm MK1 1.73 stock pads to 4 */
+ }
+ 
+ /* AD: 16-byte header + raw image; image length and CRC-32 recomputed. */

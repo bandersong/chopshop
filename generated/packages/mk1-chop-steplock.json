@@ -1,0 +1,1440 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "mk1-chop-steplock",
+ "device": "mk1",
+ "os": "1.73",
+ "title": "Classic CHOP + step-lock (older build)",
+ "summary": "The earlier, hardware-proven CHOP build: 3-knob CHOP page, step-lock, plus euclid accents and velocity humanise. No Sample Focus, no SMP CUT.",
+ "status": "Proven on the founder's MK1 (file 2b, step-lock confirmed 2026-10-06). Pressing a CHOP knob while holding steps can leave a hidden lock on this build.",
+ "features": [
+  "classic"
+ ],
+ "mods": [
+  "0000-shared",
+  "0001-chop",
+  "0002-euclid-accents",
+  "0003-velocity-humanise"
+ ],
+ "params": {
+  "0002-euclid-accents": {
+   "phase": 2,
+   "probe_range": 0,
+   "diag_get": 0
+  },
+  "0003-velocity-humanise": {
+   "diag_canary": 0
+  }
+ },
+ "stock": {
+  "syx_sha256": "9115c3888354bb388f90410e0445cd312bf020593ed99f768a99e475d1d6157c",
+  "mainos_sha256": "3db73d3a5524d10db110f6e50d722274cd0b72a01292f4a97032165e4f97e175",
+  "mainos_size": 2824228,
+  "section": 3,
+  "other_sections": {}
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded bootstrap",
+   1076414216,
+   1076501284
+  ]
+ ],
+ "regions": [
+  [
+   1073777572,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1073778242,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1073968852,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1073968860,
+   6,
+   "detour/0003-velocity-humanise"
+  ],
+  [
+   1073968868,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1073971616,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1073972022,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074367198,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074367366,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074368436,
+   6,
+   "detour/0003-velocity-humanise"
+  ],
+  [
+   1074405090,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074405158,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074419960,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074419968,
+   6,
+   "detour/0003-velocity-humanise"
+  ],
+  [
+   1074419976,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074420432,
+   4,
+   "patch/0003-velocity-humanise"
+  ],
+  [
+   1074420582,
+   4,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074422446,
+   6,
+   "detour/0003-velocity-humanise"
+  ],
+  [
+   1074425794,
+   4,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074519702,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074519750,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074531490,
+   6,
+   "detour/0002-euclid-accents"
+  ],
+  [
+   1074557282,
+   2,
+   "patch/0001-chop"
+  ],
+  [
+   1074557288,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1074586808,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074759074,
+   2,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074759084,
+   2,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074759096,
+   4,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074759224,
+   2,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074759252,
+   2,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1074759478,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074908132,
+   4,
+   "patch/0002-euclid-accents"
+  ],
+  [
+   1075372196,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372204,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372232,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372236,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372240,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372248,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372256,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372284,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372288,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372292,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372300,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372308,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372336,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372340,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1075372344,
+   4,
+   "patch/0001-chop"
+  ],
+  [
+   1076501296,
+   1232,
+   "cave/0001-chop"
+  ],
+  [
+   1076504448,
+   1464,
+   "cave/0002-euclid-accents"
+  ],
+  [
+   1076505912,
+   236,
+   "cave/0000-shared"
+  ],
+  [
+   1076506148,
+   440,
+   "cave/0003-velocity-humanise"
+  ]
+ ],
+ "edits": [
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1073777572,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "8217985b0cdd64e3359440b9fb8c00ad3fff40c4162b571931f24370fbd5aff8",
+   "parts": [
+    [
+     "data",
+     "TvlAKinc"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1073778242,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "004bbda2943b7de5f440c507e75f6dd06ca449764937462a0a85534fd9347fd2",
+   "parts": [
+    [
+     "data",
+     "TvlAKim+"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1073968852,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "a123a7dff90558f9da0084bb3a33272f0c874a7b1fbd6e0c50aa9d49b71a52cd",
+   "parts": [
+    [
+     "data",
+     "TvlAKiyM"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0003-velocity-humanise",
+   "addr": 1073968860,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "5f55063831ff44dc447d7d39c19cc15558b0c3918cbaa32f48f87203092b5dbf",
+   "parts": [
+    [
+     "data",
+     "TvlAKi62"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073968868,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "80f9616f42abe528ce213fbc24aadaae5d9fcda4d16db9d878a7a4986ae1c624",
+   "parts": [
+    [
+     "data",
+     "TvlAKhtu"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073971616,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "802bfd59372d862f188ada28f67704ac60db31c8e4e632aab6508efebb575840",
+   "parts": [
+    [
+     "data",
+     "TvlAKhtM"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1073972022,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "1d97d172c992bad43d09c82cad3b9e4180c18f6c33ea6498fdd194f984e957e7",
+   "parts": [
+    [
+     "data",
+     "TvlAKh2M"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074367198,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "ecd4933609da755b288d20d3bc521f29c842deb5532ea8e9681bdfbf3b9a10b9",
+   "parts": [
+    [
+     "data",
+     "TvlAKin6"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074367366,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "1287ed7e6b50bb313d8a8a74c840ab32c88eda515093e44669a44749ac24e696",
+   "parts": [
+    [
+     "data",
+     "TvlAKihI"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0003-velocity-humanise",
+   "addr": 1074368436,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "1ec323b55cac069d179544c86e3acee3237989443415715894476bad68ff98ff",
+   "parts": [
+    [
+     "data",
+     "TvlAKi4k"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074405090,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "b5d362db9cfc5f6a38fce7dd2a6941c9dd9be98ab12c00291629a407124d171d",
+   "parts": [
+    [
+     "data",
+     "TvlAKhzm"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074405158,
+   "len": 6,
+   "expect_len": 10,
+   "expect": "60d8ef064e40d8b0379e4f77c35cad0443f5bc38aa4795eda6213541e6caac5a",
+   "parts": [
+    [
+     "data",
+     "TvlAKh1Y"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074419960,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "35fc23670b577cb543bf435a12f8dcdbbdc6238f68b2aa4becddfcc1ccf114bf",
+   "parts": [
+    [
+     "data",
+     "TvlAKizu"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0003-velocity-humanise",
+   "addr": 1074419968,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "7c9d6457b24a771fc5e1d38f84be107d052bfd01377bafdbdf7b1c1880fd07fc",
+   "parts": [
+    [
+     "data",
+     "TvlAKi86"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074419976,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "e84a03eda699117fcb074b610176ba7bfc89db7cfa86bc02b0d9860186273969",
+   "parts": [
+    [
+     "data",
+     "TvlAKhwM"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0003-velocity-humanise",
+   "addr": 1074420432,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "ad4e3c9ee56e84f6b95a0884c901c9070dcca775cfdbf9d824a62a89ca697a80",
+   "parts": [
+    [
+     "data",
+     "QCovEg=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074420582,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "7995bca69b8eb905f5132f75e1624737823416121fa1ab59eb417cd3616e1c77",
+   "parts": [
+    [
+     "data",
+     "QConnA=="
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0003-velocity-humanise",
+   "addr": 1074422446,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "5d29ab5c95261555c27cb0d67d3774cc09b39835b6ea82c1ddb92c8066fe92f2",
+   "parts": [
+    [
+     "data",
+     "TvlAKi+q"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074425794,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "1ed2be4dcb6d75d30564f8a19ae3ac5cfb5e13b89b637fedc761e5a46b9c3e56",
+   "parts": [
+    [
+     "data",
+     "QCon0A=="
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074519702,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "d956399ec419c0e5d3295cae7b2ca01a5adb659c64eaa9c66da63dc2d02dc518",
+   "parts": [
+    [
+     "data",
+     "TvlAKilQ"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074519750,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "2e6243612c45e50f8d26c1603340ba5229c1f4bcf914d3b05920e77ec8642394",
+   "parts": [
+    [
+     "data",
+     "TvlAKilu"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0002-euclid-accents",
+   "addr": 1074531490,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "af56700a2c8092804d0d6d09973f49956794c20d3a0d9bbb88d1251283a9eabc",
+   "parts": [
+    [
+     "data",
+     "TvlAKiiA"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1074557282,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "f4746f59ce0b2aae55d09cb639636d253e4db6775b53970a8cc5b07ab5a4e4f5",
+   "parts": [
+    [
+     "data",
+     "cgI="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1074557288,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "398af23bcdc38c86e5133f061e9e9eb4656f9ca5d1a5e8878ec8b1ecbe61fa9a",
+   "parts": [
+    [
+     "data",
+     "QCofgg=="
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074586808,
+   "len": 6,
+   "expect_len": 8,
+   "expect": "0284971a4db5438f2a860c8cd56fd99709e0da46ebc34bd975f82f7df5ca28e8",
+   "parts": [
+    [
+     "data",
+     "TvlAKhxg"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074759074,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "edd038ace1bd7513419cbd7d5715589690960ab2a09ecfccc99c8061524d5f63",
+   "parts": [
+    [
+     "data",
+     "cgc="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074759084,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "cfea5cfae3b03caaa33a212559a588a765ab75b127dea465a1f7f5481ded4437",
+   "parts": [
+    [
+     "data",
+     "cAc="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074759096,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "54fc4c9df81670f69c803a09a80c41ced72b637c2eee810f5724bed89fb9c8be",
+   "parts": [
+    [
+     "data",
+     "QCooFA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074759224,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "540fb7432f96fd344c0079a20a0c2f4bb22f7689b54aac728cd6d6e1ea40d022",
+   "parts": [
+    [
+     "data",
+     "cgc="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074759252,
+   "len": 2,
+   "expect_len": 2,
+   "expect": "83893a4defb36d4f3f0c284f35d7947e6a2e1e126280f1409edc0045344c1cb8",
+   "parts": [
+    [
+     "data",
+     "cAc="
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074759478,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "11de1c98f73679bd16718cc04a9e607326ca0c6602d60d08ab5c778783a45855",
+   "parts": [
+    [
+     "data",
+     "TvlAKhsw"
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0002-euclid-accents",
+   "addr": 1074908132,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "91dce51fc3d3cec536536b120a7d47c9d274a0a780d9a4a4b913d366f41918ed",
+   "parts": [
+    [
+     "data",
+     "QCor7g=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372196,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "a13a3fbb8e5c7fd393e5dec31665d43163efe6c7d357424902fc91e510d4ba60",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372204,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "57fad20078d85f9bacd78b1a76db830537e2d28dd181341d1b971554e0fe962c",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372232,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "b547fba29796c7f89ad8cc5caf71a8b76a18bfdb4dc270eefc80cb5e1a8d0019",
+   "parts": [
+    [
+     "data",
+     "QCofsw=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372236,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "0a56ac3801686d8e41254301f10cd10dec53662aa94778692373a5a6f21e152f",
+   "parts": [
+    [
+     "data",
+     "QCofrg=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372240,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "bb010a9cf0a5bfbd37ee8191a684f03a633f48a687551c4cec4d3416a70ce023",
+   "parts": [
+    [
+     "data",
+     "QCof0A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372248,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "1190dd3170c7221affeb147f75332426f7432ae684e560375387db7913df2088",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372256,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "7a7b3c30c658a40a9d8d033d60db890f103851fd1dec7901880afe8fd048a936",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372284,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "db70a9c629e05fa5caa175dfb715e28e51dc37408f6ceb66a8d8976215dc7dce",
+   "parts": [
+    [
+     "data",
+     "QCofvA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372288,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "34de51d870dfd559ba7351daccc843907688d432270b2941a843b670b1a91b3e",
+   "parts": [
+    [
+     "data",
+     "QCofrg=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372292,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "f3a4d00d2de264cc157a38610e464a766e64c543f2661609064a20632d950532",
+   "parts": [
+    [
+     "data",
+     "QCof1A=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372300,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "2612c62f5507839b3d79da6e8301adb499ab9cabde95f0964e1bdebcf8c4ce6a",
+   "parts": [
+    [
+     "data",
+     "AAAAAA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372308,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "34dbbeea176d40dd52c3aed9bebd4451435e14ad045733249806c4aac2d33f3f",
+   "parts": [
+    [
+     "data",
+     "AAB/AA=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372336,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "5b951f4abc8142c03ac6cdb927c0ece295c04f959013d6a04f758078f7a55447",
+   "parts": [
+    [
+     "data",
+     "QCofxg=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372340,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "94a34e5e5cbfde95f5ab66f795ea8e883daefda712ce8da4f615ae89e3daeae0",
+   "parts": [
+    [
+     "data",
+     "QCofrg=="
+    ]
+   ]
+  },
+  {
+   "kind": "patch",
+   "owner": "0001-chop",
+   "addr": 1075372344,
+   "len": 4,
+   "expect_len": 4,
+   "expect": "682bc088be35f7c05870c60927ce65e901ca51df24dee687eb5cf42d5841e7c8",
+   "parts": [
+    [
+     "data",
+     "QCof2A=="
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0001-chop",
+   "section": ".text",
+   "addr": 1076501296,
+   "len": 1224,
+   "expect_len": 1224,
+   "expect": "5eb4c6ce3b589b1d1852280ff3a04aeb43051674cdb01eb4b95c9039ae20fd36",
+   "parts": [
+    [
+     "data",
+     "cAuwrwAEZghB+gRQIAhOdQ=="
+    ],
+    [
+     "stock",
+     1074759478,
+     6
+    ],
+    [
+     "data",
+     "TvlAD4c8IC8ACFeAcgKwgWIIYQADsOGITnU="
+    ],
+    [
+     "stock",
+     1073968852,
+     8
+    ],
+    [
+     "data",
+     "TvlAA4GoIC8AFFeAcgKwgWIAAIYkLwAY4IJnAAByJgBmFnAAEDoEUNCCcgthAAOeE8BAKh/eYExTg2YccgASOgQ2QfoENNHBcAAQENCCcnhhAAN6EIBgLEqCbghCOUAqH9xgIC8qAHROuUALOgRYj3ILsIFiDhPAQCof3XABE8BAKh/cLwpOuUAHbBRYj0zXBAxP7wAMTnU="
+    ],
+    [
+     "stock",
+     1073968868,
+     6
+    ],
+    [
+     "data",
+     "TvlAA3bqIARXgHICsIFiAAA8Im8AJLCBZwphAALoYQADHGAcSjoDsGcKEvwATxL8AE5gDBL8AE8S/ABGEvwARkIRTNcMHE/vABROdQ=="
+    ],
+    [
+     "stock",
+     1074419976,
+     8
+    ],
+    [
+     "data",
+     "TvlAClkQLwJOuUAHBvBYj0qAZkJKOUCgdWlnYi8CTrlABwbAWI9KgGdULwJOuUAHBvxYj0qAZkZyMrKqAIhmPkhqAgBOuUAXjthYj0oAZy5O+UAM4/QvAk65QAcG/FiPSoBmGkhqAgBOuUAXjthYj0oAVsByAcCBE8BAoHVp"
+    ],
+    [
+     "stock",
+     1074586808,
+     8
+    ],
+    [
+     "data",
+     "TvlADOTAICoABHILsIFiXEH6AvrRwEo6AuRmBnL/EIFgSnIAEjoC1xCBE8BAKh/eQfoCznIAEjAIAHAAEDoCv2EAAOBKgGYacAAQOgKyQfoCsHIAEjAIAHAAEDoCoWEAAGpwABA6ApclQAAE"
+    ],
+    [
+     "stock",
+     1074405090,
+     6
+    ],
+    [
+     "data",
+     "TvlACh7oICoABHILsIFiGkH6AojRwHAAEBAMgAAAAP9nCCVAAARy/xCB"
+    ],
+    [
+     "stock",
+     1074405158,
+     10
+    ],
+    [
+     "data",
+     "TvlACh8wIC8ACFeAcgKwgWIEcABOdQ=="
+    ],
+    [
+     "stock",
+     1073972022,
+     8
+    ],
+    [
+     "data",
+     "TvlAA4M+DIAAAAALYk5P7//4SNcADCQAJgE="
+    ],
+    [
+     "stock",
+     1074640952,
+     16
+    ],
+    [
+     "data",
+     "LwIvAE65QAo5+lCPSHgAAUh4AAEvAuGLLwNIeAArLwBOuUAKYxZP7wAYTNcADE/vAAhOdU/v/+RI1wQMJAAmAU65QBVztiRALwpOuUADZRJYj0qAZgAAtC8KTrlAA2aiWI9KAGcAAKRwC7SAYgAAnE65QBVWzC8ATrlACrbOLoBOuUALOgRYj7CCZgAAfkh4ACtOuUAPhxhYjyBAIBAIAAAIZgAAZk65QBVWzC8ATrlACrcGLoIvAE65QAo5+lCP4YsvQwAML0AAEEH6AGwvSAAUQfoAQi9IABhIeAABLwpOuUADYBZQj0HvAAxCpy8ILwpOuUADaDxP7wAMLwpOuUADYRRYj3ABYAJwAEzXBAxP7wAcTnUgbwAELy8ACC8QSHgAKyJoAAQvCSBRIGgAQE6QT+8AEE51cABOdUqAZgpwABA6AMxSgE51U4BmEHIAEjoAvkH6ALwQMBgATnVwABA6AKxOdUqAagJCgLCBbwIgAU51LwJ0AID8AGRzwGcKBoEAAAAwEsF0AUJASECA/AAKc8BKgmYESoFnCAaBAAAAMBLBSEBzwAaBAAAAMBLBJB9OdQAAAAQAAAALQCofrgAAAAMAAAAEAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAQ0hPUABDaG9wIFBhZABQYWQgU3RhcnQAQ2hvcCBNb2RlAFBBRABTVEEAQ0hQAAAAAAAAChQeKDI8RlBaZG7///////////////8="
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0002-euclid-accents",
+   "section": ".text",
+   "addr": 1076504448,
+   "len": 1462,
+   "expect_len": 1462,
+   "expect": "47a02d7ae395e169cc87a494ccad27289bc91297c6524aac83cff81d57bd58a2",
+   "parts": [
+    [
+     "data",
+     "LwEvCSJvAAwvCSBRIGgAKE6QWI8gQCJfIh9OdS8ILy8ACE65QAviRFiPcgPAgS8ALy8ADE66/8pYjyAfIghnDAgoAAECymcECMAAAiBfTnUvAi8IJC8AECACcgPAgS8ALy8AEE65QAvidFCPLy8ADE66/45YjyIIZxQIAgACZwgI6AABAspgBgioAAECyiBfJB9OdQ=="
+    ],
+    [
+     "stock",
+     1075549904,
+     17
+    ],
+    [
+     "data",
+     "Kig0QCooOEAqKD1AKihCT1IqAFhPUioAQU5EKgBTVUIqAAB18ggALwgvAEHyuAAQKALKAoAAAAADDIAAAAADZhBB6ALREDA4AEoAawQIwgADIB8gX075QAmLoC8ILy8ACE66/vhYjyIIZxYIKAABAspnDiBfLy8ABE66ABZYj051IF8="
+    ],
+    [
+     "stock",
+     1074531490,
+     8
+    ],
+    [
+     "data",
+     "TvlADAyqT+//8EjXBBwkbwAUSHgAAUh4AAEvCiBSIGgAPE6QT+8ADC8KTrlAC9VMWI8mAHQAtINsPC8CLwpOuUAL4tZQj0iASMBrJi8CLwpOuUALz6ZQj0oAZxZIeAABSHgACC8CLwpOuUAL9KpP7wAQUoJgwEKnQqcvCiBSIGgAPE6QT+8ADEKnLwogUiBoABBOkFCPTNcEHE/vABBOdS8ILy8ACE66/ihYj0KAIghnCBAoAspyAcCBIF9OdS8CLwgkLwAQLy8ADE66/gRYjyIIZzRxqALKCIAAAEqCbwQIwAAAEUACyk/v//wuvEAa42ggDy8AIG8AFC8IIFAgaAAQTpBP7wAMIF8kH051"
+    ],
+    [
+     "stock",
+     1073778242,
+     6
+    ],
+    [
+     "data",
+     "LwMWKgLKAoMAAAA+44uAgyYfTvlAAI5I"
+    ],
+    [
+     "stock",
+     1073777572,
+     6
+    ],
+    [
+     "data",
+     "LwESKwJ5AoEAAAB84omAgSIfTvlAAIuq"
+    ],
+    [
+     "stock",
+     1074367198,
+     8
+    ],
+    [
+     "data",
+     "AoD///8DTvlACYrmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAT+//6EjXDDwkbwAgR/r/EnQcJtpTgmb6Rfr/Bkf6/gJ0ACYqAAQoKgAIIGoAECJLcBC2gGMCJgAiAyLYU4Fm+nAgkIR6A+Gti6n//Iup//gvKgAULwsvBC8qAARIagBwTrlABuHKT+8AFEXqABxH6wBAUoJwBLSAZqgvLwAoSHgACEh6/pwvLwAoTrlAGGYyT+8AEEzXDDxP7wAYTnUgLwAIDIAAAAHTZkgvAi8KJC8AFOCCZzY="
+    ],
+    [
+     "stock",
+     1074098708,
+     16
+    ],
+    [
+     "data",
+     "JEAvCk66+uJYj3GA0IJqBEKAYAhyB7CBbwIgAS8ALwpOuvr6UI8kXyQfTnU="
+    ],
+    [
+     "stock",
+     1073968852,
+     8
+    ],
+    [
+     "data",
+     "TvlAA3bcIC8ACAyAAAAB02YuIC8ADHIHsIFvAuCAagJCgLCBbwJwB0H6+wIgMAwAL28AEAAEL0AACE75QBPZ2A=="
+    ],
+    [
+     "stock",
+     1074419960,
+     8
+    ],
+    [
+     "data",
+     "TvlAClkA"
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0000-shared",
+   "section": ".text",
+   "addr": 1076505912,
+   "len": 234,
+   "expect_len": 234,
+   "expect": "c65035cb6f2d328db5343fda6b8378930419f3916f22f559206a4b1fbcf89fdd",
+   "parts": [
+    [
+     "data",
+     "AAECAwQGCAoMEBQYICgwQAAIERkiKjM7RExVXWZud3+A/AAKSkBnBnIw0oASwUhAcjDSgBLBQhFOdS8BIBAiPEHGTm1MAQgAUoAggEhAIhfSgVKBTEEAASABkJ9OdU65QBVWzCBASGgAME65QAs6BFiPLwBOuUAVVswgQEhoAWBOuUAKPQhQjy8AIEAiUCJpAChOkViPIEBKgE51IFIgaACgLzz/////LwpOkFCPIkAgCWckIEAibwAEIC8ACCIoAAggaAAELwAvCS8BLwhOuUADNDhP7wAQTnU="
+    ],
+    [
+     "stock",
+     1074405158,
+     10
+    ],
+    [
+     "data",
+     "WI9KgE51"
+    ]
+   ]
+  },
+  {
+   "kind": "cave",
+   "owner": "0003-velocity-humanise",
+   "section": ".text",
+   "addr": 1076506148,
+   "len": 438,
+   "expect_len": 438,
+   "expect": "79a79a0f628ed3dcbe56d96feff5bd7496a58fcfe908d0d617820d9cf6e55466",
+   "parts": [
+    [
+     "stock",
+     1074368436,
+     6
+    ],
+    [
+     "data",
+     "c6sCyuSJZzxB+UAqLThzsBgAQfoBlC8ATrlAKi1yIgAgH9CBcgGwgWwCIAFyf7CBbwIgASIvAEhSgWcIIgDhiS9BAEhO+UAJj7pOuUAVVswvAE65QArC6C6ALwAiQCBRIGgAKE6QIF9Yj0qATnVP7//8LrxAGuNoIA8vAC8IIFAgaAAQTpBP7wAMTnVwHrCvABRmRkovAB9nQCQvABjggmcuYaZnKiRAd6oCynI8woMgAeSI0IJqAkKAdA+wgm8CIALliLODhoAVQwLKYQD/oEzXBAxP7wAMTnU="
+    ],
+    [
+     "stock",
+     1073968860,
+     8
+    ],
+    [
+     "data",
+     "TvlAA3bkTrlAKi4SZxphAP9YZxQgQHGoAsrkiEH5QCotSHGwCABOdU75QAvNtHAesK8AHGZaIC8AIGdALwEvAi8DLwgvCU65QCouEiJfIF8mHyQfIh9KgGc2IC8AIOCIcg/AwXI/0IFyf4DBAoAAAAAPQflAKi04cbAIACJvACROuUAqLVhM1wwcT+8AFE51"
+    ],
+    [
+     "stock",
+     1074419968,
+     8
+    ],
+    [
+     "data",
+     "TvlAClkIcB6wgWYWLwFOuUAqLhIiH0qAZwhB+gAWIAhOdQ=="
+    ],
+    [
+     "stock",
+     1074422446,
+     6
+    ],
+    [
+     "data",
+     "TvlACmK0JUX0kVJORAA="
+    ]
+   ]
+  }
+ ],
+ "stock_copies": [
+  {
+   "addr": 1074098708,
+   "len": 16,
+   "expect": "bb4c4ceb3d58825fb5c491c844b77389ce21d8f066b44dcf9452a7fd46008cdf"
+  },
+  {
+   "addr": 1074640952,
+   "len": 16,
+   "expect": "5cdcf8093ec238bca8e9b249206f5bbb5fdf3a8019cc936164326de97fea7970"
+  },
+  {
+   "addr": 1075549904,
+   "len": 17,
+   "expect": "13a2f88856dd38bf2344d7bbb5cc7a58912b1d0c78037c246d06365e827128d6"
+  }
+ ],
+ "detours": [
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074367366,
+   "entry": "trig_fire_accent",
+   "target": 1076504648,
+   "displaced_len": 6,
+   "rejoin": 1074367392,
+   "reemit": false
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074531490,
+   "entry": "euclid_bake_gate",
+   "target": 1076504704,
+   "displaced_len": 8,
+   "rejoin": 1074531498,
+   "reemit": true
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074519702,
+   "entry": "euclid_enabled_get_masked",
+   "target": 1076504912,
+   "displaced_len": 6,
+   "rejoin": "none",
+   "reemit": false
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074519750,
+   "entry": "euclid_enabled_set_keep",
+   "target": 1076504942,
+   "displaced_len": 6,
+   "rejoin": "none",
+   "reemit": false
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1073968852,
+   "entry": "param_delta_gate",
+   "target": 1076505740,
+   "displaced_len": 8,
+   "rejoin": 1073968860,
+   "reemit": true
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074419960,
+   "entry": "boolop_text_gate",
+   "target": 1076505838,
+   "displaced_len": 8,
+   "rejoin": 1074419968,
+   "reemit": true
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1073778242,
+   "entry": "pattern_save_accent",
+   "target": 1076505022,
+   "displaced_len": 6,
+   "rejoin": 1073778248,
+   "reemit": true
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1073777572,
+   "entry": "pattern_load_accent",
+   "target": 1076505052,
+   "displaced_len": 6,
+   "rejoin": 1073777578,
+   "reemit": true
+  },
+  {
+   "owner": "0002-euclid-accents",
+   "addr": 1074367198,
+   "entry": "trig_fire_euclid_masked",
+   "target": 1076505082,
+   "displaced_len": 8,
+   "rejoin": 1074367206,
+   "reemit": true
+  },
+  {
+   "owner": "0003-velocity-humanise",
+   "addr": 1074368436,
+   "entry": "vel_humanise",
+   "target": 1076506148,
+   "displaced_len": 6,
+   "rejoin": 1074368442,
+   "reemit": true
+  },
+  {
+   "owner": "0003-velocity-humanise",
+   "addr": 1073968860,
+   "entry": "vel_amount_gate",
+   "target": 1076506294,
+   "displaced_len": 8,
+   "rejoin": 1073968868,
+   "reemit": true
+  },
+  {
+   "owner": "0003-velocity-humanise",
+   "addr": 1074419968,
+   "entry": "vel_text_gate",
+   "target": 1076506426,
+   "displaced_len": 8,
+   "rejoin": 1074419976,
+   "reemit": true
+  },
+  {
+   "owner": "0003-velocity-humanise",
+   "addr": 1074422446,
+   "entry": "vel_label_gate",
+   "target": 1076506538,
+   "displaced_len": 6,
+   "rejoin": 1074422452,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074759478,
+   "entry": "page_info_gate",
+   "target": 1076501296,
+   "displaced_len": 6,
+   "rejoin": 1074759484,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073971616,
+   "entry": "get_gate",
+   "target": 1076501324,
+   "displaced_len": 8,
+   "rejoin": 1073971624,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073968868,
+   "entry": "delta_gate",
+   "target": 1076501358,
+   "displaced_len": 6,
+   "rejoin": 1073968874,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074419976,
+   "entry": "text_gate",
+   "target": 1076501516,
+   "displaced_len": 8,
+   "rejoin": 1074419984,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074586808,
+   "entry": "sample_key_gate",
+   "target": 1076501600,
+   "displaced_len": 8,
+   "rejoin": 1074586816,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074405090,
+   "entry": "pad_on_gate",
+   "target": 1076501734,
+   "displaced_len": 6,
+   "rejoin": 1074405096,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1074405158,
+   "entry": "pad_off_gate",
+   "target": 1076501848,
+   "displaced_len": 10,
+   "rejoin": 1074405168,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
+   "addr": 1073972022,
+   "entry": "lock_gate",
+   "target": 1076501900,
+   "displaced_len": 8,
+   "rejoin": 1073972030,
+   "reemit": true
+  }
+ ],
+ "output": {
+  "name": "AR1_OS1.73_0000_0001_0002_0003.syx",
+  "sha256": "a96657b49e70b42fc20b9d744a0f10ceceb0f065c0aac7201be88866ac15caf6",
+  "size": 1548960,
+  "mainos_sha256": "aac51f4383c0e1a17c7e1d81092eff9cc828eef7126157b4c309135170851931"
+ },
+ "counts": {
+  "edits": 51,
+  "mod_bytes": 3387,
+  "stock_reference_bytes": 191,
+  "stock_copies": 3
+ },
+ "provenance": {
+  "rytm1_mods_commit": "ee8665e",
+  "manifest_sha256": "eb2de81318aca3257f8aec75e051eea30693c9a11db6f29d1d6e0504bcc38774",
+  "generator": "web/tools/mkpackages.py"
+ }
+}

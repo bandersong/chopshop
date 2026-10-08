@@ -1,0 +1,69 @@
+Rytm & Keys Mod Installer (working name) - browser installer, milestone M0
+Copyright (C) 2026 bandersong
+
+This program is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License (LICENSE) for more details.
+
+The installer's own code (src/, tools/, test/) was written for this project. It
+stands on the work of others, credited here.
+
+THIRD-PARTY CODE IN THE PAGE
+----------------------------
+elektron-firmware-tool - Copyright (c) 2026 Marcel Bierling - MIT License
+  https://github.com/mischa85/elektron-firmware-tool, commit a5bce9a6af64...
+  Compiled to WebAssembly into generated/eft.js and so into dist/index.html. Every
+  unpack, repack and rebuild the page does is this tool's own main(), run with the
+  arguments rytm1_mods' build.py and verify.py give the native tool, which is why the
+  page reproduces the published files byte for byte. Sources, its LICENSE and its
+  PROVENANCE note: third_party/elektron-firmware-tool/. One local change, from
+  rytm1_mods (tools/eft-ele2-align4.patch, kept as LOCAL-PATCH-ele2-align4.patch):
+  ELE2 containers padded to 4 bytes, as the stock files are.
+
+Emscripten runtime - MIT or University of Illinois/NCSA Open Source License
+  The JavaScript runtime emscripten 6.0.10 writes into generated/eft.js, and the parts
+  of its system libraries linked in: musl libc (MIT, Copyright (c) 2005-2020 Rich
+  Felker, et al.), dlmalloc (public domain, Doug Lea) and, where used, compiler-rt
+  builtins (Apache-2.0 WITH LLVM-exception, which waives attribution for compiled-in
+  runtime code). Texts: third_party/emscripten-runtime/.
+
+THE MOD PACKAGES
+----------------
+generated/packages/*.json carry the mods' own bytes, read out of images built by
+gdeo607/rytm1_mods' build tools (https://github.com/gdeo607/rytm1_mods) with this
+project's patch series (mods/0001-chop/rytm1_mods-chop.patch in the parent repo):
+  - 0001-chop, 0010-chord, 0011-joyrand: this project (bandersong);
+  - 0000-shared, 0008-sample-cut, 0002-euclid-accents, 0003-velocity-humanise and the
+    build/verify tools: first committed by gdeo607 in rytm1_mods, changed since by this
+    project (MK1 fixes, MKII port; git log of rytm1_mods branch chop).
+rytm1_mods carries no licence file (GitHub reports none, 2026-10-08). Until gdeo607
+licenses that code, the packages are not covered by this project's GPL grant for those
+parts, and nothing here may be published. The installer's checks follow the rules of
+rytm1_mods' tools/build.py and tools/verify.py, re-written in JavaScript.
+
+FACTS, NOT CODE
+---------------
+elektroid (GPL-3.0, https://github.com/dagargo/elektroid) and digikit (GPL-2.0):
+  their descriptions of Elektron's USB SysEx RPC informed the "next: route A" notes in
+  README.md (through corp/installer-re). No code was copied or adapted.
+elekloader (GPL-2.0-or-later Python, GPL-3.0-or-later JavaScript,
+  https://github.com/irpina/elekloader): not consulted for this milestone; no code
+  was copied or adapted.
+midir: not used.
+
+ELEKTRON
+--------
+No Elektron code or firmware data is included. (The scan lists the only text that
+coincides with text inside the firmware: C-library error messages, the product name,
+"0123456789ABCDEF", and on-screen words quoted in elektron-firmware-tool's comments.)
+The page rebuilds the firmware from the user's
+own copy of Elektron's OS file: where a mod re-emits stock instructions (or repeats a
+run of stock bytes), the package says "copy N bytes from stock at address X" and the
+page fills them in from that file. test/scan.test.js checks this (README.md, "The
+no-Elektron-bytes scan").
+Elektron, Analog Rytm, Analog Four, Analog Keys, Overbridge and Transfer are trademarks
+of Elektron Music Machines. This project is not affiliated with, endorsed or checked by
+Elektron.

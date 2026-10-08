@@ -1,0 +1,130 @@
+{
+ "format": "rytm-installer-package/1",
+ "packages": {
+  "mk1-control": "c95aed2c0281f022bcb3c09441117043acf36d58a5669d236e1480a79f03a4e2",
+  "mk1-samplefocus": "ec666493da0f78cb594fe2a4827f678b8dd07fbb6e04fd468bae98f191fb318d",
+  "mk1-samplefocus-cut": "207076236c6286ecb66ee5f5af36f3bb6259f43e255571b9892c4250a0100a10",
+  "mk1-chop-steplock": "12384f072517f38979d58ae1868bcf26ff9ccf499f27625bc11667a772c4f004",
+  "mk2-control": "90cf5b62fecbc45441060d2ab9aadfc7da3afb464b8b8c9495d748076c6e7078",
+  "mk2-samplefocus": "51d8e663dc0bd2d8ad69bd0ae56d7335c9d3f1c35cea628a809c65f3973b86a3",
+  "mk2-samplefocus-cut": "b03a6eae4e993014582b4ce2cd9fa8926c668656ae8d0a0db7d3a88a5003bf11",
+  "keys-control": "883f3d1b0233afbd59dc3036bad88711e260886541838da53229a4d723308c2a",
+  "keys-chord": "14d46e30d6da76d4971e2f97fa509a205467fb81c5390c7206a743c8a9edb20d",
+  "keys-joy": "211dac1bbf3f527058d9cb3a9bdaa63582b9437f28c81710a8e4052c7f49a88f",
+  "keys-joy-min": "0a1a70154231341c41798d31dff2a9cbf35f565a1f2b5a79296e68d10bbc143f"
+ },
+ "features": {
+  "mk1": [
+   {
+    "id": "chop",
+    "label": "CHOP / Sample Focus page"
+   },
+   {
+    "id": "smpcut",
+    "label": "SMP CUT (FILTER ×2: low/high cut)",
+    "requires": [
+     "chop"
+    ],
+    "why": "SMP CUT is built to run through CHOP's page code, so it comes with CHOP."
+   },
+   {
+    "id": "classic",
+    "label": "Classic CHOP + step-lock (older, hardware-proven build)",
+    "excludes": [
+     "chop",
+     "smpcut"
+    ],
+    "why": "The classic build is a different, older image; it cannot be combined with Sample Focus or SMP CUT."
+   }
+  ],
+  "mk2": [
+   {
+    "id": "chop",
+    "label": "CHOP / Sample Focus page"
+   },
+   {
+    "id": "smpcut",
+    "label": "SMP CUT (FILTER ×2: low/high cut)",
+    "requires": [
+     "chop"
+    ],
+    "why": "SMP CUT is built to run through CHOP's page code, so it comes with CHOP."
+   }
+  ],
+  "keys": [
+   {
+    "id": "chord",
+    "label": "Chord memory"
+   },
+   {
+    "id": "joy",
+    "label": "JOY RANDOM (joystick roll)"
+   }
+  ]
+ },
+ "recipes": {
+  "mk1-control": {
+   "device": "mk1",
+   "features": []
+  },
+  "mk1-samplefocus": {
+   "device": "mk1",
+   "features": [
+    "chop"
+   ]
+  },
+  "mk1-samplefocus-cut": {
+   "device": "mk1",
+   "features": [
+    "chop",
+    "smpcut"
+   ]
+  },
+  "mk1-chop-steplock": {
+   "device": "mk1",
+   "features": [
+    "classic"
+   ]
+  },
+  "mk2-control": {
+   "device": "mk2",
+   "features": []
+  },
+  "mk2-samplefocus": {
+   "device": "mk2",
+   "features": [
+    "chop"
+   ]
+  },
+  "mk2-samplefocus-cut": {
+   "device": "mk2",
+   "features": [
+    "chop",
+    "smpcut"
+   ]
+  },
+  "keys-control": {
+   "device": "keys",
+   "features": []
+  },
+  "keys-chord": {
+   "device": "keys",
+   "features": [
+    "chord"
+   ]
+  },
+  "keys-joy": {
+   "device": "keys",
+   "features": [
+    "chord",
+    "joy"
+   ]
+  },
+  "keys-joy-min": {
+   "device": "keys",
+   "features": [
+    "joy"
+   ]
+  }
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "mk1-control",
+ "device": "mk1",
+ "os": "1.73",
+ "title": "Control build (no mods)",
+ "summary": "Elektron's own code, only unpacked and packed again by this tool. Flash it first: if it boots and plays normally, the route works on your unit.",
+ "status": "Same file as the project's 1_CONTROL (proves the tool).",
+ "features": [],
+ "mods": [],
+ "params": {},
+ "stock": {
+  "syx_sha256": "9115c3888354bb388f90410e0445cd312bf020593ed99f768a99e475d1d6157c",
+  "mainos_sha256": "3db73d3a5524d10db110f6e50d722274cd0b72a01292f4a97032165e4f97e175",
+  "mainos_size": 2824228,
+  "section": 3,
+  "other_sections": {}
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded bootstrap",
+   1076414216,
+   1076501284
+  ]
+ ],
+ "regions": [],
+ "edits": [],
+ "stock_copies": [],
+ "detours": [],
+ "output": {
+  "name": "AR1_OS1.73_control.syx",
+  "sha256": "3407638c3f450daba0faedbddc0d4f08b154925a3ba162172346f51ef9ed6a8d",
+  "size": 1546400,
+  "mainos_sha256": "3db73d3a5524d10db110f6e50d722274cd0b72a01292f4a97032165e4f97e175"
+ },
+ "counts": {
+  "edits": 0,
+  "mod_bytes": 0,
+  "stock_reference_bytes": 0,
+  "stock_copies": 0
+ },
+ "provenance": {
+  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "manifest_sha256": "1d9ef63450bc15b1d308426ff9d75804c6915e5123d8fbcc96da49ec8b8e147f",
+  "generator": "web/tools/mkpackages.py"
+ }
+}

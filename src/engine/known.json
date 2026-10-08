@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "_about": "Hand-entered facts the engine pins independently of the generated packages: Elektron stock files by sha256 (the user's own files, never shipped), the published output sha256 every recipe must reproduce (flash/SHA256SUMS, flash/MKII/SHA256SUMS, flash/KEYS/SHA256SUMS, README.md, flash/KEYS/START_HERE_KEYS.md), and the never-write ranges (TRUTH D11, D35, K1; the task brief). test/known.test.js cross-checks every hash against those files.",
+  "devices": {
+    "mk1": {
+      "name": "Analog Rytm MK1",
+      "device_byte": 7,
+      "base": "0x40000400",
+      "never_write": [
+        { "label": "embedded bootstrap (the recovery code)", "start": "0x4028c708", "end": "0x402a1b24" }
+      ]
+    },
+    "mk2": {
+      "name": "Analog Rytm MKII",
+      "device_byte": 12,
+      "base": "0x40000400",
+      "never_write": [
+        { "label": "embedded device firmware", "start": "0x402c8754", "end": "0x402cc91c" }
+      ]
+    },
+    "keys": {
+      "name": "Analog Keys",
+      "device_byte": 6,
+      "base": "0x40000400",
+      "never_write": [
+        { "label": "embedded bootstrap (the recovery code)", "start": "0x40226ee8", "end": "0x40233fc0" },
+        { "label": "embedded UI-board firmware", "start": "0x401b8a92", "end": "0x401b9fd6" }
+      ]
+    }
+  },
+  "stock": [
+    { "sha256": "9115c3888354bb388f90410e0445cd312bf020593ed99f768a99e475d1d6157c", "device": "mk1", "os": "1.73", "supported": true, "source": "flash/SHA256SUMS (RECOVERY_stock_Analog-Rytm_OS1.73.syx)" },
+    { "sha256": "8ad671087ec30433d5407c7380d2396e0915ab931c5d3dd18a78bf284d3d1e52", "device": "mk2", "os": "1.73", "supported": true, "source": "flash/MKII/SHA256SUMS" },
+    { "sha256": "cda4459d14bfba40635440ad9dfa8fc183e5317e5e3ffa7116704f307fdf7010", "device": "keys", "os": "1.56", "supported": true, "source": "flash/KEYS/SHA256SUMS" },
+    { "sha256": "142555ca032be21a16772c82516c2a5bf422f1ed4ba68b673cbb9d5519b747a3", "device": "mk1", "os": "1.72", "supported": false, "source": "stock/SHA256SUMS" },
+    { "sha256": "1ea60357abe8b876d8b9c52e6dcd988d833478a49d09e3cb22d42782ef822b2f", "device": "mk2", "os": "1.72", "supported": false, "source": "stock/SHA256SUMS" }
+  ],
+  "recipes": [
+    { "id": "mk1-control", "device": "mk1", "output_sha256": "3407638c3f450daba0faedbddc0d4f08b154925a3ba162172346f51ef9ed6a8d", "source": "flash/SHA256SUMS 1_CONTROL" },
+    { "id": "mk1-samplefocus", "device": "mk1", "output_sha256": "76a2f4d058daadd0629d44cb62f2608a17f7a66e8f1e95357880b15f1c481422", "source": "flash/SHA256SUMS 4b" },
+    { "id": "mk1-samplefocus-cut", "device": "mk1", "output_sha256": "0ec86d0ed118b8ba7eb0f43d4add9105bd0fa99bc39ca4710bdf2b3e6052977e", "source": "flash/SHA256SUMS 5" },
+    { "id": "mk1-chop-steplock", "device": "mk1", "output_sha256": "a96657b49e70b42fc20b9d744a0f10ceceb0f065c0aac7201be88866ac15caf6", "source": "flash/SHA256SUMS 2b" },
+    { "id": "mk2-control", "device": "mk2", "output_sha256": "f3f6aad0cad09a7c3d531fb36a34fc78ed45bee126b9aab84cfed93e51d99c04", "source": "flash/MKII/SHA256SUMS 1_CONTROL" },
+    { "id": "mk2-samplefocus", "device": "mk2", "output_sha256": "016be9ea4b4cf963d194c250e9e2af68d0a2afc20103b67fe842fe1b19535cc4", "source": "flash/MKII/SHA256SUMS 2_CHOP" },
+    { "id": "mk2-samplefocus-cut", "device": "mk2", "output_sha256": "0ce2fe92539bfc551ce6a28a36e8efa60e4848beec695143957f9e0a8d929280", "source": "flash/MKII/SHA256SUMS 3_CHOP+SMP-CUT" },
+    { "id": "keys-control", "device": "keys", "output_sha256": "6981fd94084e8f678e6579a224b009a80e50f9192499f63db2cfcc519f75a475", "source": "flash/KEYS/SHA256SUMS 1_CONTROL" },
+    { "id": "keys-chord", "device": "keys", "output_sha256": "02a4c784e99d275d3685e3fed02dff84bf5bde8cd6c9440eba5c55e9f7ffa4de", "source": "flash/KEYS/SHA256SUMS 2_CHORD" },
+    { "id": "keys-joy", "device": "keys", "output_sha256": "ebc9a6ceef5b84847714e8271442e01b9c980fd40437f873ff0cc66f4c246616", "source": "flash/KEYS/SHA256SUMS 3_JOY" },
+    { "id": "keys-joy-min", "device": "keys", "output_sha256": "7797f97486ac25ee5a7896fe108b02511333f63ea99ef66a93d3b3b4c747d469", "source": "flash/KEYS/START_HERE_KEYS.md (AKEYS_OS1.56_0011.syx)" }
+  ],
+  "other_outputs": [
+    { "sha256": "3ea80d31dba5a6ea3c937d6feb68026907759a68c7557e31373f4d7bd1a2b00b", "what": "an earlier CHOP build for the Analog Rytm MK1 (flash/SHA256SUMS 2_CHOP)" },
+    { "sha256": "3c77f43b566fab6c6b178bae3e515d468fb298d560da083c5f71686e31b31066", "what": "an earlier CHOP test build for the Analog Rytm MK1 (flash/SHA256SUMS 3)" },
+    { "sha256": "734607ae8a213a328a46c474abd2d4b55853172761e753af34e921f41b9d14dc", "what": "an earlier Sample Focus build with STR for the Analog Rytm MK1 (flash/SHA256SUMS 4)" }
+  ]
+}

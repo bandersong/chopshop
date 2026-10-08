@@ -1,0 +1,54 @@
+{
+ "format": "rytm-installer-package/1",
+ "id": "keys-control",
+ "device": "keys",
+ "os": "1.56",
+ "title": "Control build (no mods)",
+ "summary": "Elektron's own Analog Keys code, only unpacked and packed again by this tool. Flash it first.",
+ "status": "Same file as the project's KEYS 1_CONTROL. Not yet run on an Analog Keys.",
+ "features": [],
+ "mods": [],
+ "params": {},
+ "stock": {
+  "syx_sha256": "cda4459d14bfba40635440ad9dfa8fc183e5317e5e3ffa7116704f307fdf7010",
+  "mainos_sha256": "cc19347b11d220aba73e4fd7203b2ce4e6d6d9553308d713648885682c714c26",
+  "mainos_size": 2372584,
+  "section": 3,
+  "other_sections": {}
+ },
+ "base": 1073742848,
+ "site_key": "HMAC-SHA256, key = SHA-256(\"rytm-installer site key v1\" || stock MAIN OS); message = addr (u32 BE) || len (u32 BE) || the stock bytes there",
+ "never_write": [
+  [
+   "embedded bootstrap",
+   1075998440,
+   1076051904
+  ],
+  [
+   "embedded UI-board firmware",
+   1075546770,
+   1075552214
+  ]
+ ],
+ "regions": [],
+ "edits": [],
+ "stock_copies": [],
+ "detours": [],
+ "output": {
+  "name": "AKEYS_OS1.56_control.syx",
+  "sha256": "6981fd94084e8f678e6579a224b009a80e50f9192499f63db2cfcc519f75a475",
+  "size": 1090208,
+  "mainos_sha256": "cc19347b11d220aba73e4fd7203b2ce4e6d6d9553308d713648885682c714c26"
+ },
+ "counts": {
+  "edits": 0,
+  "mod_bytes": 0,
+  "stock_reference_bytes": 0,
+  "stock_copies": 0
+ },
+ "provenance": {
+  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "manifest_sha256": "94a2b29f9599c6e6fe9c2133c8026e64551cee91105d40cfe0954ea252fd0833",
+  "generator": "web/tools/mkpackages.py"
+ }
+}
