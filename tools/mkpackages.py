@@ -110,7 +110,7 @@ RECIPES = [
          title="Chord memory",
          summary="Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then "
                  "plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held "
-                 "turns it off.",
+                 "or latched turns it off.",
          status="Built and checked on a computer; not yet run on an Analog Keys."),
     dict(id="keys-joy", device="keys", tag="0010_0011", features=["chord", "joy"],
          title="Chord memory + JOY RANDOM",

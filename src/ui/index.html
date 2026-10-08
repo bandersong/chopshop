@@ -61,6 +61,7 @@
       <p><b id="dlName"></b> <span class="ok-badge">all checks passed</span></p>
       <p class="mono" id="dlSha"></p>
       <p><a id="dlLink" class="button primary" download>Download</a></p>
+      <p id="dlNext" class="fine"></p>
       <p class="fine">You can flash this file with Elektron Transfer (its normal drop page, over USB), or by the startup-menu route in step 4. If Transfer refuses the file as "same version", nothing was written: stop there, or use the startup-menu route. Keep Elektron's original file too: it is your way back.</p>
     </div>
   </div>
@@ -72,7 +73,7 @@
 
   <div class="card warn" id="m0note">
     <h3>This sender has not been tried on a real unit yet</h3>
-    <p>It has only been tested against a simulated MIDI port. Elektron's own tool for this route is <b>Elektron Transfer</b>: with the unit on the startup menu's OS UPGRADE screen, open Transfer, on its CONNECTION page click "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu", and follow the steps on screen (Elektron's manual, section 14.4, "OS UPGRADE"). Download the build in step 3 and you can send it that way. The same route with Elektron's original file is the way back.</p>
+    <p>It has only been tested against a simulated MIDI port. Elektron's own tool for this route is <b>Elektron Transfer</b>: with the unit on the startup menu's OS UPGRADE screen, open Transfer, on its CONNECTION page click "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu", and follow the steps on screen (<span class="manualRef">Elektron's manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes</span>). Download the build in step 3 and you can send it that way. The same route with Elektron's original file is the way back.</p>
   </div>
 
   <div class="card">
@@ -150,14 +151,14 @@
   <ul>
     <li><b>The unit shows an error, or nothing happens:</b> switch it off, then start again from step 1 of section 4. Try a longer pause. Check the cable goes into MIDI IN.</li>
     <li><b>You stopped the transfer:</b> if the unit is still waiting or receiving, switch it off and start again. If its screen says it is upgrading, don't switch it off: wait.</li>
-    <li><b>The unit doesn't start after flashing:</b> send Elektron's original file through the startup menu. Hold <span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> while you switch it on, press TRIG 4 (OS UPGRADE), and send the file over DIN MIDI with Elektron Transfer: CONNECTION page, "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu" (Elektron's manual, 14.4). The <b>Recover</b> button in section 4 sends the same file the same way, but this page's sender has not been tried on a unit yet. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
+    <li><b>The unit doesn't start after flashing:</b> send Elektron's original file through the startup menu. Hold <span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> while you switch it on, press TRIG 4 (OS UPGRADE), and send the file over DIN MIDI with Elektron Transfer: CONNECTION page, "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu" (<span class="manualRef">Elektron's manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes</span>). The <b>Recover</b> button in section 4 sends the same file the same way, but this page's sender has not been tried on a unit yet. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
     <li>Only send a file to the unit it was built for. The page builds Rytm files only from Rytm files, and Keys files only from the Keys file.</li>
   </ul>
 </section>
 </main>
 
 <footer class="wrap fine">
-  <p>Free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT) and on gdeo607/rytm1_mods. The packages carry only the mods' own bytes; Elektron's code comes from your own file. The full notices and licence texts are below.</p>
+  <p>This project's own code is free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT). The packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence: it is credited here and used as-is, and the GPL grant above does not cover it. The packages carry only the mods' own bytes; Elektron's code comes from your own file. The full notices and licence texts are below.</p>
   <details id="licences">
     <summary>Licences and credits (full texts)</summary>
 <!--@LICENCES@-->

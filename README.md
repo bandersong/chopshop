@@ -63,7 +63,7 @@ Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker
    - Hold FUNC (on the Keys: FUNCTION) at power-on, then press TRIG 4 = OS UPGRADE.
    - Send over DIN MIDI into the unit's MIDI IN. USB does not work in the startup menu.
 
-   A notice at the top of the section says this sender has not been tried on a unit yet and gives Elektron's own route for the same thing (Elektron's manual 14.4: Transfer, CONNECTION, "go to the SYSEX TRANSFER page", "OS Upgrade via device startup menu"); "If something goes wrong" puts that route first. Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks the confirmations:
+   A notice at the top of the section says this sender has not been tried on a unit yet and gives Elektron's own route for the same thing (Elektron's own text for it, which the page names per device: MK1 manual section 14.4 "OS UPGRADE"; Analog Keys manual "EARLY STARTUP MENU", "OS UPGRADE"; MKII OS release notes "Upgrading from the STARTUP Menu", which call Transfer's button "LEGACY OS UPGRADE mode". Transfer, CONNECTION, "go to the SYSEX TRANSFER page", "OS Upgrade via device startup menu" is the MK1/Keys wording); "If something goes wrong" puts that route first. Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks the confirmations:
    - four about the route: backup, the OS UPGRADE screen, the DIN cable, Transfer closed and no sleep;
    - a fifth, written from the file in step 1, naming the unit: e.g. "This unit is an Analog Rytm MK1 (not an MKII)", or "an Analog Keys (not an Analog Four)";
    - a sixth, for sending the build only: "It runs OS 1.73 now", or 1.56 on the Keys.
@@ -84,6 +84,8 @@ Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker
    - its bytes hash to the published sha256 for that recipe and device.
 
    The download name carries the first 8 hex digits of the sha256 (`AR1_OS1.73_0000_0001_76a2f4d0.syx`), because the project's own build names repeat across different builds (`…_0000_0001.syx` is files 3, 4 and 4b).
+
+   After a successful build the page points to that device's `START_HERE` (first-run checks and what not to do): `flash/START_HERE.md` (MK1), `flash/MKII/START_HERE_MKII.md`, `flash/KEYS/START_HERE_KEYS.md`, as links to github.com/bandersong/analog-rytm-chop (`blob/main/…`). The page itself still needs no network.
 
 Not in M0 (next): **route A**, USB while the OS runs (Transfer's drop route: the `0x50`/`0x51` OsUpgrade RPC described in corp `installer-re/REPORT.md`). Also not in M0:
 - M0b: measuring Transfer's own pacing on the startup-menu route.
@@ -213,7 +215,7 @@ Without `--steplock-tree` the generator skips that one package.
 ## Tests
 
 ```bash
-node --test web/test/*.test.js     # 50 tests, about 2 minutes; read-only (all outputs stay in memory)
+node --test web/test/*.test.js     # 51 tests, about 2 minutes; read-only (all outputs stay in memory)
 ONLY=keys-chord node --test web/test/engine.test.js
 ```
 
@@ -241,7 +243,8 @@ Stock files are found by sha256 in `stock/` and `upstream/rytm1_mods/stock/`, or
 - a missing never-write declaration;
 - an unclaimed edit;
 - an undeclared stock copy, and a failing copy check;
-- one of this project's own outputs dropped as stock.
+- one of this project's own outputs dropped as stock;
+- this project's older and superseded flash builds (`flash/`, `flash/_superseded/`) dropped as stock: each is named as "a modded build from this project, not Elektron's stock file", and a one-byte-changed copy is not.
 
 It also checks the feature rules.
 
@@ -285,5 +288,5 @@ Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/brows
   - Windows/Linux browsers.
 - **Route C pacing is unknown** (corp `installer-re`: no Elektron source gives a gap). 20 ms is a conservative default, not a measured one; M0b should measure Transfer's own stream.
 - **The page cannot see whether the unit received the file.** It is not known whether the bootstrap ever answers.
-- **Licences:** the packages contain code first written in gdeo607/rytm1_mods, which has no licence yet (see `NOTICE`). Do not publish this folder until that is settled and the project has its name. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
+- **Licences:** the packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence (GitHub reports none, 2026-10-08). It is credited (`NOTICE`, the page's footer and licence section) and used as-is; this project's GPL-3.0-or-later grant covers its own code only. Local only until the project has its name. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
 - **The page cannot ask the unit what it is or which OS it runs** (M0 has no USB route). The fifth and sixth boxes are the user's word for it.

@@ -4,7 +4,7 @@
  "device": "keys",
  "os": "1.56",
  "title": "Chord memory",
- "summary": "Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held turns it off.",
+ "summary": "Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held or latched turns it off.",
  "status": "Built and checked on a computer; not yet run on an Analog Keys.",
  "features": [
   "chord"

@@ -247,6 +247,54 @@ test('one of our own built files dropped as "stock" is recognised and refused', 
   assert.strictEqual(r.ok, false); assert.strictEqual(r.kind, 'our-output');
 });
 
+/* The project's older flash builds, dropped as "stock", get the specific message: the four
+ * the final gate named (734607ae, a96657b4, 3ea80d31, 3c77f43b) and everything in
+ * flash/_superseded. Files are read from the repo's flash/ folder (read-only). */
+function flashFiles(dir) {
+  const fs = require('fs'), path = require('path');
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const f = path.join(dir, e.name);
+    if (e.isDirectory()) out.push(...flashFiles(f));
+    else if (/\.syx$/i.test(e.name)) out.push(f);
+  }
+  return out;
+}
+
+test('an older or superseded flash build dropped as "stock" is named as a modded build from this project', async (t) => {
+  const fs = require('fs'), path = require('path');
+  const flash = flashFiles(path.join(L.REPO, 'flash'));
+  if (!flash.length) return t.skip('no flash/ folder next to web/');
+  const bySha = {};
+  for (const f of flash) bySha[L.SHA.sha256hex(new Uint8Array(fs.readFileSync(f)))] = f;
+  const named = ['734607ae', 'a96657b4', '3ea80d31', '3c77f43b'];
+  for (const p of named) {
+    const h = Object.keys(bySha).find(x => x.startsWith(p));
+    assert.ok(h, `${p} is in flash/`);
+    const r = await E.identify(new Uint8Array(fs.readFileSync(bySha[h])), 'x.syx');
+    assert.strictEqual(r.ok, false); assert.strictEqual(r.kind, 'our-output', p);
+    assert.match(r.message, /a modded build from this project, not Elektron's stock file/, p);
+  }
+  // every pinned older output that is on disk is recognised; every file in _superseded is pinned
+  for (const o of L.known.other_outputs) {
+    if (!bySha[o.sha256]) continue;
+    const r = await E.identify(new Uint8Array(fs.readFileSync(bySha[o.sha256])), 'x.syx');
+    assert.strictEqual(r.kind, 'our-output', o.what);
+    assert.ok(r.message.includes(o.what), 'the message names which build it is');
+  }
+  for (const f of flash.filter(f => f.includes(path.sep + '_superseded' + path.sep))) {
+    const h = L.SHA.sha256hex(new Uint8Array(fs.readFileSync(f)));
+    assert.ok(L.known.other_outputs.some(o => o.sha256 === h), `${path.basename(f)} is pinned in other_outputs`);
+  }
+  // negative: one byte changed in one of them is no longer "ours": it gets the generic unknown-file message
+  const any = fs.readFileSync(bySha[Object.keys(bySha).find(x => x.startsWith('3ea80d31'))]);
+  const bent = new Uint8Array(any); bent[bent.length >> 1] ^= 1;
+  const r = await E.identify(bent, 'x.syx');
+  assert.strictEqual(r.ok, false); assert.notStrictEqual(r.kind, 'our-output');
+  assert.ok(!/modded build from this project/.test(r.message), 'a damaged copy is not called one of ours');
+});
+
 test('feature rules: SMP CUT pulls in CHOP; classic excludes Sample Focus; Keys combinations map 1:1', () => {
   let r = E.resolve('mk1', ['smpcut']);
   assert.ok(r.ok); assert.strictEqual(r.recipe, 'mk1-samplefocus-cut'); assert.strictEqual(r.notes.length, 1);

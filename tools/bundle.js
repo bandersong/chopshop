@@ -83,7 +83,10 @@ function build() {
                   ...engineParts.slice(0, 5).map(p => p[0]), 'src/engine/known.json', 'generated/packages/index.json',
                   ...LICENCES.map(l => l[0])];
   const stamp = '<!-- Rytm & Keys Mod Installer (working name), M0. Copyright (C) 2026 bandersong.\n' +
-    'Free software: GPL-3.0-or-later. This file also contains elektron-firmware-tool,\n' +
+    'Free software: GPL-3.0-or-later for this project\'s own code. The packages in this file, and\n' +
+    'some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence:\n' +
+    'it is credited and used as-is, and this project\'s GPL grant does not cover it. This file\n' +
+    'also contains elektron-firmware-tool,\n' +
     'Copyright (c) 2026 Marcel Bierling (MIT License), the emscripten runtime (MIT or\n' +
     'University of Illinois/NCSA) and parts of musl libc, Copyright (c) 2005-2020 Rich Felker,\n' +
     'et al. (MIT License), compiled to WebAssembly. Their full notices and licence texts, and\n' +

@@ -30,7 +30,13 @@ test('every pinned hash appears in the project file it cites', () => {
                ...L.known.other_outputs.map(o => [o.sha256, o.what])];
   for (const [h, src] of all) {
     const file = Object.keys(files).find(f => src.startsWith(f) || src.includes(f));
-    if (file && files[file]) {
+    const sup = src.match(/\(?(flash\/_superseded\/[^\s)]+\.syx)\)?/);
+    if (sup) {
+      // a superseded build: the hash must be that of the file the pin names
+      const f = path.join(L.REPO, sup[1]);
+      if (fs.existsSync(f)) assert.strictEqual(L.SHA.sha256hex(new Uint8Array(fs.readFileSync(f))), h, `${h.slice(0, 16)} is not ${sup[1]}`);
+      else assert.fail(`${sup[1]} is not in the repo`);
+    } else if (file && files[file]) {
       assert.ok(Object.values(files[file]).includes(h), `${h.slice(0, 16)} not in ${file}`);
     } else if (/START_HERE_KEYS\.md/.test(src)) {
       assert.ok(text('flash/KEYS/START_HERE_KEYS.md').includes(h), `${h.slice(0, 16)} not in START_HERE_KEYS.md`);

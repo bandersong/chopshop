@@ -39,14 +39,16 @@ THE MOD PACKAGES
 generated/packages/*.json carry the mods' own bytes, read out of images built by
 gdeo607/rytm1_mods' build tools (https://github.com/gdeo607/rytm1_mods) with this
 project's patch series (mods/0001-chop/rytm1_mods-chop.patch in the parent repo):
-  - 0001-chop, 0010-chord, 0011-joyrand: this project (bandersong);
+  - 0001-chop, 0010-chord, 0011-joyrand: this project (bandersong). One exception: 0001-chop's
+    page gates reuse 0008's entry frame and epilogue (gdeo607);
   - 0000-shared, 0008-sample-cut, 0002-euclid-accents, 0003-velocity-humanise and the
     build/verify tools: first committed by gdeo607 in rytm1_mods, changed since by this
     project (MK1 fixes, MKII port; git log of rytm1_mods branch chop).
-rytm1_mods carries no licence file (GitHub reports none, 2026-10-08). Until gdeo607
-licenses that code, the packages are not covered by this project's GPL grant for those
-parts, and nothing here may be published. The installer's checks follow the rules of
-rytm1_mods' tools/build.py and tools/verify.py, re-written in JavaScript.
+gdeo607/rytm1_mods carries no licence file (GitHub reports none, 2026-10-08). The packages, and
+some of the mod code in them, include that code. It is credited here and used as-is: this
+project's GPL-3.0-or-later grant covers this project's own code only, not gdeo607's parts.
+The installer's checks follow the rules of rytm1_mods' tools/build.py and tools/verify.py,
+re-written in JavaScript.
 
 FACTS, NOT CODE
 ---------------

@@ -51,6 +51,10 @@
   "other_outputs": [
     { "sha256": "3ea80d31dba5a6ea3c937d6feb68026907759a68c7557e31373f4d7bd1a2b00b", "what": "an earlier CHOP build for the Analog Rytm MK1 (flash/SHA256SUMS 2_CHOP)" },
     { "sha256": "3c77f43b566fab6c6b178bae3e515d468fb298d560da083c5f71686e31b31066", "what": "an earlier CHOP test build for the Analog Rytm MK1 (flash/SHA256SUMS 3)" },
-    { "sha256": "734607ae8a213a328a46c474abd2d4b55853172761e753af34e921f41b9d14dc", "what": "an earlier Sample Focus build with STR for the Analog Rytm MK1 (flash/SHA256SUMS 4)" }
+    { "sha256": "734607ae8a213a328a46c474abd2d4b55853172761e753af34e921f41b9d14dc", "what": "an earlier Sample Focus build with STR for the Analog Rytm MK1 (flash/SHA256SUMS 4)" },
+    { "sha256": "23a20937c06fe856abcd1013bda03a14eb775dbcccb9329145d0d808c5157915", "what": "a superseded Sample Focus build (no STR) for the Analog Rytm MK1 (flash/_superseded/2026-10-08-pre-press-gate/4b_SAMPLE-FOCUS-no-STR_AR1_OS1.73_0000_0001.syx)" },
+    { "sha256": "86e1dd1b2a177b709d1e3977ee61b7f228d587ab752416d203014e66d21fa9a1", "what": "a superseded Sample Focus + SMP CUT build for the Analog Rytm MK1 (flash/_superseded/2026-10-08-pre-press-gate/5_SAMPLE-FOCUS+SMP-CUT_AR1_OS1.73_0000_0001_0008.syx)" },
+    { "sha256": "48fa678c15b4d5c7b977f517062de01949ff572c8826521d1a179025b64756f3", "what": "a superseded CHOP build for the Analog Rytm MKII (flash/_superseded/2026-10-08-pre-press-gate/MKII/2_CHOP_ARMK2_OS1.73_0000_0001.syx)" },
+    { "sha256": "128b952ef082303c04790a6ecae33562089505336f1b072c1056c818a3ccc7f6", "what": "a superseded CHOP + SMP CUT build for the Analog Rytm MKII (flash/_superseded/2026-10-08-pre-press-gate/MKII/3_CHOP+SMP-CUT_ARMK2_OS1.73_0000_0001_0008.syx)" }
   ]
 }

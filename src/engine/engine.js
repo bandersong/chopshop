@@ -100,7 +100,7 @@
         return Object.assign(base, {
           ok: false, kind: 'our-output', device: rec.device,
           title: 'A file this installer builds (' + rec.id + ')',
-          message: 'This is already a modded file made by this project, not Elektron\'s original. ' +
+          message: 'This is a modded build from this project, not Elektron\'s stock file. ' +
                    'Drop Elektron\'s own OS file: the page builds the mods from it.'
         });
       }
@@ -108,7 +108,8 @@
       if (other) {
         return Object.assign(base, {
           ok: false, kind: 'our-output', title: 'An older file from this project',
-          message: 'This is ' + other.what + ', not Elektron\'s original. Drop Elektron\'s own OS file instead.'
+          message: 'This is ' + other.what + ': a modded build from this project, not Elektron\'s stock file. ' +
+                   'Drop Elektron\'s own OS file instead: the page builds the mods from it.'
         });
       }
       if (!(bytes.length > 0 && bytes[0] === 0xf0)) {

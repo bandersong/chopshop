@@ -43,6 +43,22 @@
     keys: { name: 'Analog Keys', os: '1.56', unit: 'an Analog Keys (not an Analog Four)' }
   };
 
+  /* Where Elektron's own text for the startup-menu OS UPGRADE route is, per device
+   * (corp/installer-re/evidence/elektron: the MK1 manual's section 14.4, the Analog Keys
+   * manual's EARLY STARTUP MENU chapter, the MKII OS release notes). The MKII has no
+   * section number here: its manual was not read. */
+  var MANUAL_REF_ALL = 'Elektron\'s manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; ' +
+    'Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes';
+  var MANUAL_REF = {
+    mk1: 'Elektron\'s Analog Rytm MK1 manual, section 14.4 "OS UPGRADE"',
+    keys: 'Elektron\'s Analog Keys manual, "EARLY STARTUP MENU", "OS UPGRADE"',
+    mk2: 'Elektron\'s Analog Rytm MKII OS release notes, "Upgrading from the STARTUP Menu" (they call Transfer\'s CONNECTION-page button "LEGACY OS UPGRADE mode")'
+  };
+
+  /* This project's first-run checks and do-not list for each device's builds (public). */
+  var START_HERE_BASE = 'https://github.com/bandersong/analog-rytm-chop/blob/main/flash/';
+  var START_HERE = { mk1: 'START_HERE.md', mk2: 'MKII/START_HERE_MKII.md', keys: 'KEYS/START_HERE_KEYS.md' };
+
   /* ------------------------------ engine ------------------------------ */
 
   function workerMain() {
@@ -235,6 +251,8 @@
     var func = !r.ok ? 'FUNC (FUNCTION on the Analog Keys)' : r.device === 'keys' ? 'FUNCTION' : 'FUNC';
     $('funcKey').textContent = func;
     each('.funcName', function (n) { n.textContent = func; });
+    var manual = r.ok && MANUAL_REF[r.device] ? MANUAL_REF[r.device] : MANUAL_REF_ALL;
+    each('.manualRef', function (n) { n.textContent = manual; });
     deviceLabels();
     resetConfirms();
     if (r.ok) {
@@ -425,6 +443,14 @@
       a.textContent = 'Download ' + dl;
       $('dlName').textContent = dl;
       $('dlSha').textContent = 'sha256 ' + r.sha256 + ' (' + r.size + ' bytes) · the project\'s name for it: ' + r.name;
+      var next = $('dlNext');
+      clear(next);
+      if (START_HERE[r.device]) {
+        var url = START_HERE_BASE + START_HERE[r.device];
+        next.appendChild(document.createTextNode('Before you flash this build, read its first-run checks and what not to do: '));
+        next.appendChild(el('a', { href: url, target: '_blank', rel: 'noopener noreferrer', text: url.replace(/^https:\/\//, '') }));
+        next.appendChild(document.createTextNode(' (opens the project\'s page on GitHub; this page itself needs no network).'));
+      }
       $('dlBox').classList.remove('hidden');
       updateSend();
     }, function (e) {
