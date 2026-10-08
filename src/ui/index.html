@@ -22,7 +22,9 @@
     <p><b>Drop the file here</b></p>
     <p id="dropHelp">or <label class="pick"><input type="file" id="file" accept=".syx,.zip"> choose it on your computer</label></p>
   </div>
+  <p id="dropNote" class="warn-text" aria-live="polite"></p>
   <div id="idResult" class="card hidden" aria-live="polite"></div>
+  <p class="card warn" id="rytm174"><b>Analog Rytm owners:</b> Elektron's site now offers only OS 1.74 for the Rytm, and these builds need the <b>1.73</b> file. Use the 1.73 file you already have; the page checks it by its checksum. If your Rytm is already on 1.74, these mods can't be installed on it yet: don't go back to 1.73 on your own, Elektron does not support downgrades.</p>
   <details>
     <summary>Which file do I need?</summary>
     <ul>
@@ -31,6 +33,7 @@
       <li><b>Analog Keys:</b> Elektron's OS <b>1.56</b> file for the Analog Four / Analog Keys.</li>
     </ul>
     <p>The page recognises these files by their exact checksum, so a renamed file is fine and a changed one is refused. Your unit must run the same OS version as the file.</p>
+    <p><b>Unit on OS 1.72?</b> First install Elektron's original 1.73 file the normal way (Elektron Transfer, its drop page). Then come back with that 1.73 file and flash the Control build first.</p>
     <p><b>OS 1.74 is not supported yet.</b> In October 2026 Elektron's site offers only 1.74 for the Rytm. If your Rytm is on 1.73, don't update it: going back to an older OS is a downgrade, which Elektron does not support.</p>
   </details>
 </section>
@@ -51,27 +54,33 @@
   <div class="when-open">
     <p>The page unpacks your file, adds the mods, packs it again and then checks the result: the recovery code untouched, nothing changed outside the mods, and the finished file identical, byte for byte, to the one the project published. It takes from a few seconds to a minute, depending on the computer. The download only appears when every check has passed.</p>
     <p><button id="buildBtn" class="primary">Build</button> <span id="buildStatus" aria-live="polite"></span></p>
+    <p id="busyNote" class="fine" aria-live="polite"></p>
     <progress id="buildBar" class="hidden" max="8" value="0"></progress>
     <details id="checksBox" class="hidden"><summary>The checks</summary><pre id="checks"></pre></details>
     <div id="dlBox" class="card hidden">
       <p><b id="dlName"></b> <span class="ok-badge">all checks passed</span></p>
       <p class="mono" id="dlSha"></p>
       <p><a id="dlLink" class="button primary" download>Download</a></p>
-      <p class="fine">You can flash this file with Elektron Transfer (its normal drop page, over USB) or with step 4 below. Keep Elektron's original file too: it is your way back.</p>
+      <p class="fine">You can flash this file with Elektron Transfer (its normal drop page, over USB), or by the startup-menu route in step 4. If Transfer refuses the file as "same version", nothing was written: stop there, or use the startup-menu route. Keep Elektron's original file too: it is your way back.</p>
     </div>
   </div>
 </section>
 
 <section id="s4">
   <h2><span class="n">4</span> Send it to your unit over MIDI</h2>
-  <p>This uses the unit's own startup menu (<b>OS UPGRADE</b>), the same way Elektron's recovery works. It also works when the unit no longer starts normally.</p>
+  <p>This uses the unit's own startup menu (<b>OS UPGRADE</b>), the route Elektron's manual gives for when the normal update can't be used. It also works when the unit no longer starts normally.</p>
+
+  <div class="card warn" id="m0note">
+    <h3>This sender has not been tried on a real unit yet</h3>
+    <p>It has only been tested against a simulated MIDI port. Elektron's own tool for this route is <b>Elektron Transfer</b>: with the unit on the startup menu's OS UPGRADE screen, open Transfer, on its CONNECTION page click "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu", and follow the steps on screen (Elektron's manual, section 14.4, "OS UPGRADE"). Download the build in step 3 and you can send it that way. The same route with Elektron's original file is the way back.</p>
+  </div>
 
   <div class="card">
     <h3>You need</h3>
     <ul>
       <li><b>Chrome or Edge</b> on a computer. Firefox only with an extra add-on; Safari can't send MIDI from a web page. <span id="midiSupport" class="pill"></span></li>
       <li>A <b>DIN MIDI interface</b> (the round 5-pin MIDI plugs) and a MIDI cable. <b>USB does not work in the startup menu</b>: the unit only listens on its MIDI IN socket there.</li>
-      <li>About 10 to 15 minutes at the recommended pause, with the computer awake and this page in front.</li>
+      <li>About 9 to 15 minutes at the default pause, with the computer awake and this page in front.</li>
     </ul>
   </div>
 
@@ -101,18 +110,20 @@
       <select id="gapSel">
         <option value="5">5 ms (fast)</option>
         <option value="10">10 ms</option>
-        <option value="20" selected>20 ms (recommended)</option>
+        <option value="20" selected>20 ms (default, not measured)</option>
         <option value="40">40 ms</option>
         <option value="80">80 ms (slow interfaces)</option>
       </select></label>
       <span id="estimate" class="fine"></span></p>
-    <p class="fine">Never faster than the MIDI cable itself (31250 baud). If a transfer fails, try again with a longer pause.</p>
+    <p class="fine">Never faster than the MIDI cable itself (31250 baud). Nobody has measured which pause the unit needs: 20 ms is a careful guess. If a transfer fails, try again with a longer pause.</p>
     <fieldset id="confirms">
       <legend>Tick each one</legend>
       <label><input type="checkbox" class="cf"> My projects are backed up.</label>
       <label><input type="checkbox" class="cf"> The unit shows the startup menu's OS UPGRADE screen (<span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> held at power-on, then TRIG 4).</label>
       <label><input type="checkbox" class="cf"> A MIDI cable runs from my interface's MIDI OUT to the unit's MIDI IN (not USB).</label>
       <label><input type="checkbox" class="cf"> Transfer and other music apps are closed, and this computer won't go to sleep.</label>
+      <label><input type="checkbox" class="cf" id="cfDevice"> <span id="cfDeviceText">This unit is the one the file in step 1 is for (drop a file first).</span></label>
+      <label><input type="checkbox" class="cf cf-build" id="cfOs"> <span id="cfOsText">It runs the OS version of the file in step 1.</span> <span class="fine">(Needed for sending the build; not for Recover.)</span></label>
     </fieldset>
     <p>
       <button id="sendBuild" class="primary" disabled>Send the build</button>
@@ -139,14 +150,18 @@
   <ul>
     <li><b>The unit shows an error, or nothing happens:</b> switch it off, then start again from step 1 of section 4. Try a longer pause. Check the cable goes into MIDI IN.</li>
     <li><b>You stopped the transfer:</b> if the unit is still waiting or receiving, switch it off and start again. If its screen says it is upgrading, don't switch it off: wait.</li>
-    <li><b>The unit doesn't start after flashing:</b> use the same steps with <b>Recover: send Elektron's original file</b>. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
+    <li><b>The unit doesn't start after flashing:</b> send Elektron's original file through the startup menu. Hold <span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> while you switch it on, press TRIG 4 (OS UPGRADE), and send the file over DIN MIDI with Elektron Transfer: CONNECTION page, "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu" (Elektron's manual, 14.4). The <b>Recover</b> button in section 4 sends the same file the same way, but this page's sender has not been tried on a unit yet. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
     <li>Only send a file to the unit it was built for. The page builds Rytm files only from Rytm files, and Keys files only from the Keys file.</li>
   </ul>
 </section>
 </main>
 
 <footer class="wrap fine">
-  <p>Free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT) and on gdeo607/rytm1_mods. The packages carry only the mods' own bytes; Elektron's code comes from your own file. See README, LICENSE and NOTICE.</p>
+  <p>Free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT) and on gdeo607/rytm1_mods. The packages carry only the mods' own bytes; Elektron's code comes from your own file. The full notices and licence texts are below.</p>
+  <details id="licences">
+    <summary>Licences and credits (full texts)</summary>
+<!--@LICENCES@-->
+  </details>
   <p>Elektron, Analog Rytm, Analog Four, Analog Keys and Overbridge are trademarks of Elektron Music Machines. This project is not affiliated with Elektron.</p>
 </footer>
 <script>/*@SCRIPTS@*/</script>

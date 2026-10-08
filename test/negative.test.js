@@ -71,6 +71,9 @@ test('identify: a 1.74-like Rytm MK1 file is refused as "1.74: not supported yet
   assert.match(r.message, /1\.74/);
   assert.match(r.message, /not supported yet/);
   assert.match(r.message, /Do not install it on your unit/);
+  // the next step for a Rytm stranger (panel F3): Elektron offers only 1.74; a 1.74 unit can't take these yet
+  assert.match(r.message, /offers only 1\.74 for the Rytm/);
+  assert.match(r.message, /already on 1\.74, these mods can't be installed on it yet/);
   const b = await E.build(f, 'mk1-control');
   assert.strictEqual(b.ok, false);
   assert.strictEqual(b.stage, 'stock');
@@ -84,6 +87,7 @@ test('identify: a 1.74-like MKII file inside a _dist.zip is refused the same way
   assert.strictEqual(r.ok, false);
   assert.strictEqual(r.kind, 'newer');
   assert.match(r.title, /MKII/);
+  assert.match(r.message, /offers only 1\.74 for the Rytm/);
 });
 
 test('identify: stock 1.73 inside a _dist.zip (deflated) is found and accepted', { skip: !mk1 }, async () => {
@@ -101,6 +105,9 @@ test('identify: 1.72 stock files are known and refused (the mods need 1.73)', { 
     assert.strictEqual(r.ok, false);
     assert.strictEqual(r.kind, 'stock-old');
     assert.match(r.message, /1\.73/);
+    // the way forward from 1.72 (panel F7): stock 1.73 first, then the Control build
+    assert.match(r.message, /first install Elektron's original 1\.73 file the normal way/);
+    assert.match(r.message, /flash the Control build first/);
   }
 });
 

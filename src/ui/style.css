@@ -71,3 +71,6 @@ footer { padding-bottom: 40px; }
   h1 { font-size: 1.4rem; }
   button, .button { width: 100%; margin: 4px 0; }
 }
+.drop.busy { opacity: .5; cursor: not-allowed; }
+#licences pre { max-height: 420px; }
+#licences h3 { margin-top: 14px; }

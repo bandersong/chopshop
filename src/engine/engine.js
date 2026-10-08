@@ -88,7 +88,11 @@
           title: deviceName(st.device) + ', OS ' + st.os,
           message: 'This is Elektron\'s OS ' + st.os + ' file for the ' + deviceName(st.device) +
                    '. The mods are built for OS ' + want + ', so they need Elektron\'s ' + want +
-                   ' file instead (and your unit needs to run ' + want + ' too).'
+                   ' file instead (and your unit needs to run ' + want + ' too). If your unit is on ' + st.os +
+                   ': first install Elektron\'s original ' + want + ' file the normal way (Elektron Transfer, its drop page), ' +
+                   'then drop that ' + want + ' file here and flash the Control build first.' +
+                   (st.device === 'keys' ? '' : ' Elektron\'s site now offers only 1.74 for the Rytm, so the 1.73 file has to be one you ' +
+                   'already have; this page checks it by its checksum.')
         });
       }
       var rec = known.recipes.filter(function (r) { return r.output_sha256 === sha; })[0];
@@ -145,7 +149,10 @@
           message: 'Your file is OS ' + ver + ' for the ' + what + ': not supported yet. ' +
                    'Do not install it on your unit. These mods are built for OS ' + target +
                    ', and going back from a newer OS to an older one is a downgrade, which Elektron ' +
-                   'does not support.'
+                   'does not support.' +
+                   (ourDev === 'keys' ? '' : ' Elektron\'s site now offers only 1.74 for the Rytm. If your unit is on 1.73, ' +
+                   'keep it there and drop the 1.73 file you already have. If it is already on 1.74, these mods ' +
+                   'can\'t be installed on it yet.')
         });
       }
       return Object.assign(base, {

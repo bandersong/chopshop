@@ -13,6 +13,10 @@ stands on the work of others, credited here.
 
 THIRD-PARTY CODE IN THE PAGE
 ----------------------------
+dist/index.html carries this NOTICE, the full licence text of each component below
+and of the GPL, and a pointer to the Corresponding Source, in its "Licences and
+credits" section (written in by tools/bundle.js; test/bundle.test.js checks each one).
+
 elektron-firmware-tool - Copyright (c) 2026 Marcel Bierling - MIT License
   https://github.com/mischa85/elektron-firmware-tool, commit a5bce9a6af64...
   Compiled to WebAssembly into generated/eft.js and so into dist/index.html. Every

@@ -120,6 +120,76 @@ test('abort stops scheduling within the look-ahead', async () => {
   assert.ok(last.ts - clock.now() <= 1000 + EPS, 'queued data at abort is within the look-ahead');
 });
 
+test('abort resolves only after the queued tail has left the wire', async () => {
+  const msgs = Array.from({ length: 500 }, () => new Uint8Array(128).fill(0x01).fill(0xf0, 0, 1).fill(0xf7, 127));
+  const clock = fakeClock();
+  const out = new MockOutput(clock);
+  const signal = { aborted: false };
+  const stops = [];
+  const r = await S.send({ output: out, messages: msgs, gapMs: 20, aheadMs: 1000, clock, signal,
+                           onProgress: p => { if (p.sent === 100) signal.aborted = true; },
+                           onStopping: s => stops.push(s) });
+  assert.ok(r.aborted);
+  const last = out.log[out.log.length - 1];
+  const tailEnd = last.ts + S.wireMs(last.data.length);
+  assert.ok(clock.now() >= tailEnd - EPS, `resolved at ${clock.now()}, tail leaves at ${tailEnd}`);
+  assert.ok(r.drainedAt >= tailEnd - EPS);
+  assert.strictEqual(stops.length, 1);
+  assert.ok(stops[0].untilMs > 0 && stops[0].untilMs <= 1000 + S.wireMs(128) + EPS, `drain announced: ${stops[0].untilMs} ms`);
+});
+
+test('an output error mid-send: rejects only after the queued tail has left, with the same error', async () => {
+  const msgs = Array.from({ length: 200 }, () => new Uint8Array(128).fill(0x02).fill(0xf0, 0, 1).fill(0xf7, 127));
+  const clock = fakeClock();
+  const out = new MockOutput(clock);
+  const orig = out.send.bind(out);
+  out.send = (d, ts) => { if (out.log.length === 60) throw new Error('port disconnected'); orig(d, ts); };
+  await assert.rejects(S.send({ output: out, messages: msgs, gapMs: 20, aheadMs: 1000, clock }), /port disconnected/);
+  const last = out.log[out.log.length - 1];
+  assert.strictEqual(out.log.length, 60);
+  assert.ok(clock.now() >= last.ts + S.wireMs(last.data.length) - EPS);
+});
+
+test('Stop pressed after the last message is queued: still waits for the wire, reports done', async () => {
+  const msgs = Array.from({ length: 30 }, () => new Uint8Array(128).fill(0x03).fill(0xf0, 0, 1).fill(0xf7, 127));
+  const clock = fakeClock();
+  const out = new MockOutput(clock);
+  const signal = { aborted: false };
+  const r = await S.send({ output: out, messages: msgs, gapMs: 20, aheadMs: 1000, clock, signal,
+                           onProgress: p => { if (p.sent === 30) signal.aborted = true; } });
+  assert.ok(r.done && !r.aborted && r.sent === 30);
+  const last = out.log[out.log.length - 1];
+  assert.ok(clock.now() >= last.ts + S.wireMs(128) - EPS);
+});
+
+test('real timers, one port: Stop, then a new send at once never interleaves with the old tail', async () => {
+  // the panel's abort_resend case (SAFE-5), shortened: 128-byte messages, 300 ms look-ahead
+  const msgs = Array.from({ length: 400 }, (_, i) => new Uint8Array(128).fill(i & 0x7f).fill(0xf0, 0, 1).fill(0xf7, 127));
+  const clock = S.realClock();
+  let stream = 'A';
+  const wire = [];
+  const out = { send(d, ts) { wire.push({ ts, stream, len: d.length }); } };
+  const sigA = { aborted: false };
+  const pA = S.send({ output: out, messages: msgs, gapMs: 5, aheadMs: 300, startDelayMs: 5, clock, signal: sigA });
+  await new Promise(r => setTimeout(r, 400));
+  sigA.aborted = true;
+  const ra = await pA;
+  assert.ok(ra.aborted && ra.sent > 0);
+  stream = 'B';
+  const sigB = { aborted: false };
+  const pB = S.send({ output: out, messages: msgs, gapMs: 5, aheadMs: 300, startDelayMs: 5, clock, signal: sigB });
+  await new Promise(r => setTimeout(r, 150));
+  sigB.aborted = true;
+  await pB;
+  const A = wire.filter(w => w.stream === 'A'), B = wire.filter(w => w.stream === 'B');
+  const lastA = A[A.length - 1];
+  const tailA = lastA.ts + S.wireMs(lastA.len);
+  const firstB = Math.min(...B.map(w => w.ts));
+  console.log(`  A: ${A.length} queued, tail leaves ${tailA.toFixed(1)}; B's first at ${firstB.toFixed(1)} (+${(firstB - tailA).toFixed(1)} ms)`);
+  assert.ok(B.length > 0);
+  assert.strictEqual(B.filter(w => w.ts < tailA).length, 0, 'no B message scheduled before A has left the wire');
+});
+
 test('real timers: short stream keeps its spacing and look-ahead', async () => {
   const msgs = Array.from({ length: 40 }, (_, i) => new Uint8Array([0xf0, 0x00, i, 0xf7]));
   const clock = S.realClock();

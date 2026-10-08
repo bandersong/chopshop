@@ -19,7 +19,7 @@ From a static server instead (any host works; nothing is fetched):
 python3 -m http.server --directory web/dist 8000   # then http://localhost:8000
 ```
 
-Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker and three builds reproduce their published sha256 inside the page (`test/browser/e2e.js`). Web MIDI exists there and the page is a secure context, but headless Chrome refuses the permission. Whether a desktop Chrome shows the SysEx permission prompt for a `file://` page is **not checked**. If it doesn't, use the local server.
+Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker and three builds reproduce their published sha256 inside the page (`test/browser/e2e.js`). Web MIDI exists there and the page is a secure context, but headless Chrome refuses the permission. Whether a desktop Chrome shows the SysEx permission prompt for a `file://` page is **not checked**. If it doesn't, use the local server (bound to `127.0.0.1`: `python3 -m http.server --bind 127.0.0.1 --directory web/dist 8000`). The page's own refusal message gives the same command, because the page travels as one file without this README.
 
 ## What the page does
 
@@ -34,7 +34,7 @@ Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker
    - MK1: the classic step-lock build excludes both.
    - Keys: chord and JOY RANDOM are independent; JOY alone is `joy-min`.
 
-   Each selection resolves to exactly one published build, or the page says why it can't. No boxes ticked gives the Control build.
+   Each selection resolves to exactly one published build, or the page says why it can't. No boxes ticked gives the Control build. Ticking a box ticks what it requires and unticks whatever excludes it or is excluded by it, in both directions (ticking CHOP or SMP CUT clears Classic, and the reverse).
 3. **Build and verify** (in a Web Worker; about 9 to 15 s per build in node on the VM, 9 to 13 s in headless Chrome):
    - **Package:** its text hashes to the pinned `index.json` entry, and it names the published output pinned in `known.json`.
    - **Stock file:** its sha256 matches the stock file this target needs.
@@ -63,14 +63,27 @@ Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker
    - Hold FUNC (on the Keys: FUNCTION) at power-on, then press TRIG 4 = OS UPGRADE.
    - Send over DIN MIDI into the unit's MIDI IN. USB does not work in the startup menu.
 
-   Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks four confirmations, then the page streams the file's own SysEx messages (`src/sender/sender.js`):
+   A notice at the top of the section says this sender has not been tried on a unit yet and gives Elektron's own route for the same thing (Elektron's manual 14.4: Transfer, CONNECTION, "go to the SYSEX TRANSFER page", "OS Upgrade via device startup menu"); "If something goes wrong" puts that route first. Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks the confirmations:
+   - four about the route: backup, the OS UPGRADE screen, the DIN cable, Transfer closed and no sleep;
+   - a fifth, written from the file in step 1, naming the unit: e.g. "This unit is an Analog Rytm MK1 (not an MKII)", or "an Analog Keys (not an Analog Four)";
+   - a sixth, for sending the build only: "It runs OS 1.73 now", or 1.56 on the Keys.
+
+   Both buttons name the device ("Send the Analog Rytm MK1 build", "Recover: send Elektron's original Analog Rytm MK1 file"). Recover needs the first five boxes, the build all six. Every box is unticked again on a new file, a new choice, a new build and at the end of every send. Then the page streams the file's own SysEx messages (`src/sender/sender.js`):
    - one by one, unchanged, with a selectable gap: 5/10/**20**/40/80 ms;
    - each timestamped no earlier than the previous one plus its DIN wire time (10 bits a byte at 31250 baud, 40.96 ms for 128 B) plus the gap, so the average never exceeds 31250 baud;
    - restarting the schedule from "now" after a stall instead of bursting;
    - never handing the browser more than 1 s of data ahead, because Chrome has no `MIDIOutput.clear()`;
-   - with progress and ETA, an abort, a screen wake lock, and a warning when the tab goes to the background.
+   - with progress and ETA, an abort, a screen wake lock, and a warning when the tab goes to the background;
+   - ending (done, stopped or failed) only once everything already handed to the browser is due to have left the cable, so a new send can never interleave with the tail of a stopped one.
 
    **Recover: send Elektron's original file** uses the same sender on the stock file the user dropped.
+
+5. **State.** Every result is bound to the state that asked for it. A counter goes up on every new file and every new choice; each engine reply carries the counter it was asked under, and a stale reply is dropped. While a build or a send runs, the file input, the drop zone, the mod boxes and Build are locked, and a dropped file is refused with a message. Before anything goes out, the page checks again, on its own thread with its own copy of `sha256.js` and `known.json`, that:
+   - the stock file is Elektron's original for the device on screen;
+   - the build belongs to that file and to the recipe on screen;
+   - its bytes hash to the published sha256 for that recipe and device.
+
+   The download name carries the first 8 hex digits of the sha256 (`AR1_OS1.73_0000_0001_76a2f4d0.syx`), because the project's own build names repeat across different builds (`…_0000_0001.syx` is files 3, 4 and 4b).
 
 Not in M0 (next): **route A**, USB while the OS runs (Transfer's drop route: the `0x50`/`0x51` OsUpgrade RPC described in corp `installer-re/REPORT.md`). Also not in M0:
 - M0b: measuring Transfer's own pacing on the startup-menu route.
@@ -95,13 +108,15 @@ Not in M0 (next): **route A**, USB while the OS runs (Transfer's drop route: the
 | `tools/build-wasm.sh` | builds `generated/eft.js` (emscripten; build VM) |
 | `tools/mkpackages.py` | builds `generated/packages/` from rytm1_mods' built images (build VM) |
 | `tools/bundle.js` | builds `dist/index.html`; `--check` fails if it is stale |
-| `test/*.test.js` | node tests (below); `test/browser/e2e.js` drives the page in headless Chrome (VM only) |
+| `test/*.test.js` | node tests (below); `test/browser/e2e.js` and `test/browser/race.js` drive the page in headless Chrome (VM only) |
 
 ## Package format `rytm-installer-package/1`
 
-One JSON file per build. Every field is generated by `tools/mkpackages.py` from:
+One JSON file per build, written by `tools/mkpackages.py`. The bytes, sites, claims and detours come from:
 - `build/manifest_<tag>.json` and `build/mainos_<tag>.bin` (the built, verify-passed image);
 - `registry/allocations*.toml` and `re/symbols*.toml` (rytm1_mods, branch `chop`).
+
+The words are hand-written in `mkpackages.py`: each recipe's title, summary and status (`RECIPES`), and the checkboxes with their `requires`/`excludes` rules (`FEATURES`).
 
 The generator refuses to write a package unless:
 - the built `.syx` hashes to the published sha256;
@@ -119,6 +134,25 @@ The generator refuses to write a package unless:
 - `counts`, `provenance`: rytm1_mods commit and manifest sha256.
 
 Trust: the page runs only packages whose text hashes to `index.json`, and only accepts a result whose sha256 equals the pin in `known.json`. Both files are hand-checked by `test/known.test.js` against `flash/*/SHA256SUMS`, `stock/SHA256SUMS` and `flash/KEYS/START_HERE_KEYS.md`.
+
+## Adding a mod package
+
+1. Build it in `rytm1_mods` (branch `chop`, in the VM) until `verify.py` passes, and publish the output: its sha256 goes into the `SHA256SUMS` of its `flash/` folder (or a `START_HERE` file that `known.test.js` reads).
+2. Pin it by hand in `src/engine/known.json` under `recipes`: `id`, `device`, `output_sha256`, and a `source` naming that file. `known.test.js` fails if the hash is not in the cited file, or if a pin has no package.
+3. Add a `RECIPES` entry in `tools/mkpackages.py` (id, device, build tag, features, title, summary, status). If it brings a new checkbox, add it to `FEATURES` for that device with its `requires`/`excludes` and a `why`. Every selection must still resolve to exactly one recipe.
+4. In the VM: `python3.12 web/tools/mkpackages.py --rytm1-mods upstream/rytm1_mods` (it refuses unless the image rebuilds from stock + package byte for byte and hashes to the pin), then `node web/tools/bundle.js`.
+5. Run every test: `node --test web/test/*.test.js` (the new pin is built by `engine.test.js` and scanned by `scan.test.js`), then `test/browser/e2e.js` and `test/browser/race.js` in the VM.
+6. If it adds a feature combination, add it to the feature-rule cases in `negative.test.js`.
+
+### A new OS version
+
+Supporting another OS version (say Rytm 1.74) touches more than a package:
+- `known.json`: the new stock sha256 under `stock` (`supported: true`), and the old one set to `supported: false` if it is dropped; new never-write ranges if they move.
+- `src/engine/engine.js`: the target versions in `identifySyx` (`'1.56' : '1.73'` in the old-file and newer-file branches), `supportedLine()`, and `DEVICE_WORDS` if a device byte is new.
+- `src/ui/app.js`: `DEVICE_TEXT` (the OS in the confirmation box).
+- `src/ui/index.html`: the versions in the page text (lede, "Which file do I need?", the 1.74 note in step 1).
+- `tools/mkpackages.py`: `DEVICES` (stock name, build dir) and the recipes.
+- `test/negative.test.js`: the version cases (it makes a "newer" file with the tool's own `-V`).
 
 ## The no-Elektron-bytes scan (`test/scan.test.js`)
 
@@ -154,7 +188,7 @@ Results, VM and host (2026-10-08):
 | Longest non-padding run, mod bytes vs same-device MAIN OS | 15 B | 15 B | 15 B |
 
 - T1 covered 33 displaced spans.
-- T2 non-package runs: all text (361 on the final run; the count moves as the docs change).
+- T2 non-package runs: all text (380 on the integrator's run of 2026-10-08, after the licence texts went into the page; the count moves as the docs change).
 - Package texts: 0 hits.
 
 ## Rebuild
@@ -179,7 +213,7 @@ Without `--steplock-tree` the generator skips that one package.
 ## Tests
 
 ```bash
-node --test web/test/*.test.js     # 45 tests, about 2 minutes; read-only (all outputs stay in memory)
+node --test web/test/*.test.js     # 50 tests, about 2 minutes; read-only (all outputs stay in memory)
 ONLY=keys-chord node --test web/test/engine.test.js
 ```
 
@@ -192,11 +226,11 @@ Stock files are found by sha256 in `stock/` and `upstream/rytm1_mods/stock/`, or
 | `sender.test.js` | the sender against a mock `MIDIOutput` with a fake clock (listed below) |
 | `scan.test.js` | the no-Elektron-bytes scan |
 | `known.test.js` | pins against the project's SHA256SUMS files; packages against pins; SHA-256/HMAC against node crypto and RFC 4231 |
-| `bundle.test.js` | `dist/index.html` is current, self-contained, and its embedded engine builds `keys-joy-min` in a worker-like sandbox |
+| `bundle.test.js` | `dist/index.html` is current, self-contained, carries NOTICE and every licence text in full (EFT's MIT, emscripten, musl, the GPL) plus the source pointer, and its embedded engine builds `keys-joy-min` in a worker-like sandbox |
 
 `negative.test.js` checks that each of these is refused, each by the layer meant to catch it:
-- a 1.74-like file, made with the tool's own `-V 1.74`, as `.syx` and inside a `_dist.zip`;
-- 1.72 files;
+- a 1.74-like file, made with the tool's own `-V 1.74`, as `.syx` and inside a `_dist.zip` (the refusal must also say that Elektron offers only 1.74 for the Rytm and that a 1.74 unit can't take these mods yet);
+- 1.72 files (the refusal must give the way forward: Elektron's 1.73 first, then the Control build);
 - random, truncated and empty inputs;
 - a wrong stock file for the target;
 - a tampered package;
@@ -219,10 +253,23 @@ It also checks the feature rules.
 - the ETA is exact;
 - gap 0 runs at wire speed;
 - stalls don't cause bursts;
-- abort works;
+- abort works, and resolves only after the queued tail is due to have left the wire;
+- an output error mid-send rejects only after the queued tail has left;
+- a Stop after the last message is queued still waits for the wire;
+- with real timers on one port, Stop followed at once by a new send never interleaves (the panel's SAFE-5 case);
 - real timers keep the spacing.
 
 No device, virtual port or system setting is used.
+
+Browser state test (VM): `CHROME=… PUPPETEER=… [INLINE=1] [DIST=…] SHOTS=… node web/test/browser/race.js` checks, with a mock MIDI port and both engine modes, that the page never offers or sends bytes other than the published file for the device and recipe on screen:
+- another device's stock file dropped 0 and 100 ms into a build (the panel's SAFE-1 case), then after the build, and a synthetic drop event right after Build. A drop the page handles during the build must be refused. With the on-page engine the page itself is busy packing, so the browser may deliver the drop only after the build; then it must be taken as a new file, with the old build gone;
+- the mod boxes changed 0.5 s and 3 s into a build (a click and a scripted change event);
+- the exclusion rule both ways;
+- the confirmation boxes: device and OS text, five boxes for Recover and six for the build, unticked after a build and after a send;
+- during a send: Build, the file input and the mod boxes locked, a dropped file refused; after Stop, nothing re-enabled before the queued tail has left;
+- the download name with its sha256 prefix.
+
+When "Send the build" is enabled after a settle, the test presses it: the first 30 messages on the mock port must be a prefix of the published file for the recipe on screen. Against the M0 page as first committed (33cd3f8) the same test fails: that was the panel's SAFE-1/SAFE-2 finding.
 
 Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/browser/e2e.js` checks:
 - the page from `file://` builds `mk1-samplefocus-cut`, `mk2-samplefocus` and `keys-joy-min` to their published sha256 (checked with `crypto.subtle` in the page);
@@ -238,4 +285,5 @@ Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/brows
   - Windows/Linux browsers.
 - **Route C pacing is unknown** (corp `installer-re`: no Elektron source gives a gap). 20 ms is a conservative default, not a measured one; M0b should measure Transfer's own stream.
 - **The page cannot see whether the unit received the file.** It is not known whether the bootstrap ever answers.
-- **Licences:** the packages contain code first written in gdeo607/rytm1_mods, which has no licence yet (see `NOTICE`). Do not publish this folder until that is settled and the project has its name.
+- **Licences:** the packages contain code first written in gdeo607/rytm1_mods, which has no licence yet (see `NOTICE`). Do not publish this folder until that is settled and the project has its name. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
+- **The page cannot ask the unit what it is or which OS it runs** (M0 has no USB route). The fifth and sixth boxes are the user's word for it.

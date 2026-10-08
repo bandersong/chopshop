@@ -14,7 +14,10 @@
  *     instead of catching up with a burst;
  *   - nothing is handed to the browser more than `aheadMs` (default 1 s) before its
  *     time, because Web MIDI in Chrome cannot cancel queued output (no clear()), so an
- *     abort stops the stream within about that long.
+ *     abort stops the stream within about that long;
+ *   - send() resolves (or, after an error, rejects) only once everything it handed to
+ *     the browser is due to have left the wire, so the caller can never start a new
+ *     stream that interleaves with the tail of a stopped one.
  * The timing source is injectable so the tests can drive it with a fake clock.
  */
 (function (root) {
@@ -59,9 +62,21 @@
     };
   }
 
-  /* send({output, messages, gapMs, baud, aheadMs, startDelayMs, clock, onProgress, signal})
-   * -> {done, aborted, sent, total, bytes, schedule: [timestamps]}
-   * `output` needs only send(data, timestamp) (a Web MIDI MIDIOutput, or a mock). */
+  /* Sleep until `until` on this clock. Nothing can call back what the browser already
+   * holds, so this wait ignores the abort signal on purpose. */
+  async function drain(clock, until) {
+    for (;;) {
+      var n = clock.now();
+      if (n >= until) return;
+      await clock.sleep(Math.min(until - n, 250));
+    }
+  }
+
+  /* send({output, messages, gapMs, baud, aheadMs, startDelayMs, clock, onProgress, onStopping, signal})
+   * -> {done, aborted, sent, total, bytes, schedule: [timestamps], drainedAt}
+   * `output` needs only send(data, timestamp) (a Web MIDI MIDIOutput, or a mock).
+   * Whether it ends done, aborted or with an error, send() settles only after the last
+   * message it handed out is due to have left the wire (drainedAt >= that time). */
   async function send(o) {
     var out = o.output, msgs = o.messages;
     var gap = o.gapMs == null ? 20 : o.gapMs;
@@ -75,38 +90,50 @@
     var remainingMs = estimateMs(msgs, gap, baud);
     var t = clock.now() + (o.startDelayMs == null ? 100 : o.startDelayMs);
     var bytes = 0, schedule = [];
+    var wireEnd = -Infinity; // when the last message handed out is due to have left
 
-    for (var i = 0; i < total; i++) {
-      var now = clock.now();
-      if (t < now) t = now; // fell behind: restart the schedule from now, never burst
-      while (t - now > ahead) {
-        if (signal.aborted) break;
-        await clock.sleep(Math.min(t - now - ahead, 250));
-        now = clock.now();
-      }
-      if (signal.aborted) {
-        if (typeof out.clear === 'function') { try { out.clear(); } catch (e) { /* not supported */ } }
-        return { done: false, aborted: true, sent: i, total: total, bytes: bytes, schedule: schedule };
-      }
-      out.send(msgs[i], t);
-      schedule.push(t);
-      bytes += msgs[i].length;
-      // left after this message: the gap and wire time of every later one
-      remainingMs -= wireMs(msgs[i].length, baud) + (i > 0 ? gap : 0);
-      t += wireMs(msgs[i].length, baud) + gap;
-      if (o.onProgress) {
-        o.onProgress({ sent: i + 1, total: total, bytes: bytes, totalBytes: totalBytes,
-                       etaMs: Math.max(0, (t - gap) - now) + Math.max(0, remainingMs) });
-      }
+    function stopping(why) {
+      if (o.onStopping) { try { o.onStopping({ why: why, untilMs: Math.max(0, wireEnd - clock.now()) }); } catch (e) { /* UI only */ } }
     }
-    // wait until the last message is due to have left, so "done" means done
-    var end = t - gap;
-    for (;;) {
-      var n2 = clock.now();
-      if (n2 >= end || signal.aborted) break;
-      await clock.sleep(Math.min(end - n2, 250));
+
+    try {
+      for (var i = 0; i < total; i++) {
+        var now = clock.now();
+        if (t < now) t = now; // fell behind: restart the schedule from now, never burst
+        while (t - now > ahead) {
+          if (signal.aborted) break;
+          await clock.sleep(Math.min(t - now - ahead, 250));
+          now = clock.now();
+        }
+        if (signal.aborted) {
+          if (typeof out.clear === 'function') { try { out.clear(); } catch (e) { /* not supported */ } }
+          stopping('aborted');
+          await drain(clock, wireEnd);
+          return { done: false, aborted: true, sent: i, total: total, bytes: bytes, schedule: schedule, drainedAt: clock.now() };
+        }
+        out.send(msgs[i], t);
+        schedule.push(t);
+        bytes += msgs[i].length;
+        wireEnd = t + wireMs(msgs[i].length, baud);
+        // left after this message: the gap and wire time of every later one
+        remainingMs -= wireMs(msgs[i].length, baud) + (i > 0 ? gap : 0);
+        t += wireMs(msgs[i].length, baud) + gap;
+        if (o.onProgress) {
+          o.onProgress({ sent: i + 1, total: total, bytes: bytes, totalBytes: totalBytes,
+                         etaMs: Math.max(0, (t - gap) - now) + Math.max(0, remainingMs) });
+        }
+      }
+    } catch (err) {
+      // e.g. the interface was unplugged: whatever was already queued may still go out
+      stopping('error');
+      await drain(clock, wireEnd);
+      throw err;
     }
-    return { done: true, aborted: false, sent: total, total: total, bytes: bytes, schedule: schedule };
+    // every message is queued: wait until the last one is due to have left, so "done"
+    // means done (a Stop pressed now cannot take anything back, so it does not cut this short)
+    if (signal.aborted) stopping('aborted-after-queue');
+    await drain(clock, wireEnd);
+    return { done: true, aborted: false, sent: total, total: total, bytes: bytes, schedule: schedule, drainedAt: clock.now() };
   }
 
   var api = { DIN_BAUD: DIN_BAUD, wireMs: wireMs, splitSysex: splitSysex, estimateMs: estimateMs,
