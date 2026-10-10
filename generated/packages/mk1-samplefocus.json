@@ -4,8 +4,8 @@
  "device": "mk1",
  "os": "1.73",
  "title": "CHOP / Sample Focus",
- "summary": "A CHOP page on SAMPLE (press SAMPLE, pause, SAMPLE again): the 12 pads play one track's sample from 12 start markers; hi-res markers, END, DIV, LAY, RND; step-lock in GRID REC.",
- "status": "Built and checked on a computer; this exact file has not run on a Rytm yet (the earlier CHOP builds did).",
+ "summary": "A CHOP page on SAMPLE (press SAMPLE, pause, SAMPLE again): the 12 pads play one track's sample from 12 start markers; hi-res markers, DIV, LAY, RND; step-lock in GRID REC.",
+ "status": "Built and verified byte for byte (the project's file 4d). This exact file has not been run on a unit yet; its sibling 5c (the same CHOP code plus SMP CUT) was run on an Analog Rytm MK1 on 2026-10-10.",
  "features": [
   "chop"
  ],
@@ -15,10 +15,10 @@
  ],
  "params": {
   "0000-shared": {
-   "lean": 0
+   "lean": 1
   },
   "0001-chop": {
-   "shared_lean": 0
+   "shared_lean": 1
   }
  },
  "stock": {
@@ -55,6 +55,11 @@
   ],
   [
    1073972472,
+   6,
+   "detour/0001-chop"
+  ],
+  [
+   1074393350,
    6,
    "detour/0001-chop"
   ],
@@ -169,31 +174,6 @@
    "patch/0001-chop"
   ],
   [
-   1075372612,
-   4,
-   "patch/0001-chop"
-  ],
-  [
-   1075372620,
-   4,
-   "patch/0001-chop"
-  ],
-  [
-   1075372648,
-   4,
-   "patch/0001-chop"
-  ],
-  [
-   1075372652,
-   4,
-   "patch/0001-chop"
-  ],
-  [
-   1075372656,
-   4,
-   "patch/0001-chop"
-  ],
-  [
    1075372664,
    4,
    "patch/0001-chop"
@@ -280,12 +260,12 @@
   ],
   [
    1076504448,
-   1464,
+   1560,
    "cave/0001-chop"
   ],
   [
-   1076505912,
-   236,
+   1076506008,
+   140,
    "cave/0000-shared"
   ],
   [
@@ -333,7 +313,7 @@
    "parts": [
     [
      "data",
-     "TvlAKinq"
+     "TvlAKinU"
     ]
    ]
   },
@@ -347,7 +327,21 @@
    "parts": [
     [
      "data",
-     "TvlAKi/W"
+     "TvlAKi+M"
+    ]
+   ]
+  },
+  {
+   "kind": "detour",
+   "owner": "0001-chop",
+   "addr": 1074393350,
+   "len": 6,
+   "expect_len": 6,
+   "expect": "410bcb063611c6cb5954e2f55a6e74d0b6242cbb84e26d818a6e5f8b9d818289",
+   "parts": [
+    [
+     "data",
+     "TvlAKixQ"
     ]
    ]
   },
@@ -375,7 +369,7 @@
    "parts": [
     [
      "data",
-     "TvlAKh9A"
+     "TvlAKh88"
     ]
    ]
   },
@@ -389,7 +383,7 @@
    "parts": [
     [
      "data",
-     "TvlAKiju"
+     "TvlAKijY"
     ]
    ]
   },
@@ -431,7 +425,7 @@
    "parts": [
     [
      "data",
-     "TvlAKilk"
+     "TvlAKilO"
     ]
    ]
   },
@@ -487,7 +481,7 @@
    "parts": [
     [
      "data",
-     "QCos6g=="
+     "QCos8g=="
     ]
    ]
   },
@@ -557,7 +551,7 @@
    "parts": [
     [
      "data",
-     "QCos8w=="
+     "QCos+w=="
     ]
    ]
   },
@@ -627,7 +621,7 @@
    "parts": [
     [
      "data",
-     "QCos/Q=="
+     "QCotBQ=="
     ]
    ]
   },
@@ -656,76 +650,6 @@
     [
      "data",
      "QCTe8Q=="
-    ]
-   ]
-  },
-  {
-   "kind": "patch",
-   "owner": "0001-chop",
-   "addr": 1075372612,
-   "len": 4,
-   "expect_len": 4,
-   "expect": "8cc47020a712e7eb4d2b1729d5dc63e7ff907c89df6530fe1cb01fd1119b3a2c",
-   "parts": [
-    [
-     "data",
-     "AAAAAA=="
-    ]
-   ]
-  },
-  {
-   "kind": "patch",
-   "owner": "0001-chop",
-   "addr": 1075372620,
-   "len": 4,
-   "expect_len": 4,
-   "expect": "3ca59eb7d688336b581a1cbd227239b8829087c1b5efc47bc988e10418d7295f",
-   "parts": [
-    [
-     "data",
-     "AAB/AA=="
-    ]
-   ]
-  },
-  {
-   "kind": "patch",
-   "owner": "0001-chop",
-   "addr": 1075372648,
-   "len": 4,
-   "expect_len": 4,
-   "expect": "1de7ba7a0d8a34b3c931e31e5d7fbcd574065b966042908aa33a2197c490e30d",
-   "parts": [
-    [
-     "data",
-     "QCotBw=="
-    ]
-   ]
-  },
-  {
-   "kind": "patch",
-   "owner": "0001-chop",
-   "addr": 1075372652,
-   "len": 4,
-   "expect_len": 4,
-   "expect": "76957b565e6537384a22abba1e50b1352b8c77562bf169ce44ba8950435701bb",
-   "parts": [
-    [
-     "data",
-     "QCTe5A=="
-    ]
-   ]
-  },
-  {
-   "kind": "patch",
-   "owner": "0001-chop",
-   "addr": 1075372656,
-   "len": 4,
-   "expect_len": 4,
-   "expect": "acad7781914843eb0d99ac856c4df534925cf50f7398eb1472fa6058a7d8385e",
-   "parts": [
-    [
-     "data",
-     "QCTe9Q=="
     ]
    ]
   },
@@ -767,7 +691,7 @@
    "parts": [
     [
      "data",
-     "QCotEQ=="
+     "QCotDw=="
     ]
    ]
   },
@@ -795,7 +719,7 @@
    "parts": [
     [
      "data",
-     "QCTe+Q=="
+     "QCTe9Q=="
     ]
    ]
   },
@@ -837,7 +761,7 @@
    "parts": [
     [
      "data",
-     "QCotGA=="
+     "QCotFg=="
     ]
    ]
   },
@@ -865,7 +789,7 @@
    "parts": [
     [
      "data",
-     "QCTe/Q=="
+     "QCTe+Q=="
     ]
    ]
   },
@@ -907,7 +831,7 @@
    "parts": [
     [
      "data",
-     "QCotIA=="
+     "QCotHg=="
     ]
    ]
   },
@@ -935,7 +859,7 @@
    "parts": [
     [
      "data",
-     "QCTfAQ=="
+     "QCTe/Q=="
     ]
    ]
   },
@@ -944,22 +868,13 @@
    "owner": "0001-chop",
    "section": ".cave3",
    "addr": 1076158136,
-   "len": 77,
-   "expect_len": 77,
-   "expect": "b74b65f860f6bca5530fc6548f2ba7ccb2bf6fd2cb6232e56db691a8d586bfc7",
+   "len": 73,
+   "expect_len": 73,
+   "expect": "84199838f659d4e4ae017c41177fea8fe7ee6eebb708e67c2cc70f01698f013d",
    "parts": [
     [
      "data",
-     "AAAABAAAAAtAJN7kAAAAAwAAAAQAAAAF"
-    ],
-    [
-     "stock",
-     1075370288,
-     19
-    ],
-    [
-     "data",
-     "AENIT1AAUEFEAFNUQQBDSFAARU5EAERJVgBMQVkAUk5EAA=="
+     "AAAABAAAAAtAJN7kAAAAAwAAAAQAAAAFAAAAAAAAAAwAAAANAAAADgAAAABDSE9QAFBBRABTVEEAQ0hQAERJVgBMQVkAUk5EAA=="
     ]
    ]
   },
@@ -968,13 +883,13 @@
    "owner": "0001-chop",
    "section": ".chst",
    "addr": 1076502236,
-   "len": 280,
-   "expect_len": 280,
-   "expect": "aa75bba0e39e3a675e22d87bcf175e18cbf28345a1e8ee210dd76246fe78b7c2",
+   "len": 260,
+   "expect_len": 260,
+   "expect": "07810d109f9dd272a74722d5820339ec06f05682c80a29c1962384a516f8d72f",
    "parts": [
     [
      "data",
-     "ICoABHILsIFiTkH6APjRwEo6ANZmBnL/EIFgPHIAEjoAyRCBE8BAKh/GQfoAwHfwCgAgASIDYQAPEEqAZhBwABA6AKciA2EACuxhAAvEcAAQOgCXJUAABA=="
+     "ICoABHILsIFiSkH6AOjRwEo6AMZmBnL/EIFgOHIAEjoAuRCBE8BAKh+2QfoAsHfwCgAgASIDYQAPEEqAZgxwABA6AJciA2EACw5wABA6AIslQAAE"
     ],
     [
      "stock",
@@ -983,7 +898,7 @@
     ],
     [
      "data",
-     "TvlACh7oICoABHILsIFiGkH6AJTRwHAAEBAMgAAAAP9nCCVAAARy/xCB"
+     "TvlACh7oICoABHILsIFiGkH6AIjRwHAAEBAMgAAAAP9nCCVAAARy/xCB"
     ],
     [
      "stock",
@@ -992,7 +907,7 @@
     ],
     [
      "data",
-     "TvlACh8wSoBmCnAAEDoASlKAYDxTgGYQcgASOgA8QfoAOnHwGgBOdVOAZghwABA6ACZgHFOAZghwABA6AB1gEFOAZghwABA6ADZgBHAATnXhiE51AAAAAAAAAAAKABQAHgAoADIAPABGAFAAWgBkAG4A////////////////DAAAAF7tAAE="
+     "TvlACh8wSoBmCnAAEDoAPlKAYDBTgGYQcgASOgAwQfoALnHwGgBOdVOAZghwABA6ABpgEFOAZghwABA6ABFgBHAATnXhiE51AAAAAAAMAAAKABQAHgAoADIAPABGAFAAWgBkAG4A////////////////Xu0AAQ=="
     ]
    ]
   },
@@ -1001,9 +916,9 @@
    "owner": "0001-chop",
    "section": ".text",
    "addr": 1076504448,
-   "len": 1448,
-   "expect_len": 1448,
-   "expect": "fba6cfecd2cf74ee71520a9362922716dbdb5fb5f9d90bf947280e523256441d",
+   "len": 1446,
+   "expect_len": 1446,
+   "expect": "147a86d5a72f944239a32fd6544fe3012132831e807e7c99f24bef33ca23a389",
    "parts": [
     [
      "data",
@@ -1016,7 +931,7 @@
     ],
     [
      "data",
-     "TvlAD4c8IC8ACGEAAlBKgGsEYAD3oA=="
+     "TvlAD4c8IC8ACGEAAi5KgGsEYAD3nA=="
     ],
     [
      "stock",
@@ -1025,7 +940,7 @@
     ],
     [
      "data",
-     "TvlAA4GoIC8AFGEAAjJKgGsAAPIkLwAYJgBTgGc04IJnAADYSoNnEHICtoFnAACAYQADIGAAALpwABA5QCofxtCCcgthAAIME8BAKh/GYAAAoHIAEjlAKh/G0oFB+UAqH8jRwXHQSi8AH2ceQgAiPAAAAQBKgmoCRIHQgSIvACBnECJBcgESgWAISoJnAABs0IIiPAAAeABhAAG4JABOuUAPPPxKAGcCQgIwgmBCSoJuDGEAAnRCOUAqH8RgMi8qAHROuUALOgRYj3ILsIFiICQAcgASOUAqH8WwgWcEYQACSBPCQCofxXABE8BAKh/ELwpOuUAHbBRYj0zXBAxP7wAMTnU="
+     "TvlAA4GoIC8AFGEAAhBKgGsAANwkLwAYJgBTgGc04IJnAADCSoNnEHICtoFnAACAYQACxGAAAKRwABA5QCofttCCcgthAAHqE8BAKh+2YAAAinIAEjlAKh+20oFB+UAqH7jRwXHQSi8AH2ceQgAiPAAAAQBKgmoCRIHQgSIvACBnECJBcgESgWAISoJnAABW0IIiPAAAeABhAAGWJABOuUAPPPxKAGcCQgIwgmAsSoJuCEI5QCoftGAgLyoAdE65QAs6BFiPcguwgWIOE8BAKh+1cAETwEAqH7QvCk65QAdsFFiPTNcEDE/vAAxOdQ=="
     ],
     [
      "stock",
@@ -1034,7 +949,7 @@
     ],
     [
      "data",
-     "TvlAA3bqIARhAAEqSoBrAABeJABhAPZ2Im8AJEH6AUhyABIwKABnKHYCsoNnHEqAZwoS/ABPEvwATmAmEvwATxL8AEYS/ABGYBgS/AAtYBIvCS8AQqdOuUAPTLxP7wAMYAJCEUzXDBxP7wAUTnU="
+     "TvlAA3bqIARhAAEeSoBrAABeJABhAPaIIm8AJEH6ATxyABIwKABnKHYCsoNnHEqAZwoS/ABPEvwATmAmEvwATxL8AEYS/ABGYBgS/AAtYBIvCS8AQqdOuUAPTLxP7wAMYAJCEUzXDBxP7wAUTnU="
     ],
     [
      "stock",
@@ -1052,7 +967,7 @@
     ],
     [
      "data",
-     "TvlADOTAIC8ACGEAACxKgGsMcgawgWcABVhwAE51"
+     "TvlADOTAIC8ACGEAACBKgGsMcgWwgWcABThwAE51"
     ],
     [
      "stock",
@@ -1061,7 +976,25 @@
     ],
     [
      "data",
-     "TvlAA4M+MHwAKzJ8AAFgAAA8cg+wgWIKQfoAGnEwCABOdXD/TnVKgGoCQoCwgW8CIAFOdf///wABAv//////AwQFBv8AAAEBAAICAAyAAAAAC2IyT+//8EjXDAwkACYBJEgmSWEiSHgAAS8LLwIvAy8KLwBOuUAKYxZP7wAYTNcMDE/vABBOdS8ATrlAFVbMLwBOuUAKtwYugE65QAo5+lCPTnUvAE65QA+HGFiPIEAgEAgAAAhOdS8CQflAKh/Ic/AKACA8AAB4AEPoABh12LSBYwa0gGQCIAKxyWXwJB9OdUo5QCofx2c6cAAQOUAqH8ZhxCIAMnwAAWAYSjlAKh/EZyBKOUAqH8dnGCI8AAB4AJPJcAAQOUAqH8UwfAAsYAD/Kk51cAO2gGYYSoJvCnABE8BAKh/HTnVhwEI5QCofx051cAW2gGcAAGBwBLaAZiJwABA5QCof7CYA0IJTgHILYQD+wlKAsINnCBPAQCof7GACTnVyABI5QCof7EqBZyYvAkH5QCofyEPoABhwACQAxPx4AITBMMJSgLCBZQJwALHJZeokH051SoJvAAEwSjlAKh/EZwABJk/v/+BI1xj8fgAeOUAqH8VwC76AYgABBk65QBVWzChALwBOuUAKts4ugE65QAs6BFiPsIdmAADmLwxOuUAKwuhYjyZASoBnAADULwtOuUAL3pZYj3EAcgGwgWcAAMBwK2EA/ohmAAC2fP9KOUAqH8dnCnAsYQD+dGYCfAAvDE65QAq3Bi6HLwBOuUAKOfpQjyhALwtOuUAL1UxYjyoAbwAAfHgAGDlAKh/suIVjAigFSoRnAABodgAkA8TFhMR1wkh4AAEvAi8LTrlAC8qgT+8ADEoAZjZIeAABLwIvC065QAv2wE/vAAwgBmsGIANhAP4OLwBB+UAqH8hx8DoALwAvDC8CYQACVk/vABBSg7aEZaYvCk65QAdsTFiPTNcY/E/vACBOdUNob3AgUGFkAFBhZCBTdGFydABDaG9wIE1vZGUAU2xpY2UgRW5kAERpdmlkZQBMYXkgT3V0AFNodWZmbGUA"
+     "TvlAA4M+cg+wgWIKQfoAGnEwCABOdXD/TnVKgGoCQoCwgW8CIAFOdf///wABAv///////wMEBf8AAAEAAgIwfAArk8kMgAAAAAtiNk/v//BI1wwMJAAmASRIJklhUkh4AAEvCy8CLwMvCi8ATrlACmMWT+8AGCACYQpM1wwMT+8AEE51cguwgWIkclTAwSBA0fyAAFEWIkDTwNP8gABaWDIYSEFCQSLBSEExQRHSTnUvAE65QBVWzC8ATrlACrcGLoBOuUAKOfpQj051LwBOuUAPhxhYjyBAIBAIAAAITnVwBLaAZwAAYHADtoBmInAAEDlAKh+3JgDQglOAcgthAP8aUoCwg2cIE8BAKh+3YAJOdXIAEjlAKh+3SoFnJi8CQflAKh+4Q+gAGHAAJADE/HgAhMEwwlKAsIFlAnAAscll6iQfTnVKgm8AARBKOUAqH7RnAAEGT+//4EjXGPx+AB45QCoftXALvoBiAADmTrlAFVbMKEAvAE65QAq2zi6ATrlACzoEWI+wh2YAAMYvDE65QArC6FiPJkBKgGcAALQvC065QAvelliPcQByAbCBZwAAoHArYQD/FGYAAJYvDE65QAq3Bi6HLwBOuUAKOfpQjyhALwtOuUAL1UxYjyoAbwAAcHgAGDlAKh+3uIVjAigFSoRnAABcdgAkA8TFhMR1wkh4AAEvAi8LTrlAC8qgT+8ADEoAZipIeAABLwIvC065QAv2wE/vAAxB+UAqH7hx8DoALwAvDC8CYQACyE/vAAxSg7aEZbIvCk65QAdsTFiPTNcY/E/vACBOdQ=="
+    ],
+    [
+     "stock",
+     1074393350,
+     6
+    ],
+    [
+     "data",
+     "SjlAKh+0ZwAAjnAAEDlAKh+1sK8ABGYAAH4="
+    ],
+    [
+     "stock",
+     1074695578,
+     24
+    ],
+    [
+     "data",
+     "WI+wrwAMZlhwK2EA/ixmUCAvABhyP2EA/W4kAE65QArC6C6ASHgAAS8CLwBOuUALyqBP7wAMSgBnJnAAEDlAKh+2QflAKh+4cfAKAC6AIC8ADGEA/cgvAC8CYQACFFCPWI8kH075QAnxDENob3AgUGFkAFBhZCBTdGFydABDaG9wIE1vZGUARGl2aWRlAExheSBPdXQAU2h1ZmZsZQA="
     ]
    ]
   },
@@ -1069,23 +1002,14 @@
    "kind": "cave",
    "owner": "0000-shared",
    "section": ".text",
-   "addr": 1076505912,
-   "len": 234,
-   "expect_len": 234,
-   "expect": "c65035cb6f2d328db5343fda6b8378930419f3916f22f559206a4b1fbcf89fdd",
+   "addr": 1076506008,
+   "len": 140,
+   "expect_len": 140,
+   "expect": "8039016bb67361237e8667000e81fd27de0b515df611e33d3506dfe6ba9b3101",
    "parts": [
     [
      "data",
-     "AAECAwQGCAoMEBQYICgwQAAIERkiKjM7RExVXWZud3+A/AAKSkBnBnIw0oASwUhAcjDSgBLBQhFOdS8BIBAiPEHGTm1MAQgAUoAggEhAIhfSgVKBTEEAASABkJ9OdU65QBVWzCBASGgAME65QAs6BFiPLwBOuUAVVswgQEhoAOhOuUAKPQhQjy8AIEAiUCJpAChOkViPIEBKgE51IFIgaACgLzz/////LwpOkFCPIkAgCWckIEAibwAEIC8ACCIoAAggaAAELwAvCS8BLwhOuUADNDhP7wAQTnU="
-    ],
-    [
-     "stock",
-     1074405158,
-     10
-    ],
-    [
-     "data",
-     "WI9KgE51"
+     "LwEgECI8QcZObUwBCABSgCCASEAiF9KBUoFMQQABIAGQn051LwBOuUAVVswgQEhoAOhOuUAKPQhQjy8AIEAiUCJpAChOkViPIEBKgE51IFIgaACgLzz/////LwpOkFCPIkAgCWckIEAibwAEIC8ACCIoAAggaAAELwAvCS8BLwhOuUADNDhP7wAQTnU="
     ]
    ]
   },
@@ -1094,22 +1018,13 @@
    "owner": "0001-chop",
    "section": ".cave2",
    "addr": 1076506148,
-   "len": 464,
-   "expect_len": 464,
-   "expect": "409cff2895cb72b5cb32a2d1f6c6136ed9a35d70cbd8b284830e11e9f2752fc4",
+   "len": 390,
+   "expect_len": 390,
+   "expect": "f685741b74a21eabb667ec1f18b23f41498dde6190cfd14ccdebceb78bfb55a4",
    "parts": [
     [
      "data",
-     "Q/oA4E/v/+BI1wQML0kAGCQAJgFOuUAVc7YkQC8KTrlAA2USWI9KgGYAAKwvCk65QANmoliPSgBnAACccAu0gGI="
-    ],
-    [
-     "stock",
-     1074641517,
-     17
-    ],
-    [
-     "data",
-     "LoBOuUALOgRYj7CCZgAAdnArYQD8JGYAAGwgAmEA+/4vQwAML0AAEEH6ALAvSAAUdv9KOUAqH8dnFnAsYQD7+mYOcAAQOUAqH8ZhAPwAJgAvQwAcSHgAAS8KTrlAA2AWUI9B7wAMQqcvCC8KTrlAA2g8T+8ADC8KTrlAA2EUWI9wAWACcABM1wQMT+8AIE51IG8ABC8oABAvEC8oAAQvLwAUYQZP7wAQTnUiLwAMcCthDCIvABBrBHAsYQJOdS8vAAgvAS8AIm8AGC8JIFEgaABATpBP7wAQTnVwAE51SjlAKh/EZxJwABA5QCofxXIAQ/oACmEA/rxwAE51LwJB+UAqH/AiPAAAf/9OuUAqLXIGgAAAf/9yABI5QCof7GYCcgyAwUhAdcBw/yBvAAhKqAAQawYgAmEA+xQvAEH5QCofyHHwKgAvACBvABAvKAAELy8AGGEA/1RP7wAQJB9OdSAvAAhhAPpASoBrBHAATnU="
+     "Q/oAvE/v/+RI1wQML0kAGCQAJgFOuUAVc7YkQC8KTrlAA2USWI9KgGYAAIgvCk65QANmoliPSgBnAAB4cAu0gGIAAHBOuUAVVswvAE65QAq2zi6ATrlACzoEWI+wgmYAAFJwK2EA/DZmAABIIAJhAPwQL0MADC9AABBB+gB6L0gAFEh4AAEvCk65QANgFlCPQe8ADEKnLwgvCk65QANoPE/vAAwvCk65QANhFFiPcAFgAnAATNcEDE/vABxOdSBvAAQvEC8oAAQvLwAQYQZP7wAMTnUiLwAMcCsvLwAELwEvACJvABQvCSBRIGgAQE6QT+8AEE51cABOdUo5QCoftGcScAAQOUAqH7VyAEP6AAphAP7ycABOdS8CQflAKh/cIjwAAH//TrlAKi2YBoAAAH//cgASOUAqH7dmAnIMgMFIQHXAQflAKh+4cfAqAC8AIG8ADC8oAAQvLwAUYQD/dk/vAAwkH051IC8ACGEA+mhKgGsEcABOdQ=="
     ],
     [
      "stock",
@@ -1125,14 +1040,9 @@
  ],
  "stock_copies": [
   {
-   "addr": 1074641517,
-   "len": 17,
-   "expect": "f2ad8c02a52e9d1bc140480e83009f529e808e271a36559f423f7b912738018f"
-  },
-  {
-   "addr": 1075370288,
-   "len": 19,
-   "expect": "75bfa554b9f75be95edc329d2d6d3eb7da9f7acda7418cb76e5c8eeabf8e33b0"
+   "addr": 1074695578,
+   "len": 24,
+   "expect": "4e7873ac6e92c906a5578e03b022521614a036b6faff92aa9614f2fa12204a03"
   }
  ],
  "detours": [
@@ -1167,7 +1077,7 @@
    "owner": "0001-chop",
    "addr": 1074419976,
    "entry": "text_gate",
-   "target": 1076504814,
+   "target": 1076504792,
    "displaced_len": 8,
    "rejoin": 1074419984,
    "reemit": true
@@ -1176,7 +1086,7 @@
    "owner": "0001-chop",
    "addr": 1074586808,
    "entry": "sample_key_gate",
-   "target": 1076504932,
+   "target": 1076504910,
    "displaced_len": 8,
    "rejoin": 1074586816,
    "reemit": true
@@ -1194,16 +1104,25 @@
    "owner": "0001-chop",
    "addr": 1074405158,
    "entry": "pad_off_gate",
-   "target": 1076502336,
+   "target": 1076502332,
    "displaced_len": 10,
    "rejoin": 1074405168,
    "reemit": true
   },
   {
    "owner": "0001-chop",
+   "addr": 1074393350,
+   "entry": "record_gate",
+   "target": 1076505680,
+   "displaced_len": 6,
+   "rejoin": 1074393356,
+   "reemit": true
+  },
+  {
+   "owner": "0001-chop",
    "addr": 1073972022,
    "entry": "lock_gate",
-   "target": 1076505066,
+   "target": 1076505044,
    "displaced_len": 8,
    "rejoin": 1073972030,
    "reemit": true
@@ -1212,7 +1131,7 @@
    "owner": "0001-chop",
    "addr": 1073972472,
    "entry": "press_gate",
-   "target": 1076506582,
+   "target": 1076506508,
    "displaced_len": 8,
    "rejoin": 1073972480,
    "reemit": true
@@ -1220,19 +1139,19 @@
  ],
  "output": {
   "name": "AR1_OS1.73_0000_0001.syx",
-  "sha256": "76a2f4d058daadd0629d44cb62f2608a17f7a66e8f1e95357880b15f1c481422",
-  "size": 1548576,
-  "mainos_sha256": "7c4eb00cd1cd1875fa840cfca9c190863a780e03dd2d0ea54ebfccada3a3af76"
+  "sha256": "36a017ba8ef3712283342563a8a0cf14b374ea3c5b4d1c38babdf36901022d05",
+  "size": 1548448,
+  "mainos_sha256": "77a23016f14b1a7848ad6c08b6e317c0156c94e0cab432b7f301cc1c3e62ebf4"
  },
  "counts": {
-  "edits": 51,
-  "mod_bytes": 2589,
-  "stock_reference_bytes": 114,
-  "stock_copies": 2
+  "edits": 47,
+  "mod_bytes": 2397,
+  "stock_reference_bytes": 98,
+  "stock_copies": 1
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
-  "manifest_sha256": "ae525792d5ba33714a6e83e492bc863754294d76ef1c3c04f23811e3c1e6bd5c",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
+  "manifest_sha256": "72c2463b248847fe8e62eadb5f937e74157ca61dbf53f9e328c97b435b421836",
   "generator": "web/tools/mkpackages.py"
  }
 }

@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "Chord memory + JOY RANDOM",
  "summary": "Chord memory, plus FUNCTION + OCTAVE DOWN: new random joystick assignments for the active track ([NO/RELOAD] + [SOUND] undoes it).",
- "status": "Built and checked on a computer; not yet run on an Analog Keys.",
+ "status": "Built and verified byte for byte; never run on an Analog Keys.",
  "features": [
   "chord",
   "joy"
@@ -221,7 +221,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "12cef89160b7bde0e32eef4e5e6a5fa0748b740a8b228278ad5cfb58478e45c2",
   "generator": "web/tools/mkpackages.py"
  }

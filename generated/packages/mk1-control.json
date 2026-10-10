@@ -5,7 +5,7 @@
  "os": "1.73",
  "title": "Control build (no mods)",
  "summary": "Elektron's own code, only unpacked and packed again by this tool. Flash it first: if it boots and plays normally, the route works on your unit.",
- "status": "Same file as the project's 1_CONTROL (proves the tool).",
+ "status": "Same file as the project's 1_CONTROL (stock code, proves the tool). The project's notes do not record a separate hardware report for this file.",
  "features": [],
  "mods": [],
  "params": {},
@@ -42,7 +42,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "1d9ef63450bc15b1d308426ff9d75804c6915e5123d8fbcc96da49ec8b8e147f",
   "generator": "web/tools/mkpackages.py"
  }

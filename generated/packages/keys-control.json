@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "Control build (no mods)",
  "summary": "Elektron's own Analog Keys code, only unpacked and packed again by this tool. Flash it first.",
- "status": "Same file as the project's KEYS 1_CONTROL. Not yet run on an Analog Keys.",
+ "status": "Same file as the project's KEYS 1_CONTROL. Built and verified byte for byte; never run on an Analog Keys.",
  "features": [],
  "mods": [],
  "params": {},
@@ -47,7 +47,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "94a2b29f9599c6e6fe9c2133c8026e64551cee91105d40cfe0954ea252fd0833",
   "generator": "web/tools/mkpackages.py"
  }

@@ -5,7 +5,7 @@
  "os": "1.73",
  "title": "Control build (no mods)",
  "summary": "Elektron's own MKII code, only unpacked and packed again by this tool. Flash it first.",
- "status": "Same file as the project's MKII 1_CONTROL. Not yet run on an MKII.",
+ "status": "Same file as the project's MKII 1_CONTROL. Built and verified byte for byte; never run on an MKII.",
  "features": [],
  "mods": [],
  "params": {},
@@ -47,7 +47,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "b5db3cfe1dad01ea074ec2b8ce7eb991d27498f9f1e54b165f1b5922cddfc3e5",
   "generator": "web/tools/mkpackages.py"
  }

@@ -5,7 +5,7 @@
  "os": "1.73",
  "title": "Classic CHOP + step-lock (older build)",
  "summary": "The earlier, hardware-proven CHOP build: 3-knob CHOP page, step-lock, plus euclid accents and velocity humanise. No Sample Focus, no SMP CUT.",
- "status": "Proven on the founder's MK1 (file 2b, step-lock confirmed 2026-10-06). Pressing a CHOP knob while holding steps can leave a hidden lock on this build.",
+ "status": "Proven on the project author's MK1 (file 2b, step-lock confirmed 2026-10-06). Pressing a CHOP knob while holding steps can leave a hidden lock on this build.",
  "features": [
   "classic"
  ],

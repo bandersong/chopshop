@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "Chord memory",
  "summary": "Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held or latched turns it off.",
- "status": "Built and checked on a computer; not yet run on an Analog Keys.",
+ "status": "Built and verified byte for byte; never run on an Analog Keys.",
  "features": [
   "chord"
  ],
@@ -157,7 +157,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "ebde31f47ea9546db88aaa56f91e703ef97adc061bd3d39305c668c38700874a",
   "generator": "web/tools/mkpackages.py"
  }

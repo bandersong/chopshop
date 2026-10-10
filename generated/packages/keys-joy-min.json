@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "JOY RANDOM only",
  "summary": "Only the joystick roll (FUNCTION + OCTAVE DOWN), without chord memory.",
- "status": "Built and checked on a computer; not yet run on an Analog Keys.",
+ "status": "Built and verified byte for byte; never run on an Analog Keys.",
  "features": [
   "joy"
  ],
@@ -116,7 +116,7 @@
   "stock_copies": 0
  },
  "provenance": {
-  "rytm1_mods_commit": "f3e093c64ceff10a6c048a641c98046428ee7d0f",
+  "rytm1_mods_commit": "e0273add48faa78666ab03292ff2c5aec2949649",
   "manifest_sha256": "a24e2e1d1b989b74b3279b2f93c174ce9516c28cac2bf27236cde8270f53e6af",
   "generator": "web/tools/mkpackages.py"
  }

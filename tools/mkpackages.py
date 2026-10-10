@@ -64,63 +64,69 @@ RECIPES = [
          title="Control build (no mods)",
          summary="Elektron's own code, only unpacked and packed again by this tool. "
                  "Flash it first: if it boots and plays normally, the route works on your unit.",
-         status="Same file as the project's 1_CONTROL (proves the tool)."),
+         status="Same file as the project's 1_CONTROL (stock code, proves the tool). "
+                "The project's notes do not record a separate hardware report for this file."),
     dict(id="mk1-samplefocus", device="mk1", tag="0000_0001", features=["chop"],
          title="CHOP / Sample Focus",
          summary="A CHOP page on SAMPLE (press SAMPLE, pause, SAMPLE again): the 12 pads "
-                 "play one track's sample from 12 start markers; hi-res markers, END, DIV, "
+                 "play one track's sample from 12 start markers; hi-res markers, DIV, "
                  "LAY, RND; step-lock in GRID REC.",
-         status="Built and checked on a computer; this exact file has not run on a Rytm yet "
-                "(the earlier CHOP builds did)."),
+         status="Built and verified byte for byte (the project's file 4d). This exact file has "
+                "not been run on a unit yet; its sibling 5c (the same CHOP code plus SMP CUT) "
+                "was run on an Analog Rytm MK1 on 2026-10-10."),
     dict(id="mk1-samplefocus-cut", device="mk1", tag="0000_0001_0008",
          features=["chop", "smpcut"],
          title="CHOP / Sample Focus + SMP CUT",
          summary="Everything in CHOP / Sample Focus, plus SMP CUT: a second FILTER page "
                  "(press FILTER, pause, FILTER again) with a low cut and a high cut per track.",
-         status="Built and checked on a computer; SMP CUT has never run on an MK1 yet."),
+         status="Run on the project author's Analog Rytm MK1 (OS 1.73) on 2026-10-10: "
+                "\"everything works\" (the project's file 5c). The per-row SMP CUT test "
+                "detail is still pending."),
     dict(id="mk1-chop-steplock", device="mk1", tag="0000_0001_0002_0003",
          features=["classic"], optional=True,
          title="Classic CHOP + step-lock (older build)",
          summary="The earlier, hardware-proven CHOP build: 3-knob CHOP page, step-lock, "
                  "plus euclid accents and velocity humanise. No Sample Focus, no SMP CUT.",
-         status="Proven on the founder's MK1 (file 2b, step-lock confirmed 2026-10-06). "
+         status="Proven on the project author's MK1 (file 2b, step-lock confirmed 2026-10-06). "
                 "Pressing a CHOP knob while holding steps can leave a hidden lock on this build."),
     dict(id="mk2-control", device="mk2", tag="control", features=[],
          title="Control build (no mods)",
          summary="Elektron's own MKII code, only unpacked and packed again by this tool. "
                  "Flash it first.",
-         status="Same file as the project's MKII 1_CONTROL. Not yet run on an MKII."),
+         status="Same file as the project's MKII 1_CONTROL. Built and verified byte for byte; "
+                "never run on an MKII."),
     dict(id="mk2-samplefocus", device="mk2", tag="0000_0001", features=["chop"],
          title="CHOP / Sample Focus",
          summary="The CHOP page as the third SAMPLE page (SAMPLE → SMPL WAVEFORM → CHOP): "
                  "12 pads, 12 start markers, hi-res, END, DIV, LAY, RND, step-lock.",
-         status="Built and checked on a computer; not yet run on an MKII."),
+         status="Built and verified byte for byte; never run on an MKII."),
     dict(id="mk2-samplefocus-cut", device="mk2", tag="0000_0001_0008",
          features=["chop", "smpcut"],
          title="CHOP / Sample Focus + SMP CUT",
          summary="Everything in CHOP / Sample Focus, plus SMP CUT on FILTER ×2 "
                  "(low cut / high cut per track).",
-         status="Built and checked on a computer; not yet run on an MKII."),
+         status="Built and verified byte for byte; never run on an MKII."),
     dict(id="keys-control", device="keys", tag="control", features=[],
          title="Control build (no mods)",
          summary="Elektron's own Analog Keys code, only unpacked and packed again by this "
                  "tool. Flash it first.",
-         status="Same file as the project's KEYS 1_CONTROL. Not yet run on an Analog Keys."),
+         status="Same file as the project's KEYS 1_CONTROL. Built and verified byte for byte; "
+                "never run on an Analog Keys."),
     dict(id="keys-chord", device="keys", tag="0010", features=["chord"],
          title="Chord memory",
          summary="Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then "
                  "plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held "
                  "or latched turns it off.",
-         status="Built and checked on a computer; not yet run on an Analog Keys."),
+         status="Built and verified byte for byte; never run on an Analog Keys."),
     dict(id="keys-joy", device="keys", tag="0010_0011", features=["chord", "joy"],
          title="Chord memory + JOY RANDOM",
          summary="Chord memory, plus FUNCTION + OCTAVE DOWN: new random joystick "
                  "assignments for the active track ([NO/RELOAD] + [SOUND] undoes it).",
-         status="Built and checked on a computer; not yet run on an Analog Keys."),
+         status="Built and verified byte for byte; never run on an Analog Keys."),
     dict(id="keys-joy-min", device="keys", tag="0011", features=["joy"],
          title="JOY RANDOM only",
          summary="Only the joystick roll (FUNCTION + OCTAVE DOWN), without chord memory.",
-         status="Built and checked on a computer; not yet run on an Analog Keys."),
+         status="Built and verified byte for byte; never run on an Analog Keys."),
 ]
 
 FEATURES = {

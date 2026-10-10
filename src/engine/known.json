@@ -37,12 +37,12 @@
   ],
   "recipes": [
     { "id": "mk1-control", "device": "mk1", "output_sha256": "3407638c3f450daba0faedbddc0d4f08b154925a3ba162172346f51ef9ed6a8d", "source": "flash/SHA256SUMS 1_CONTROL" },
-    { "id": "mk1-samplefocus", "device": "mk1", "output_sha256": "76a2f4d058daadd0629d44cb62f2608a17f7a66e8f1e95357880b15f1c481422", "source": "flash/SHA256SUMS 4b" },
-    { "id": "mk1-samplefocus-cut", "device": "mk1", "output_sha256": "0ec86d0ed118b8ba7eb0f43d4add9105bd0fa99bc39ca4710bdf2b3e6052977e", "source": "flash/SHA256SUMS 5" },
+    { "id": "mk1-samplefocus", "device": "mk1", "output_sha256": "36a017ba8ef3712283342563a8a0cf14b374ea3c5b4d1c38babdf36901022d05", "source": "flash/SHA256SUMS 4d" },
+    { "id": "mk1-samplefocus-cut", "device": "mk1", "output_sha256": "f73f4239c4b874e786b768d50698462477d0a4ccb029f9740040aad992dc70b8", "source": "flash/SHA256SUMS 5c" },
     { "id": "mk1-chop-steplock", "device": "mk1", "output_sha256": "a96657b49e70b42fc20b9d744a0f10ceceb0f065c0aac7201be88866ac15caf6", "source": "flash/SHA256SUMS 2b" },
     { "id": "mk2-control", "device": "mk2", "output_sha256": "f3f6aad0cad09a7c3d531fb36a34fc78ed45bee126b9aab84cfed93e51d99c04", "source": "flash/MKII/SHA256SUMS 1_CONTROL" },
-    { "id": "mk2-samplefocus", "device": "mk2", "output_sha256": "016be9ea4b4cf963d194c250e9e2af68d0a2afc20103b67fe842fe1b19535cc4", "source": "flash/MKII/SHA256SUMS 2_CHOP" },
-    { "id": "mk2-samplefocus-cut", "device": "mk2", "output_sha256": "0ce2fe92539bfc551ce6a28a36e8efa60e4848beec695143957f9e0a8d929280", "source": "flash/MKII/SHA256SUMS 3_CHOP+SMP-CUT" },
+    { "id": "mk2-samplefocus", "device": "mk2", "output_sha256": "2ff96af2f5ed05f5884e0dfa74f806091a867be46254250c4b404da609de792d", "source": "flash/MKII/SHA256SUMS 2_CHOP" },
+    { "id": "mk2-samplefocus-cut", "device": "mk2", "output_sha256": "782955769d2f199af5937eb8c945de659f1dad497b66aef07180c004089f6e8a", "source": "flash/MKII/SHA256SUMS 3_CHOP+SMP-CUT" },
     { "id": "keys-control", "device": "keys", "output_sha256": "6981fd94084e8f678e6579a224b009a80e50f9192499f63db2cfcc519f75a475", "source": "flash/KEYS/SHA256SUMS 1_CONTROL" },
     { "id": "keys-chord", "device": "keys", "output_sha256": "02a4c784e99d275d3685e3fed02dff84bf5bde8cd6c9440eba5c55e9f7ffa4de", "source": "flash/KEYS/SHA256SUMS 2_CHORD" },
     { "id": "keys-joy", "device": "keys", "output_sha256": "ebc9a6ceef5b84847714e8271442e01b9c980fd40437f873ff0cc66f4c246616", "source": "flash/KEYS/SHA256SUMS 3_JOY" },
@@ -55,6 +55,12 @@
     { "sha256": "23a20937c06fe856abcd1013bda03a14eb775dbcccb9329145d0d808c5157915", "what": "a superseded Sample Focus build (no STR) for the Analog Rytm MK1 (flash/_superseded/2026-10-08-pre-press-gate/4b_SAMPLE-FOCUS-no-STR_AR1_OS1.73_0000_0001.syx)" },
     { "sha256": "86e1dd1b2a177b709d1e3977ee61b7f228d587ab752416d203014e66d21fa9a1", "what": "a superseded Sample Focus + SMP CUT build for the Analog Rytm MK1 (flash/_superseded/2026-10-08-pre-press-gate/5_SAMPLE-FOCUS+SMP-CUT_AR1_OS1.73_0000_0001_0008.syx)" },
     { "sha256": "48fa678c15b4d5c7b977f517062de01949ff572c8826521d1a179025b64756f3", "what": "a superseded CHOP build for the Analog Rytm MKII (flash/_superseded/2026-10-08-pre-press-gate/MKII/2_CHOP_ARMK2_OS1.73_0000_0001.syx)" },
-    { "sha256": "128b952ef082303c04790a6ecae33562089505336f1b072c1056c818a3ccc7f6", "what": "a superseded CHOP + SMP CUT build for the Analog Rytm MKII (flash/_superseded/2026-10-08-pre-press-gate/MKII/3_CHOP+SMP-CUT_ARMK2_OS1.73_0000_0001_0008.syx)" }
+    { "sha256": "128b952ef082303c04790a6ecae33562089505336f1b072c1056c818a3ccc7f6", "what": "a superseded CHOP + SMP CUT build for the Analog Rytm MKII (flash/_superseded/2026-10-08-pre-press-gate/MKII/3_CHOP+SMP-CUT_ARMK2_OS1.73_0000_0001_0008.syx)" },
+    { "sha256": "76a2f4d058daadd0629d44cb62f2608a17f7a66e8f1e95357880b15f1c481422", "what": "an older build of this project (the superseded Sample Focus build 4b, no STR, for the Analog Rytm MK1; flash/_superseded/2026-10-09-pre-snap/4b_SAMPLE-FOCUS-no-STR_AR1_OS1.73_0000_0001.syx)" },
+    { "sha256": "0ec86d0ed118b8ba7eb0f43d4add9105bd0fa99bc39ca4710bdf2b3e6052977e", "what": "an older build of this project (the superseded Sample Focus + SMP CUT build 5 for the Analog Rytm MK1; flash/_superseded/2026-10-09-pre-snap/5_SAMPLE-FOCUS+SMP-CUT_AR1_OS1.73_0000_0001_0008.syx)" },
+    { "sha256": "dda5a4f8b63c58359da3f8f3f3fa70567273df74cd8d4ea136fd62bcd82a8c6f", "what": "an older build of this project (the superseded Sample Focus build 4c, no STR, for the Analog Rytm MK1; flash/_superseded/2026-10-10-pre-recfix/4c_SAMPLE-FOCUS-no-STR_AR1_OS1.73_0000_0001.syx)" },
+    { "sha256": "ac094b30e7ea68022d00cd06c057229284df36dbc3176423fdd34b26dfffc3b4", "what": "an older build of this project (the superseded Sample Focus + SMP CUT build 5b for the Analog Rytm MK1; flash/_superseded/2026-10-10-pre-recfix/5b_SAMPLE-FOCUS+SMP-CUT_AR1_OS1.73_0000_0001_0008.syx)" },
+    { "sha256": "016be9ea4b4cf963d194c250e9e2af68d0a2afc20103b67fe842fe1b19535cc4", "what": "an older build of this project (the superseded CHOP build for the Analog Rytm MKII; flash/_superseded/2026-10-09-pre-snap/MKII/2_CHOP_ARMK2_OS1.73_0000_0001.syx)" },
+    { "sha256": "0ce2fe92539bfc551ce6a28a36e8efa60e4848beec695143957f9e0a8d929280", "what": "an older build of this project (the superseded CHOP + SMP CUT build for the Analog Rytm MKII; flash/_superseded/2026-10-09-pre-snap/MKII/3_CHOP+SMP-CUT_ARMK2_OS1.73_0000_0001_0008.syx)" }
   ]
 }
