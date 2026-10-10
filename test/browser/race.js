@@ -21,6 +21,9 @@
  * pressed: the first 30 messages on a mock port must be a prefix of the published file
  * for the recipe on screen, for the device on screen.
  *
+ * The page's own Web MIDI sender is off by default (it has never touched a real unit).
+ * It is switched on by the address flag #experimental-sender, which this test adds; e2e.js checks the default page.
+ *
  * Needs Chrome and puppeteer-core (build VM only; never installed on the host):
  *   CHROME=<chrome-headless-shell> PUPPETEER=<dir with node_modules/puppeteer-core> \
  *   [DIST=<page to test, default web/dist/index.html>] [INLINE=1] [SHOTS=<dir>] node web/test/browser/race.js
@@ -76,7 +79,8 @@ async function openPage(browser) {
   page.on('dialog', d => d.dismiss().catch(() => {}));
   await page.evaluateOnNewDocument(MOCK);
   await page.setViewport({ width: 1100, height: 900 });
-  await page.goto('file://' + DIST.split('/').map(encodeURIComponent).join('/'), { waitUntil: 'load' });
+  // the sender is off by default: this test is the experimental sender's regression test, so it turns it on
+  await page.goto('file://' + DIST.split('/').map(encodeURIComponent).join('/') + '#experimental-sender', { waitUntil: 'load' });
   await page.waitForFunction(() => window.RYTM_ENGINE_MODE, { timeout: 30000 });
   await page.click('#midiBtn');
   await page.waitForFunction(() => document.getElementById('portSel').options.length > 1, { timeout: 10000 });

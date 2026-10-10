@@ -6,7 +6,8 @@
  * VM only (never installed on the host):
  *   CHROME=<chrome-headless-shell> PUPPETEER=<dir with node_modules/puppeteer-core> \
  *   STOCK_DIR=<stock dir> SHOTS=<dir> node web/test/browser/e2e.js
- * Read-only on the project: screenshots go to SHOTS. No MIDI device is used.
+ * Read-only on the project: screenshots go to SHOTS. No MIDI device is used; the default page
+ * must not ask for MIDI access at all (a spy on navigator.requestMIDIAccess counts the calls).
  */
 'use strict';
 const path = require('path');
@@ -36,6 +37,11 @@ function stockPath(dev, os) {
     const logs = [];
     page.on('console', m => logs.push(`${m.type()}: ${m.text()}`));
     page.on('pageerror', e => logs.push(`pageerror: ${e.message}`));
+    await page.evaluateOnNewDocument(() => {
+      window.__midiCalls = 0;
+      const spy = () => { window.__midiCalls++; return Promise.reject(new Error('spy')); };
+      try { Object.defineProperty(navigator, 'requestMIDIAccess', { value: spy, configurable: true }); } catch (e) { /* none */ }
+    });
     await page.setViewport({ width: 1100, height: 900 });
     const url = 'file://' + path.join(L.WEB, 'dist', 'index.html').split('/').map(encodeURIComponent).join('/');
     await page.goto(url, { waitUntil: 'load' });
@@ -79,6 +85,21 @@ function stockPath(dev, os) {
       await page.screenshot({ path: path.join(shots, `e2e-${want}.png`), fullPage: true });
     }
 
+    // the default page: no sender, no MIDI request, the OS 1.74 note and Transfer steps, only the unit's own note
+    {
+      const d = await page.evaluate(() => ({
+        midiCalls: window.__midiCalls,
+        sender: ['midiBtn', 'portSel', 'gapSel', 'sendBuild', 'sendStock', 'confirms', 'abortBtn'].filter(id => document.getElementById(id)),
+        os174: !!document.getElementById('os174') && /OS 1\.74/.test(document.getElementById('os174').textContent),
+        transfer: /Flash it with Elektron Transfer/.test(document.getElementById('s4').textContent),
+        notes: Array.from(document.querySelectorAll('.devnote:not(.hidden)')).map(n => n.getAttribute('data-dev'))
+      }));
+      const ok = d.midiCalls === 0 && d.sender.length === 0 && d.os174 && d.transfer && d.notes.join() === 'keys';
+      console.log(`${ok ? 'PASS' : 'FAIL'} default page: no sender controls, ${d.midiCalls} MIDI access requests, OS 1.74 note ${d.os174}, Transfer steps ${d.transfer}, device notes shown [${d.notes}]`);
+      results.push({ defaultPage: ok, ...d });
+      await page.screenshot({ path: path.join(shots, 'e2e-default-s4.png'), fullPage: true });
+    }
+
     // a refused file, in the page
     const old = stockPath('mk1', '1.72');
     if (old) {
@@ -90,10 +111,11 @@ function stockPath(dev, os) {
       results.push({ refused172: locked });
     }
 
-    // Web MIDI button in a browser with no MIDI hardware: the page must say what happened
-    await page.click('#midiBtn').catch(() => {});
-    await new Promise(r => setTimeout(r, 3000));
-    console.log('MIDI status text:', await page.$eval('#midiStatus', e => e.textContent));
+    {
+      const calls = await page.evaluate(() => window.__midiCalls);
+      console.log(`${calls === 0 ? 'PASS' : 'FAIL'} the page never asked for MIDI access during the whole run: ${calls} call(s)`);
+      results.push({ midiCalls: calls });
+    }
 
     // phone width: no horizontal scrolling
     await page.setViewport({ width: 375, height: 800 });
@@ -105,7 +127,7 @@ function stockPath(dev, os) {
     const errs = logs.filter(l => /^(error|pageerror)/.test(l));
     console.log('console errors:', errs.length ? errs : 'none');
     fs.writeFileSync(path.join(shots, 'e2e-results.json'), JSON.stringify({ mode, results, logs }, null, 1));
-    const bad = results.some(r => r.pass === false || r.refused172 === false || r.phoneOverflow > 0) || errs.length;
+    const bad = results.some(r => r.pass === false || r.refused172 === false || r.phoneOverflow > 0 || r.defaultPage === false || r.midiCalls > 0) || errs.length;
     process.exitCode = bad ? 1 : 0;
   } finally {
     await browser.close();
