@@ -7,6 +7,9 @@ const path = require('path');
 
 const WEB = path.resolve(__dirname, '..');
 const REPO = path.resolve(WEB, '..');
+/* The project's flash/*.syx images are not in git ("images stay local"): SYX_ROOT names a checkout that holds them
+ * (read only); the checksum files and START_HERE pages are always read from this repo (REPO). */
+const SYX_ROOT = process.env.SYX_ROOT || REPO;
 const SHA = require(path.join(WEB, 'src/engine/sha256.js'));
 const ZIP = require(path.join(WEB, 'src/engine/zip.js'));
 const EFT = require(path.join(WEB, 'src/engine/eftrun.js'));
@@ -28,10 +31,10 @@ function engine(over = {}) {
   }, over));
 }
 
-/* The user's stock files, found by checksum in STOCK_DIR (default: the repo's stock/
+/* The user's stock files, found by checksum in STOCK_DIR (a path-delimited list; default: the repo's stock/
  * and upstream/rytm1_mods/stock/). Elektron's files: read, never copied anywhere. */
 function findStock() {
-  const dirs = process.env.STOCK_DIR ? [process.env.STOCK_DIR]
+  const dirs = process.env.STOCK_DIR ? process.env.STOCK_DIR.split(path.delimiter)
     : [path.join(REPO, 'stock'), path.join(REPO, 'upstream/rytm1_mods/stock')];
   const bySha = {};
   for (const d of dirs) {
@@ -52,4 +55,4 @@ function stockFor(device, os) {
   return s && all[s.sha256] ? all[s.sha256].bytes : null;
 }
 
-module.exports = { WEB, REPO, SHA, ZIP, EFT, createEFT, known, loadPackages, engine, findStock, stockFor };
+module.exports = { WEB, REPO, SYX_ROOT, SHA, ZIP, EFT, createEFT, known, loadPackages, engine, findStock, stockFor };

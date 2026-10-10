@@ -264,11 +264,12 @@ function flashFiles(dir) {
 
 test('an older or superseded flash build dropped as "stock" is named as a modded build from this project', async (t) => {
   const fs = require('fs'), path = require('path');
-  const flash = flashFiles(path.join(L.REPO, 'flash'));
+  const flash = flashFiles(path.join(L.SYX_ROOT, 'flash'));
   if (!flash.length) return t.skip('no flash/ folder next to web/');
   const bySha = {};
   for (const f of flash) bySha[L.SHA.sha256hex(new Uint8Array(fs.readFileSync(f)))] = f;
-  const named = ['734607ae', 'a96657b4', '3ea80d31', '3c77f43b'];
+  // the four the final gate named, plus the builds superseded since: 4b, 5, 4c, 5b (MK1) and the old MKII 2/3
+  const named = ['734607ae', 'a96657b4', '3ea80d31', '3c77f43b', '76a2f4d0', '0ec86d0e', 'dda5a4f8', 'ac094b30', '016be9ea', '0ce2fe92'];
   for (const p of named) {
     const h = Object.keys(bySha).find(x => x.startsWith(p));
     assert.ok(h, `${p} is in flash/`);

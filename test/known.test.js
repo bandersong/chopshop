@@ -33,7 +33,7 @@ test('every pinned hash appears in the project file it cites', () => {
     const sup = src.match(/\(?(flash\/_superseded\/[^\s)]+\.syx)\)?/);
     if (sup) {
       // a superseded build: the hash must be that of the file the pin names
-      const f = path.join(L.REPO, sup[1]);
+      const f = path.join(L.SYX_ROOT, sup[1]);
       if (fs.existsSync(f)) assert.strictEqual(L.SHA.sha256hex(new Uint8Array(fs.readFileSync(f))), h, `${h.slice(0, 16)} is not ${sup[1]}`);
       else assert.fail(`${sup[1]} is not in the repo`);
     } else if (file && files[file]) {

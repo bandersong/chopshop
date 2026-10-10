@@ -52,7 +52,7 @@ const published = {};
     if (e.isDirectory()) walk(p);
     else if (/\.syx$/i.test(e.name)) published[sha(fs.readFileSync(p))] = p;
   }
-})(path.join(L.REPO, 'flash'));
+})(path.join(L.SYX_ROOT, 'flash'));
 const pinBySha = {};
 for (const r of L.known.recipes) pinBySha[r.output_sha256] = r;
 const DEVICE_RX = { mk1: /Analog Rytm MK1/, mk2: /Analog Rytm MKII/, keys: /Analog Keys/ };
@@ -211,7 +211,7 @@ async function coherent(page, label) {
         console.log('engine mode:', await page.evaluate(() => window.RYTM_ENGINE_MODE));
         await upload(page, MK1); await waitIdentified(page, /✓ Analog Rytm MK1/); await waitResolved(page);
         await page.click('#features input[value="smpcut"]');
-        await page.waitForFunction(() => /0ec86d0e/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 });
+        await page.waitForFunction(() => /f73f4239/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 });
         await tickAll(page);
         await page.click('#buildBtn');
         if (D) await new Promise(r => setTimeout(r, D));
@@ -255,7 +255,7 @@ async function coherent(page, label) {
       try {
       await upload(page, MK1); await waitIdentified(page, /✓ Analog Rytm MK1/); await waitResolved(page);
       await page.click('#features input[value="smpcut"]');
-      await page.waitForFunction(() => /0ec86d0e/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 });
+      await page.waitForFunction(() => /f73f4239/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 });
       await page.click('#buildBtn');
       await new Promise(r => setTimeout(r, D));
       // a user click (disabled box) and a scripted change event (as an extension or a11y tool might send)
@@ -281,10 +281,10 @@ async function coherent(page, label) {
       await page.click('#features input[value="classic"]');
       await page.waitForFunction(() => /a96657b4/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 });
       await page.click('#features input[value="smpcut"]');
-      await page.waitForFunction(() => /0ec86d0e/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 }).catch(() => {});
+      await page.waitForFunction(() => /f73f4239/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 }).catch(() => {});
       let s = await snapshot(page);
       check('R3 Classic on, then tick SMP CUT: Classic goes, CHOP comes, recipe = SMP CUT build',
-            s.ticked.sort().join(',') === 'chop,smpcut' && /0ec86d0e/.test(String(s.card)), { ticked: s.ticked, card: s.cardName });
+            s.ticked.sort().join(',') === 'chop,smpcut' && /f73f4239/.test(String(s.card)), { ticked: s.ticked, card: s.cardName });
       await page.click('#features input[value="classic"]');
       await page.waitForFunction(() => /a96657b4/.test(document.getElementById('recipeCard').textContent), { timeout: 30000 }).catch(() => {});
       s = await snapshot(page);
