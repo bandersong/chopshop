@@ -1,11 +1,11 @@
-# Rytm & Keys Mod Installer (working name) — browser installer, M0
+# Chopshop — browser installer, M0
 
 A static web page that builds this project's firmware mods from **the user's own copy of Elektron's OS file**, checks the result the way `rytm1_mods`' `verify.py` does, and offers the file for download only when every check passes. To install it the page points to **Elektron Transfer** (the proven route). The page's own Web MIDI sender is **hidden by default**: it has never touched a real unit, and it exists only behind the address flag `#experimental-sender` (see "The experimental sender").
 
 - One self-contained file: **`dist/index.html`** (no server, no network, works offline).
 - Targets: Analog Rytm MK1 OS 1.73, Analog Rytm MKII OS 1.73, Analog Keys OS 1.56.
 - Licence: **GPL-3.0-or-later** (`LICENSE`). Credits and third-party terms: `NOTICE`.
-- Status: **M0, no device.** Nothing here has talked to a real unit. Local only: not pushed, not deployed, not named.
+- Status: **M0, no device.** Nothing here has talked to a real unit. Local only: not pushed, not deployed.
 
 ## Open the page
 
@@ -315,6 +315,6 @@ Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/brows
   - Windows/Linux browsers.
 - **Experimental sender only:** route C pacing is unknown (corp `installer-re`: no Elektron source gives a gap). 20 ms is a conservative default, not a measured one; M0b should measure Transfer's own stream.
 - **Experimental sender only:** the page cannot see whether the unit received the file. It is not known whether the bootstrap ever answers.
-- **Licences:** the packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence (GitHub reports none, 2026-10-08). It is credited (`NOTICE`, the page's footer and licence section) and used as-is; this project's GPL-3.0-or-later grant covers its own code only. Local only until the project has its name. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
+- **Licences:** the packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence (GitHub reports none, 2026-10-08). It is credited (`NOTICE`, the page's footer and licence section) and used as-is; this project's GPL-3.0-or-later grant covers its own code only. Local only until it is published. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
 - **Experimental sender only:** the page cannot ask the unit what it is or which OS it runs (M0 has no USB route). The fifth and sixth boxes are the user's word for it.
 - **Elektron's pages** (the two support articles linked from step 4, the release-note and manual references, "only 1.74 is served") were read from copies saved on 2026-10-08; they were not re-fetched for this build.

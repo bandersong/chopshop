@@ -1,5 +1,5 @@
 /* The Web MIDI sender against a mock MIDIOutput: the exact bytes, in order, at DIN pace.
- * Part of the browser installer (working name "web"). SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
  * No real device, no virtual port, no system setting is touched. */
 'use strict';
 const test = require('node:test');

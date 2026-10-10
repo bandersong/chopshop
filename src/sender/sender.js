@@ -1,6 +1,6 @@
 /* sender.js - stream an OS .syx to a MIDI output, message by message, at DIN speed.
  *
- * Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
+ * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
  * SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Written for the startup-menu route (hold FUNC at power-on, TRIG 4 = OS UPGRADE,

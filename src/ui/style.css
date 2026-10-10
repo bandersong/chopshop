@@ -1,4 +1,4 @@
-/* Part of the browser installer (working name "web"). SPDX-License-Identifier: GPL-3.0-or-later. */
+/* Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later. */
 :root {
   --bg: #f7f6f3; --fg: #1d1d1f; --muted: #5d5d63; --card: #ffffff; --line: #d9d7d0;
   --accent: #b2451f; --accent-fg: #ffffff; --ok: #1f7a3a; --warn-bg: #fff4e0; --warn-line: #e3b25c; --bad: #a32020;

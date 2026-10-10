@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* bundle.js - assemble dist/index.html: one self-contained page, no server needed.
  *
- * Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
+ * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
  * SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Inlines the stylesheet, the sender, the page script and, as one string, the engine
@@ -42,7 +42,7 @@ const SOURCE_NOTE =
   'generated/, third_party/). Its JavaScript is in this file as written. The WebAssembly part is ' +
   'elektron-firmware-tool\'s C sources (third_party/elektron-firmware-tool/) plus src/wasm/eft_api.c, compiled by ' +
   'tools/build-wasm.sh with emscripten 6.0.10 (flags and source hashes: generated/eft.build.txt). The project has ' +
-  'no public address yet (working name, not published); the address of the source will be written here before ' +
+  'no public address yet (not published); the address of the source will be written here before ' +
   'this page is shared.';
 
 function licenceHtml() {
@@ -82,7 +82,7 @@ function build() {
   const inputs = ['src/ui/index.html', 'src/ui/style.css', 'src/ui/app.js', 'src/sender/sender.js',
                   ...engineParts.slice(0, 5).map(p => p[0]), 'src/engine/known.json', 'generated/packages/index.json',
                   ...LICENCES.map(l => l[0])];
-  const stamp = '<!-- Rytm & Keys Mod Installer (working name), M0. Copyright (C) 2026 bandersong.\n' +
+  const stamp = '<!-- Chopshop, M0. Copyright (C) 2026 bandersong.\n' +
     'Free software: GPL-3.0-or-later for this project\'s own code. The packages in this file, and\n' +
     'some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence:\n' +
     'it is credited and used as-is, and this project\'s GPL grant does not cover it. This file\n' +

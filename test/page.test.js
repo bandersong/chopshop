@@ -1,6 +1,6 @@
 /* The default page has no sender: no sender controls, and no MIDI access request at load.
  * The experimental sender exists only behind the address flag #experimental-sender.
- * Part of the browser installer (working name "web"). SPDX-License-Identifier: GPL-3.0-or-later. Read-only.
+ * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later. Read-only.
  *
  * Two layers: (1) the shipped dist/index.html, with its <template> and scripts cut out, holds
  * none of the sender's controls or MIDI-sender wording; (2) the page's own script, taken from

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the installer's mod packages from rytm1_mods' BUILT images.
 
-Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
+Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
 SPDX-License-Identifier: GPL-3.0-or-later.
 
 Nothing here is typed in by hand: every byte a package carries is read out of an

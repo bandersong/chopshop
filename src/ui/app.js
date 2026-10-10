@@ -1,6 +1,6 @@
 /* app.js - the page: drop a file, choose mods, build and check; flash with Elektron Transfer.
  *
- * Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
+ * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
  * SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * The engine (EFT in WebAssembly, the packages, the checks) runs in a Web Worker made
@@ -257,7 +257,7 @@
     resetConfirms();
     if (r.ok) {
       if (r.device === 'keys') {
-        box.appendChild(el('p', { cls: 'fine', text: 'The same OS file also runs the Analog Four MK1. These mods were made and checked for the Analog Keys only.' }));
+        box.appendChild(el('p', { cls: 'fine', text: 'Elektron publishes this OS file for the Analog Four too, but the Analog Four is not supported: these mods were made and checked for the Analog Keys only.' }));
       }
       loadFeatures(g);
     }

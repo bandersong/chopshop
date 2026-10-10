@@ -1,6 +1,6 @@
 /* sha256.js - SHA-256 (FIPS 180-4) and HMAC-SHA256 (RFC 2104), plain JavaScript.
  *
- * Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
+ * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
  * SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Written from the specifications. Used instead of crypto.subtle so the engine
