@@ -74,3 +74,8 @@ footer { padding-bottom: 40px; }
 .drop.busy { opacity: .5; cursor: not-allowed; }
 #licences pre { max-height: 420px; }
 #licences h3 { margin-top: 14px; }
+section.alert { background: var(--warn-bg); border-color: var(--warn-line); border-width: 2px; }
+section.alert ul { margin: 6px 0 0; padding-left: 20px; }
+section.alert li { margin: 6px 0; }
+section.experimental { border-style: dashed; }
+.devnote h3 { margin-top: 0; }

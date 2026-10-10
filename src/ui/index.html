@@ -4,17 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rytm &amp; Keys Mod Installer</title>
-<meta name="description" content="Build unofficial Analog Rytm and Analog Keys mods from Elektron's own OS file in your browser, check them, and send them over MIDI.">
+<meta name="description" content="Build unofficial Analog Rytm and Analog Keys mods from Elektron's own OS file in your browser and check them, then flash the verified file with Elektron Transfer.">
 <style>/*@CSS@*/</style>
 </head>
 <body>
 <header class="wrap">
   <h1>Rytm &amp; Keys Mod Installer <span class="tag">working name</span></h1>
-  <p class="lede">Builds unofficial mods for the Elektron <b>Analog Rytm</b> (MK1 and MKII, OS 1.73) and the <b>Analog Keys</b> (OS 1.56) from Elektron's own OS file, right here in your browser. Then it can send the result to your unit over MIDI.</p>
+  <p class="lede">Builds unofficial mods for the Elektron <b>Analog Rytm</b> (MK1 and MKII, OS 1.73) and the <b>Analog Keys</b> (OS 1.56) from Elektron's own OS file, right here in your browser. Then you flash the checked file with Elektron Transfer.</p>
   <p class="fine">Nothing is uploaded: your file never leaves this computer, and the page works offline. Unofficial: not made, checked or endorsed by Elektron. Changing your unit's firmware is at your own risk.</p>
 </header>
 
 <main class="wrap">
+<section id="os174" class="alert" aria-labelledby="os174h">
+  <h2 id="os174h">Read this first: OS 1.74</h2>
+  <p><b>Elektron's support pages now serve only OS 1.74 for the Analog Rytm MK1 and MKII.</b> These mods are built for <b>OS 1.73</b>. (The Analog Keys mods are built for <b>OS 1.56</b>, which Elektron still serves as of October 2026.)</p>
+  <ul>
+    <li><b>A Rytm that is already on 1.74 can't be loaded with these files.</b> They are built for 1.73, this page will not build anything from a 1.74 file, and putting a 1.73-based file on a 1.74 unit would be a downgrade, which Elektron does not support. Don't try it.</li>
+    <li><b>Going back to 1.73 on an MKII that is on 1.74 is likely not possible.</b> That is unverified: nobody has tried it here. Ask Elektron support before you try anything. Elektron's own release notes say that downgrading the device OS is not supported, is at your own risk, and can lose user content. Whether an MK1 can go back is equally unverified.</li>
+    <li><b>Still have Elektron's original 1.73 file</b> (a copy or backup from before you updated), and a unit that is still on 1.73? Use that file here: the page recognises it by its checksum. Don't update the unit to 1.74 if you want these mods.</li>
+    <li><b>A 1.74 port is planned as a follow-up.</b> There is no date, and nothing on this page works with 1.74 yet.</li>
+  </ul>
+</section>
+
 <section id="s1">
   <h2><span class="n">1</span> Your Elektron OS file</h2>
   <p>Drop Elektron's original OS update file here: the <code>.syx</code> file, or the <code>_dist.zip</code> it came in.</p>
@@ -24,7 +35,6 @@
   </div>
   <p id="dropNote" class="warn-text" aria-live="polite"></p>
   <div id="idResult" class="card hidden" aria-live="polite"></div>
-  <p class="card warn" id="rytm174"><b>Analog Rytm owners:</b> Elektron's site now offers only OS 1.74 for the Rytm, and these builds need the <b>1.73</b> file. Use the 1.73 file you already have; the page checks it by its checksum. If your Rytm is already on 1.74, these mods can't be installed on it yet: don't go back to 1.73 on your own, Elektron does not support downgrades.</p>
   <details>
     <summary>Which file do I need?</summary>
     <ul>
@@ -34,7 +44,7 @@
     </ul>
     <p>The page recognises these files by their exact checksum, so a renamed file is fine and a changed one is refused. Your unit must run the same OS version as the file.</p>
     <p><b>Unit on OS 1.72?</b> First install Elektron's original 1.73 file the normal way (Elektron Transfer, its drop page). Then come back with that 1.73 file and flash the Control build first.</p>
-    <p><b>OS 1.74 is not supported yet.</b> In October 2026 Elektron's site offers only 1.74 for the Rytm. If your Rytm is on 1.73, don't update it: going back to an older OS is a downgrade, which Elektron does not support.</p>
+    <p><b>On OS 1.74?</b> See the note at the top of this page: these mods are for 1.73 (Keys: 1.56), and this page will not build from a 1.74 file.</p>
   </details>
 </section>
 
@@ -62,18 +72,73 @@
       <p class="mono" id="dlSha"></p>
       <p><a id="dlLink" class="button primary" download>Download</a></p>
       <p id="dlNext" class="fine"></p>
-      <p class="fine">You can flash this file with Elektron Transfer (its normal drop page, over USB), or by the startup-menu route in step 4. If Transfer refuses the file as "same version", nothing was written: stop there, or use the startup-menu route. Keep Elektron's original file too: it is your way back.</p>
+      <p class="fine">Flash this file with Elektron Transfer: the steps are in step 4. Keep Elektron's original file too: it is your way back.</p>
     </div>
   </div>
 </section>
 
 <section id="s4">
-  <h2><span class="n">4</span> Send it to your unit over MIDI</h2>
+  <h2><span class="n">4</span> Flash it with Elektron Transfer</h2>
+  <p>Download the checked file in step 3, then install it with <b>Elektron Transfer</b>, Elektron's own program. This page does not send anything to your unit itself.</p>
+
+  <div class="card warn">
+    <h3>Before you start</h3>
+    <ul>
+      <li><b>Back up your projects</b> (and +Drive) in Elektron Transfer first.</li>
+      <li><b>Flash the Control build first</b> (step 2, no boxes ticked). If the unit starts and plays normally, the route works.</li>
+      <li><b>Don't power off the unit</b> while it installs, or during the first start after it.</li>
+      <li>Keep Elektron's original OS file: it is your way back.</li>
+    </ul>
+  </div>
+
+  <h3>The steps</h3>
+  <ol class="steps" id="flashSteps">
+    <li>Connect the unit to the computer with USB, start Elektron Transfer, choose the unit as MIDI in and MIDI out, and click Connect.</li>
+    <li>Drag the downloaded <code>.syx</code> file onto Transfer's big DROP area ("Drop files here"). Transfer then sends it to the unit by itself.</li>
+    <li>When Transfer says the file has arrived, press <b>YES</b> on the unit and follow its screen. Do not turn it off until the update is done.</li>
+    <li>If Transfer refuses the file as "same version", nothing was written. Stop, or use the startup-menu route below.</li>
+  </ol>
+  <p class="fine">These are the steps of the project's own notes for each device and of Elektron's article <a href="https://support.elektron.se/support/solutions/articles/43000662890-how-to-update-your-device" target="_blank" rel="noopener noreferrer">How to update your device</a> (opens Elektron's site; this page itself needs no network).</p>
+
+  <div class="devnote card" data-dev="mk1">
+    <h3>Analog Rytm MK1 (OS 1.73)</h3>
+    <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.73 file. Hold <b>FUNC</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE). In Elektron Transfer click "go to the SYSEX TRANSFER page", then "OS upgrade via device startup menu", and follow the screen. This needs a DIN MIDI interface and a MIDI cable into the unit's MIDI IN: <b>USB does not work in the startup menu</b>.</p>
+    <p class="fine">Elektron's text: Analog Rytm MK1 manual, section 14.4 "OS UPGRADE", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's first-run checks for these files: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/START_HERE.md" target="_blank" rel="noopener noreferrer">flash/START_HERE.md</a>.</p>
+  </div>
+
+  <div class="devnote card" data-dev="mk2">
+    <h3>Analog Rytm MKII (OS 1.73)</h3>
+    <p><b>No MKII build has been run on an MKII.</b> They are built and verified byte for byte, nothing more. Flash the Control build first and read the notes before you try the others.</p>
+    <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.73 file. Hold <b>FUNC</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE), and in Elektron Transfer use the CONNECTION page's "LEGACY OS UPGRADE" mode (Elektron's wording in the MKII release notes). This needs a DIN MIDI interface into the unit's MIDI IN: <b>USB does not work in the startup menu</b>.</p>
+    <p class="fine">Elektron's text: the Analog Rytm MKII OS release notes, "Upgrading from the STARTUP Menu", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's notes: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/MKII/START_HERE_MKII.md" target="_blank" rel="noopener noreferrer">flash/MKII/START_HERE_MKII.md</a>.</p>
+  </div>
+
+  <div class="devnote card" data-dev="keys">
+    <h3>Analog Keys (OS 1.56)</h3>
+    <p><b>No Analog Keys build has been run on an Analog Keys.</b> They are built and verified byte for byte, nothing more. Flash the Control build first and read the notes before you try the others.</p>
+    <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.56 file. Connect your MIDI interface's output to the Keys' MIDI IN (DIN). Hold <b>FUNCTION</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE). In Elektron Transfer click "go to the SYSEX TRANSFER page", then "OS upgrade via device startup menu", and follow the screen. <b>USB does not work in the startup menu</b>.</p>
+    <p class="fine">Elektron's text: Analog Keys manual, "EARLY STARTUP MENU" and "OS UPGRADE", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's notes: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/KEYS/START_HERE_KEYS.md" target="_blank" rel="noopener noreferrer">flash/KEYS/START_HERE_KEYS.md</a>.</p>
+  </div>
+</section>
+
+<section id="s5">
+  <h2>If something goes wrong</h2>
+  <ul>
+    <li><b>Transfer shows an error, or the unit shows one:</b> if the unit's screen says it is upgrading, don't switch it off: wait. Otherwise start again from step 1 of section 4. If Transfer refuses the file as "same version", nothing was written.</li>
+    <li><b>The unit doesn't start after flashing:</b> use Elektron's startup-menu route in step 4 (your unit's box) with Elektron's original OS file, the one you dropped in step 1. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
+    <li>Only flash a file onto the unit it was built for. The page builds Rytm files only from Rytm files, and Keys files only from the Keys file.</li>
+  </ul>
+</section>
+</main>
+
+<template id="experimentalSenderTpl">
+<section id="s4x" class="experimental">
+  <h2>Experimental: send it over MIDI from this page</h2>
   <p>This uses the unit's own startup menu (<b>OS UPGRADE</b>), the route Elektron's manual gives for when the normal update can't be used. It also works when the unit no longer starts normally.</p>
 
   <div class="card warn" id="m0note">
-    <h3>This sender has not been tried on a real unit yet</h3>
-    <p>It has only been tested against a simulated MIDI port. Elektron's own tool for this route is <b>Elektron Transfer</b>: with the unit on the startup menu's OS UPGRADE screen, open Transfer, on its CONNECTION page click "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu", and follow the steps on screen (<span class="manualRef">Elektron's manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes</span>). Download the build in step 3 and you can send it that way. The same route with Elektron's original file is the way back.</p>
+    <h3>This sender has never been used on a real unit</h3>
+    <p>It is switched on only by the address ending <code>#experimental-sender</code>, for testing. It has only been tested against a simulated MIDI port. Elektron's own tool for this route is <b>Elektron Transfer</b>: with the unit on the startup menu's OS UPGRADE screen, open Transfer, on its CONNECTION page click "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu", and follow the steps on screen (<span class="manualRef">Elektron's manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes</span>). Download the build in step 3 and send it that way. The same route with Elektron's original file is the way back.</p>
   </div>
 
   <div class="card">
@@ -145,17 +210,7 @@
     <p><b>Next, not in this version:</b> sending over USB while the unit runs normally (the way Transfer's drop page does).</p>
   </details>
 </section>
-
-<section id="s5">
-  <h2>If something goes wrong</h2>
-  <ul>
-    <li><b>The unit shows an error, or nothing happens:</b> switch it off, then start again from step 1 of section 4. Try a longer pause. Check the cable goes into MIDI IN.</li>
-    <li><b>You stopped the transfer:</b> if the unit is still waiting or receiving, switch it off and start again. If its screen says it is upgrading, don't switch it off: wait.</li>
-    <li><b>The unit doesn't start after flashing:</b> send Elektron's original file through the startup menu. Hold <span class="funcName">FUNC (FUNCTION on the Analog Keys)</span> while you switch it on, press TRIG 4 (OS UPGRADE), and send the file over DIN MIDI with Elektron Transfer: CONNECTION page, "go to the SYSEX TRANSFER page", then "OS Upgrade via device startup menu" (<span class="manualRef">Elektron's manuals: Analog Rytm MK1, section 14.4 "OS UPGRADE"; Analog Keys, "EARLY STARTUP MENU", "OS UPGRADE"; Analog Rytm MKII, "Upgrading from the STARTUP Menu" in its OS release notes</span>). The <b>Recover</b> button in section 4 sends the same file the same way, but this page's sender has not been tried on a unit yet. These mods never change the recovery code: before offering a download, the page checks byte for byte that the file leaves it exactly as Elektron made it.</li>
-    <li>Only send a file to the unit it was built for. The page builds Rytm files only from Rytm files, and Keys files only from the Keys file.</li>
-  </ul>
-</section>
-</main>
+</template>
 
 <footer class="wrap fine">
   <p>This project's own code is free software: GPL-3.0-or-later. Built on elektron-firmware-tool by Marcel Bierling (MIT). The packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence: it is credited here and used as-is, and the GPL grant above does not cover it. The packages carry only the mods' own bytes; Elektron's code comes from your own file. The full notices and licence texts are below.</p>

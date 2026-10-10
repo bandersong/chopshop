@@ -1,4 +1,4 @@
-/* app.js - the page: drop a file, choose mods, build and check, send over MIDI.
+/* app.js - the page: drop a file, choose mods, build and check; flash with Elektron Transfer.
  *
  * Part of the browser installer (working name "web"). Copyright (C) 2026 bandersong.
  * SPDX-License-Identifier: GPL-3.0-or-later.
@@ -14,6 +14,11 @@
  * the mod boxes and Build are locked. Before anything goes out over MIDI, the page checks
  * again, on this thread, that the bytes belong to the file and the choice on screen and
  * hash to the published sha256 (RYTM_PAGE_KNOWN, the same pins the engine uses).
+ *
+ * The page's own Web MIDI sender is EXPERIMENTAL and off: it has never touched a real unit.
+ * Its markup lives in <template id="experimentalSenderTpl"> and all of its code is inside
+ * mountSender(), which runs only when the address ends in #experimental-sender. Without that
+ * flag the page has no sender controls and never asks for MIDI access.
  */
 (function () {
   'use strict';
@@ -25,6 +30,7 @@
   var state = {
     gen: 0,            // bumped on every new file or new choice
     file: null,        // identify result (with .data)
+    ident: null,       // the last identify result, accepted or not
     device: null,
     picked: {},
     rules: null,       // {byId, excludedBy} for the mod boxes
@@ -42,6 +48,17 @@
     mk2: { name: 'Analog Rytm MKII', os: '1.73', unit: 'an Analog Rytm MKII (not an MK1)' },
     keys: { name: 'Analog Keys', os: '1.56', unit: 'an Analog Keys (not an Analog Four)' }
   };
+
+  /* The experimental sender plugs in here (see mountSender). Off, all three do nothing. */
+  var sender = { on: false, update: function () {}, labels: function () {}, identity: function () {} };
+  function updateSend() { sender.update(); }
+  function deviceLabels() { sender.labels(); }
+
+  /* The step-4 notes for the unit in the file: only that unit's box is shown. With no
+   * accepted file, all three are. */
+  function showDevice(dev) {
+    each('.devnote', function (n) { n.classList.toggle('hidden', !!dev && n.getAttribute('data-dev') !== dev); });
+  }
 
   /* Where Elektron's own text for the startup-menu OS UPGRADE route is, per device
    * (corp/installer-re/evidence/elektron: the MK1 manual's section 14.4, the Analog Keys
@@ -195,20 +212,6 @@
     each('.cf', function (c) { c.checked = false; });
   }
 
-  function deviceLabels() {
-    var d = state.device && DEVICE_TEXT[state.device];
-    $('cfDeviceText').textContent = d
-      ? 'This unit is ' + d.unit + '.'
-      : 'This unit is the one the file in step 1 is for (drop a file first).';
-    $('cfOsText').textContent = d
-      ? 'It runs OS ' + d.os + ' now (Elektron\'s ' + d.os + ', or a ' + d.os + ' build from this page), not an older or newer OS.'
-      : 'It runs the OS version of the file in step 1.';
-    $('cfDevice').disabled = !d;
-    $('cfOs').disabled = !d;
-    $('sendBuild').textContent = d ? 'Send the ' + d.name + ' build' : 'Send the build';
-    $('sendStock').textContent = d ? 'Recover: send Elektron\'s original ' + d.name + ' file' : 'Recover: send Elektron\'s original file';
-  }
-
   /* ------------------------------ step 1 ------------------------------ */
 
   function readFile(f) {
@@ -247,12 +250,9 @@
     if (r.sha256) box.appendChild(el('p', { cls: 'fine mono', text: 'sha256 ' + r.sha256 }));
     state.file = r.ok ? r : null;
     state.device = r.ok ? r.device : null;
-    // the key's name on this unit; until a file is accepted, both names
-    var func = !r.ok ? 'FUNC (FUNCTION on the Analog Keys)' : r.device === 'keys' ? 'FUNCTION' : 'FUNC';
-    $('funcKey').textContent = func;
-    each('.funcName', function (n) { n.textContent = func; });
-    var manual = r.ok && MANUAL_REF[r.device] ? MANUAL_REF[r.device] : MANUAL_REF_ALL;
-    each('.manualRef', function (n) { n.textContent = manual; });
+    state.ident = r;
+    showDevice(r.ok ? r.device : null);
+    sender.identity(r);
     deviceLabels();
     resetConfirms();
     if (r.ok) {
@@ -268,7 +268,8 @@
   /* A new file: forget everything that belonged to the old one. Returns the new gen. */
   function resetChoice() {
     var g = bump();
-    state.file = null; state.device = null; state.picked = {}; state.rules = null; state.recipe = null; state.built = null;
+    state.file = null; state.ident = null; state.device = null; state.picked = {}; state.rules = null; state.recipe = null; state.built = null;
+    showDevice(null);
     unlock('s2', false); unlock('s3', false);
     Array.prototype.slice.call($('features').querySelectorAll('label')).forEach(function (n) { n.remove(); });
     clear($('recipeCard'));
@@ -463,206 +464,251 @@
     });
   });
 
-  /* ------------------------------ step 4 ------------------------------ */
+  /* ---------------- EXPERIMENTAL: the Web MIDI sender (off unless #experimental-sender) ---------------- */
 
-  var hasMidi = typeof navigator !== 'undefined' && typeof navigator.requestMIDIAccess === 'function';
-  $('midiSupport').textContent = hasMidi ? 'this browser: yes' : 'this browser: no';
-  if (!hasMidi) {
-    $('midiBtn').disabled = true;
-    $('midiStatus').textContent = 'This browser has no Web MIDI. Use Chrome or Edge on a computer.';
-  }
+  function mountSender() {
+    if (sender.on) return;
+    sender.on = true;
+    var tpl = document.getElementById('experimentalSenderTpl');
+    var host = $('s5');
+    if (!tpl || !host) { sender.on = false; return; }
+    host.parentNode.insertBefore(tpl.content.cloneNode(true), host);
 
-  $('midiBtn').addEventListener('click', function () {
-    $('midiStatus').textContent = 'Asking…';
-    navigator.requestMIDIAccess({ sysex: true }).then(function (access) {
-      state.midi = access;
-      $('midiStatus').textContent = 'MIDI allowed.';
-      access.onstatechange = listPorts;
-      listPorts();
-    }, function (e) {
-      $('midiStatus').textContent = 'MIDI access was not given (' + (e && e.name ? e.name : 'denied') + '). ' +
-        'The page needs MIDI with SysEx to send an OS file. If the browser asked and the answer was no: ' +
-        'allow MIDI for this page in the browser\'s site settings, then reload the page. ' +
-        'If no question appeared, the browser may not offer MIDI to a page opened from a file: in a terminal, ' +
-        'in the folder that holds this page, run  python3 -m http.server --bind 127.0.0.1 8000  then open ' +
-        'http://localhost:8000/ in Chrome or Edge and click this page\'s file name.';
-    });
-  });
-
-  function listPorts() {
-    var sel = $('portSel'), keep = sel.value;
-    clear(sel);
-    var outs = [];
-    state.midi.outputs.forEach(function (o) { outs.push(o); });
-    if (!outs.length) {
-      sel.appendChild(el('option', { value: '', text: '(no MIDI outputs found: plug in your interface)' }));
-      sel.disabled = true;
-    } else {
-      sel.appendChild(el('option', { value: '', text: 'choose your MIDI interface…' }));
-      outs.forEach(function (o) {
-        sel.appendChild(el('option', { value: o.id, text: o.name + (o.manufacturer ? ' (' + o.manufacturer + ')' : '') }));
-      });
-      sel.disabled = false;
-      if (keep) sel.value = keep;
+    function senderLabels() {
+      var d = state.device && DEVICE_TEXT[state.device];
+      $('cfDeviceText').textContent = d
+        ? 'This unit is ' + d.unit + '.'
+        : 'This unit is the one the file in step 1 is for (drop a file first).';
+      $('cfOsText').textContent = d
+        ? 'It runs OS ' + d.os + ' now (Elektron\'s ' + d.os + ', or a ' + d.os + ' build from this page), not an older or newer OS.'
+        : 'It runs the OS version of the file in step 1.';
+      $('cfDevice').disabled = !d;
+      $('cfOs').disabled = !d;
+      $('sendBuild').textContent = d ? 'Send the ' + d.name + ' build' : 'Send the build';
+      $('sendStock').textContent = d ? 'Recover: send Elektron\'s original ' + d.name + ' file' : 'Recover: send Elektron\'s original file';
     }
-    portWarning();
+    function senderIdentity(r) {
+      // the key's name on this unit; until a file is accepted, both names
+      var func = !r || !r.ok ? 'FUNC (FUNCTION on the Analog Keys)' : r.device === 'keys' ? 'FUNCTION' : 'FUNC';
+      $('funcKey').textContent = func;
+      each('.funcName', function (n) { n.textContent = func; });
+      var manual = r && r.ok && MANUAL_REF[r.device] ? MANUAL_REF[r.device] : MANUAL_REF_ALL;
+      each('.manualRef', function (n) { n.textContent = manual; });
+    }
+    /* ------------------------------ step 4 ------------------------------ */
+
+    var hasMidi = typeof navigator !== 'undefined' && typeof navigator.requestMIDIAccess === 'function';
+    $('midiSupport').textContent = hasMidi ? 'this browser: yes' : 'this browser: no';
+    if (!hasMidi) {
+      $('midiBtn').disabled = true;
+      $('midiStatus').textContent = 'This browser has no Web MIDI. Use Chrome or Edge on a computer.';
+    }
+
+    $('midiBtn').addEventListener('click', function () {
+      $('midiStatus').textContent = 'Asking…';
+      navigator.requestMIDIAccess({ sysex: true }).then(function (access) {
+        state.midi = access;
+        $('midiStatus').textContent = 'MIDI allowed.';
+        access.onstatechange = listPorts;
+        listPorts();
+      }, function (e) {
+        $('midiStatus').textContent = 'MIDI access was not given (' + (e && e.name ? e.name : 'denied') + '). ' +
+          'The page needs MIDI with SysEx to send an OS file. If the browser asked and the answer was no: ' +
+          'allow MIDI for this page in the browser\'s site settings, then reload the page. ' +
+          'If no question appeared, the browser may not offer MIDI to a page opened from a file: in a terminal, ' +
+          'in the folder that holds this page, run  python3 -m http.server --bind 127.0.0.1 8000  then open ' +
+          'http://localhost:8000/ in Chrome or Edge and click this page\'s file name.';
+      });
+    });
+
+    function listPorts() {
+      var sel = $('portSel'), keep = sel.value;
+      clear(sel);
+      var outs = [];
+      state.midi.outputs.forEach(function (o) { outs.push(o); });
+      if (!outs.length) {
+        sel.appendChild(el('option', { value: '', text: '(no MIDI outputs found: plug in your interface)' }));
+        sel.disabled = true;
+      } else {
+        sel.appendChild(el('option', { value: '', text: 'choose your MIDI interface…' }));
+        outs.forEach(function (o) {
+          sel.appendChild(el('option', { value: o.id, text: o.name + (o.manufacturer ? ' (' + o.manufacturer + ')' : '') }));
+        });
+        sel.disabled = false;
+        if (keep) sel.value = keep;
+      }
+      portWarning();
+      updateSend();
+    }
+
+    function selectedPort() {
+      if (!state.midi) return null;
+      var id = $('portSel').value, found = null;
+      state.midi.outputs.forEach(function (o) { if (o.id === id) found = o; });
+      return found;
+    }
+
+    function portWarning() {
+      var p = selectedPort();
+      $('portWarn').textContent = (p && /elektron|analog rytm|analog keys|analog four/i.test(p.name))
+        ? 'This looks like the unit\'s own USB port. In the startup menu the unit only listens on its DIN MIDI IN: pick your MIDI interface instead.'
+        : '';
+    }
+    $('portSel').addEventListener('change', function () { portWarning(); updateSend(); });
+    $('gapSel').addEventListener('change', updateSend);
+    each('.cf', function (c) { c.addEventListener('change', updateSend); });
+
+    function ticked(sel) {
+      return Array.prototype.every.call(document.querySelectorAll(sel), function (c) { return c.checked && !c.disabled; });
+    }
+
+    function updateSend() {
+      var port = selectedPort();
+      var d = state.device && DEVICE_TEXT[state.device];
+      var stockOk = !!(port && !busy() && state.file && state.file.kind === 'stock' && d);
+      var recoverReady = stockOk && ticked('.cf:not(.cf-build)');
+      $('sendStock').disabled = !recoverReady;
+      $('sendBuild').disabled = !(recoverReady && state.built && ticked('.cf'));
+      var gap = +$('gapSel').value, parts = [];
+      [['the build', state.built && state.built.bytes], ['the original file', state.file && state.file.data]].forEach(function (x) {
+        if (!x[1]) return;
+        try {
+          var msgs = S.splitSysex(x[1]);
+          parts.push(x[0] + ': ' + msgs.length + ' messages, about ' + fmtMin(S.estimateMs(msgs, gap)));
+        } catch (e) { /* not a sendable file */ }
+      });
+      $('estimate').textContent = parts.join(' · ');
+      var what = [];
+      if (state.built && d) what.push('Send the ' + d.name + ' build = ' + state.built.dlName + ' (checked).');
+      if (state.file && state.file.kind === 'stock' && d) what.push('Recover = Elektron\'s original ' + d.name + ' file, ' + state.file.name + '.');
+      if (!state.built) what.push('Build in step 3 to enable "Send the build".');
+      if (d) what.push('Recover needs the first five boxes ticked; sending the build needs all six.');
+      $('sendWhat').textContent = what.join(' ');
+    }
+
+    /* The last word before anything goes out: recomputed here, on this thread, from the
+     * bytes themselves. Returns {bytes, label} or {why}. */
+    function preflight(kind) {
+      var d = state.device && DEVICE_TEXT[state.device];
+      if (busy()) return { why: 'Something else is running.' };
+      if (!state.file || !d) return { why: 'No OS file in step 1.' };
+      var fileSha = SHA.sha256hex(state.file.data);
+      var stockPin = KNOWN.stock.filter(function (s) { return s.sha256 === fileSha && s.supported; })[0];
+      if (!stockPin || stockPin.device !== state.device || fileSha !== state.file.sha256) {
+        return { why: 'The file in step 1 is not Elektron\'s original file for the ' + d.name + '.' };
+      }
+      if (kind === 'stock') return { bytes: state.file.data, label: 'Elektron\'s original ' + d.name + ' file' };
+      var b = state.built;
+      if (!b) return { why: 'There is no checked build.' };
+      if (b.gen !== state.gen || b.device !== state.device || b.recipe !== state.recipe || b.stockSha !== fileSha) {
+        return { why: 'The build does not belong to the file and the mods shown on the page now. Press Build again.' };
+      }
+      var pin = KNOWN.recipes.filter(function (r) { return r.id === b.recipe; })[0];
+      if (!pin || pin.device !== state.device) return { why: 'The build is not a published build for the ' + d.name + '.' };
+      var outSha = SHA.sha256hex(b.bytes);
+      if (outSha !== pin.output_sha256 || outSha !== b.sha256) {
+        return { why: 'The build\'s bytes do not hash to the published sha256 (' + outSha.slice(0, 16) + '…). Nothing was sent.' };
+      }
+      return { bytes: b.bytes, label: 'the ' + d.name + ' build ' + b.dlName };
+    }
+
+    function startSend(kind) {
+      var port = selectedPort();
+      if (!port) return;
+      var pf = preflight(kind);
+      if (!pf.bytes) {
+        if (kind === 'build') { state.built = null; hideBuild(); }
+        resetConfirms(); updateSend();
+        alert('Not sent: ' + pf.why);
+        return;
+      }
+      var msgs, label = pf.label;
+      try { msgs = S.splitSysex(pf.bytes); } catch (e) { alert('This file cannot be sent: ' + e.message); return; }
+      var signal = { aborted: false };
+      state.sending = { signal: signal, kind: kind };
+      syncInputs(); updateSend();
+      $('sendBox').classList.remove('hidden');
+      $('sendDone').classList.add('hidden');
+      $('abortBtn').disabled = false;
+      $('sendBar').max = msgs.length; $('sendBar').value = 0;
+      $('sendStatus').textContent = 'Starting ' + label + '…';
+      var lock = null;
+      if (navigator.wakeLock && navigator.wakeLock.request) {
+        navigator.wakeLock.request('screen').then(function (l) { lock = l; }, function () { /* not available */ });
+      }
+      var gap = +$('gapSel').value;
+      function finish() {
+        if (lock) lock.release().catch(function () {});
+        state.sending = null;
+        $('sendBox').classList.add('hidden');
+        $('bgWarn').classList.add('hidden');
+        resetConfirms(); // the unit is no longer on the OS UPGRADE screen
+        syncInputs(); updateSend();
+      }
+      S.send({
+        output: port, messages: msgs, gapMs: gap, aheadMs: 1000, signal: signal,
+        onProgress: function (p) {
+          $('sendBar').value = p.sent;
+          if (!signal.aborted) {
+            $('sendStatus').textContent = 'Sending ' + label + ': message ' + p.sent + ' of ' + p.total +
+              ' · ' + fmtMin(p.etaMs) + ' left';
+          }
+        },
+        onStopping: function (s) {
+          $('sendStatus').textContent = (s.why === 'error' ? 'Error: ' : 'Stopping: ') +
+            'letting the data already handed to the browser leave the cable (' + fmtMin(s.untilMs) + ')…';
+        }
+      }).then(function (r) {
+        finish();
+        var done = $('sendDone');
+        done.classList.remove('hidden');
+        clear(done);
+        if (r.aborted) {
+          done.className = 'card bad';
+          done.appendChild(el('p', { text: 'Stopped after ' + r.sent + ' of ' + r.total + ' messages (the data already queued has now left). ' +
+            'The unit has only part of the file. If it is still waiting or receiving, switch it off and start again from step 1 of this section. ' +
+            'If its screen says it is upgrading, don\'t switch it off: wait.' }));
+        } else {
+          done.className = 'card good';
+          done.appendChild(el('p', { text: 'The whole file has been sent (' + r.total + ' messages). The unit now installs it and restarts by itself. ' +
+            'Don\'t switch it off until it has restarted. If it shows an error instead, start again from step 1 of this section with a longer pause, ' +
+            'or send the file with Elektron Transfer (see the box at the top of this section).' }));
+        }
+      }, function (e) {
+        finish();
+        $('sendStatus').textContent = '';
+        alert('Sending failed: ' + e.message);
+      });
+    }
+
+    $('sendBuild').addEventListener('click', function () { startSend('build'); });
+    $('sendStock').addEventListener('click', function () { startSend('stock'); });
+    $('abortBtn').addEventListener('click', function () {
+      if (!state.sending) return;
+      state.sending.signal.aborted = true;
+      $('abortBtn').disabled = true;
+      $('sendStatus').textContent = 'Stopping…';
+    });
+    document.addEventListener('visibilitychange', function () {
+      $('bgWarn').classList.toggle('hidden', !(state.sending && document.hidden));
+    });
+    window.addEventListener('beforeunload', function (ev) {
+      if (state.sending) { ev.preventDefault(); ev.returnValue = ''; }
+    });
+
+    sender.labels = senderLabels;
+    sender.identity = senderIdentity;
+    sender.update = updateSend;
+    senderIdentity(state.ident);
+    senderLabels();
+    resetConfirms();
     updateSend();
   }
 
-  function selectedPort() {
-    if (!state.midi) return null;
-    var id = $('portSel').value, found = null;
-    state.midi.outputs.forEach(function (o) { if (o.id === id) found = o; });
-    return found;
-  }
-
-  function portWarning() {
-    var p = selectedPort();
-    $('portWarn').textContent = (p && /elektron|analog rytm|analog keys|analog four/i.test(p.name))
-      ? 'This looks like the unit\'s own USB port. In the startup menu the unit only listens on its DIN MIDI IN: pick your MIDI interface instead.'
-      : '';
-  }
-  $('portSel').addEventListener('change', function () { portWarning(); updateSend(); });
-  $('gapSel').addEventListener('change', updateSend);
-  each('.cf', function (c) { c.addEventListener('change', updateSend); });
-
-  function ticked(sel) {
-    return Array.prototype.every.call(document.querySelectorAll(sel), function (c) { return c.checked && !c.disabled; });
-  }
-
-  function updateSend() {
-    var port = selectedPort();
-    var d = state.device && DEVICE_TEXT[state.device];
-    var stockOk = !!(port && !busy() && state.file && state.file.kind === 'stock' && d);
-    var recoverReady = stockOk && ticked('.cf:not(.cf-build)');
-    $('sendStock').disabled = !recoverReady;
-    $('sendBuild').disabled = !(recoverReady && state.built && ticked('.cf'));
-    var gap = +$('gapSel').value, parts = [];
-    [['the build', state.built && state.built.bytes], ['the original file', state.file && state.file.data]].forEach(function (x) {
-      if (!x[1]) return;
-      try {
-        var msgs = S.splitSysex(x[1]);
-        parts.push(x[0] + ': ' + msgs.length + ' messages, about ' + fmtMin(S.estimateMs(msgs, gap)));
-      } catch (e) { /* not a sendable file */ }
-    });
-    $('estimate').textContent = parts.join(' · ');
-    var what = [];
-    if (state.built && d) what.push('Send the ' + d.name + ' build = ' + state.built.dlName + ' (checked).');
-    if (state.file && state.file.kind === 'stock' && d) what.push('Recover = Elektron\'s original ' + d.name + ' file, ' + state.file.name + '.');
-    if (!state.built) what.push('Build in step 3 to enable "Send the build".');
-    if (d) what.push('Recover needs the first five boxes ticked; sending the build needs all six.');
-    $('sendWhat').textContent = what.join(' ');
-  }
-
-  /* The last word before anything goes out: recomputed here, on this thread, from the
-   * bytes themselves. Returns {bytes, label} or {why}. */
-  function preflight(kind) {
-    var d = state.device && DEVICE_TEXT[state.device];
-    if (busy()) return { why: 'Something else is running.' };
-    if (!state.file || !d) return { why: 'No OS file in step 1.' };
-    var fileSha = SHA.sha256hex(state.file.data);
-    var stockPin = KNOWN.stock.filter(function (s) { return s.sha256 === fileSha && s.supported; })[0];
-    if (!stockPin || stockPin.device !== state.device || fileSha !== state.file.sha256) {
-      return { why: 'The file in step 1 is not Elektron\'s original file for the ' + d.name + '.' };
-    }
-    if (kind === 'stock') return { bytes: state.file.data, label: 'Elektron\'s original ' + d.name + ' file' };
-    var b = state.built;
-    if (!b) return { why: 'There is no checked build.' };
-    if (b.gen !== state.gen || b.device !== state.device || b.recipe !== state.recipe || b.stockSha !== fileSha) {
-      return { why: 'The build does not belong to the file and the mods shown on the page now. Press Build again.' };
-    }
-    var pin = KNOWN.recipes.filter(function (r) { return r.id === b.recipe; })[0];
-    if (!pin || pin.device !== state.device) return { why: 'The build is not a published build for the ' + d.name + '.' };
-    var outSha = SHA.sha256hex(b.bytes);
-    if (outSha !== pin.output_sha256 || outSha !== b.sha256) {
-      return { why: 'The build\'s bytes do not hash to the published sha256 (' + outSha.slice(0, 16) + '…). Nothing was sent.' };
-    }
-    return { bytes: b.bytes, label: 'the ' + d.name + ' build ' + b.dlName };
-  }
-
-  function startSend(kind) {
-    var port = selectedPort();
-    if (!port) return;
-    var pf = preflight(kind);
-    if (!pf.bytes) {
-      if (kind === 'build') { state.built = null; hideBuild(); }
-      resetConfirms(); updateSend();
-      alert('Not sent: ' + pf.why);
-      return;
-    }
-    var msgs, label = pf.label;
-    try { msgs = S.splitSysex(pf.bytes); } catch (e) { alert('This file cannot be sent: ' + e.message); return; }
-    var signal = { aborted: false };
-    state.sending = { signal: signal, kind: kind };
-    syncInputs(); updateSend();
-    $('sendBox').classList.remove('hidden');
-    $('sendDone').classList.add('hidden');
-    $('abortBtn').disabled = false;
-    $('sendBar').max = msgs.length; $('sendBar').value = 0;
-    $('sendStatus').textContent = 'Starting ' + label + '…';
-    var lock = null;
-    if (navigator.wakeLock && navigator.wakeLock.request) {
-      navigator.wakeLock.request('screen').then(function (l) { lock = l; }, function () { /* not available */ });
-    }
-    var gap = +$('gapSel').value;
-    function finish() {
-      if (lock) lock.release().catch(function () {});
-      state.sending = null;
-      $('sendBox').classList.add('hidden');
-      $('bgWarn').classList.add('hidden');
-      resetConfirms(); // the unit is no longer on the OS UPGRADE screen
-      syncInputs(); updateSend();
-    }
-    S.send({
-      output: port, messages: msgs, gapMs: gap, aheadMs: 1000, signal: signal,
-      onProgress: function (p) {
-        $('sendBar').value = p.sent;
-        if (!signal.aborted) {
-          $('sendStatus').textContent = 'Sending ' + label + ': message ' + p.sent + ' of ' + p.total +
-            ' · ' + fmtMin(p.etaMs) + ' left';
-        }
-      },
-      onStopping: function (s) {
-        $('sendStatus').textContent = (s.why === 'error' ? 'Error: ' : 'Stopping: ') +
-          'letting the data already handed to the browser leave the cable (' + fmtMin(s.untilMs) + ')…';
-      }
-    }).then(function (r) {
-      finish();
-      var done = $('sendDone');
-      done.classList.remove('hidden');
-      clear(done);
-      if (r.aborted) {
-        done.className = 'card bad';
-        done.appendChild(el('p', { text: 'Stopped after ' + r.sent + ' of ' + r.total + ' messages (the data already queued has now left). ' +
-          'The unit has only part of the file. If it is still waiting or receiving, switch it off and start again from step 1 of this section. ' +
-          'If its screen says it is upgrading, don\'t switch it off: wait.' }));
-      } else {
-        done.className = 'card good';
-        done.appendChild(el('p', { text: 'The whole file has been sent (' + r.total + ' messages). The unit now installs it and restarts by itself. ' +
-          'Don\'t switch it off until it has restarted. If it shows an error instead, start again from step 1 of this section with a longer pause, ' +
-          'or send the file with Elektron Transfer (see the box at the top of this section).' }));
-      }
-    }, function (e) {
-      finish();
-      $('sendStatus').textContent = '';
-      alert('Sending failed: ' + e.message);
-    });
-  }
-
-  $('sendBuild').addEventListener('click', function () { startSend('build'); });
-  $('sendStock').addEventListener('click', function () { startSend('stock'); });
-  $('abortBtn').addEventListener('click', function () {
-    if (!state.sending) return;
-    state.sending.signal.aborted = true;
-    $('abortBtn').disabled = true;
-    $('sendStatus').textContent = 'Stopping…';
-  });
-  document.addEventListener('visibilitychange', function () {
-    $('bgWarn').classList.toggle('hidden', !(state.sending && document.hidden));
-  });
-  window.addEventListener('beforeunload', function (ev) {
-    if (state.sending) { ev.preventDefault(); ev.returnValue = ''; }
-  });
+  /* The flag: the address ends in #experimental-sender. Read at load and when the hash changes. */
+  function senderFlag() { return /^#experimental-sender$/.test(location.hash || ''); }
+  if (senderFlag()) mountSender();
+  window.addEventListener('hashchange', function () { if (senderFlag()) mountSender(); });
 
   /* ------------------------------ drop -------------------------------- */
 
