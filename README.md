@@ -236,7 +236,7 @@ Without `--steplock-tree` the generator skips that one package.
 ## Tests
 
 ```bash
-node --test web/test/*.test.js     # 51 tests, about 2 minutes; read-only (all outputs stay in memory)
+node --test web/test/*.test.js     # 55 tests (run 2026-10-10: 55 pass, 0 fail, 0 skipped), about 2 minutes; read-only (all outputs stay in memory)
 ONLY=keys-chord node --test web/test/engine.test.js
 ```
 
