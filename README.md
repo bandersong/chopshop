@@ -1,6 +1,6 @@
 # Rytm & Keys Mod Installer (working name) — browser installer, M0
 
-A static web page that builds this project's firmware mods from **the user's own copy of Elektron's OS file**, checks the result the way `rytm1_mods`' `verify.py` does, offers the file for download only when every check passes, and can stream it to the unit over **Web MIDI** through the startup-menu route.
+A static web page that builds this project's firmware mods from **the user's own copy of Elektron's OS file**, checks the result the way `rytm1_mods`' `verify.py` does, and offers the file for download only when every check passes. To install it the page points to **Elektron Transfer** (the proven route). The page's own Web MIDI sender is **hidden by default**: it has never touched a real unit, and it exists only behind the address flag `#experimental-sender` (see "The experimental sender").
 
 - One self-contained file: **`dist/index.html`** (no server, no network, works offline).
 - Targets: Analog Rytm MK1 OS 1.73, Analog Rytm MKII OS 1.73, Analog Keys OS 1.56.
@@ -10,7 +10,7 @@ A static web page that builds this project's firmware mods from **the user's own
 ## Open the page
 
 ```bash
-open "web/dist/index.html"        # Chrome or Edge; Safari opens it but cannot send MIDI
+open "web/dist/index.html"        # any current browser (the page no longer sends MIDI by default)
 ```
 
 From a static server instead (any host works; nothing is fetched):
@@ -19,7 +19,7 @@ From a static server instead (any host works; nothing is fetched):
 python3 -m http.server --directory web/dist 8000   # then http://localhost:8000
 ```
 
-Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker and three builds reproduce their published sha256 inside the page (`test/browser/e2e.js`). Web MIDI exists there and the page is a secure context, but headless Chrome refuses the permission. Whether a desktop Chrome shows the SysEx permission prompt for a `file://` page is **not checked**. If it doesn't, use the local server (bound to `127.0.0.1`: `python3 -m http.server --bind 127.0.0.1 --directory web/dist 8000`). The page's own refusal message gives the same command, because the page travels as one file without this README.
+Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker and three builds reproduce their published sha256 inside the page (`test/browser/e2e.js`). The default page never asks the browser for MIDI access: `test/page.test.js` and `e2e.js` count the calls to `navigator.requestMIDIAccess` (none).
 
 ## What the page does
 
@@ -59,33 +59,54 @@ Checked in headless Chrome 155 from `file://`: the engine starts in a Web Worker
    - **Round trip:** `eft -i out.syx -o /v` must give back the patched MAIN OS. The other sections must equal stock's: MK1 and Keys carry MAIN OS only; on MKII the bootstrap section must be byte-identical. The never-write ranges are checked again.
    - **Published hash:** sha256(out) must equal the published hash. Only then does the page show the download.
    - Not repeated in the page: `verify.py`'s stack-frame disassembly check (it needs `objdump`). It is a property of the mod code, and that code passed `verify.py` when the image was built. The published-hash check pins the same bytes.
-4. **Flash (Web MIDI, route C).** The page walks the user through the startup menu:
-   - Hold FUNC (on the Keys: FUNCTION) at power-on, then press TRIG 4 = OS UPGRADE.
-   - Send over DIN MIDI into the unit's MIDI IN. USB does not work in the startup menu.
+4. **Flash with Elektron Transfer.** The page never sends to the unit. Section 4 gives the steps for the unit in the dropped file, using only wording the project's START_HERE files and Elektron's own text already contain:
+   - normal route: Elektron's article "How to update your device" (USB, Transfer's DROP area, YES on the unit; the article is saved in corp `installer-re/evidence/elektron`, fetched 2026-10-08, not re-fetched);
+   - startup-menu route for a unit that doesn't start (DIN MIDI only): FUNC (Keys: FUNCTION) at power-on, TRIG 4 = OS UPGRADE, then Transfer's "go to the SYSEX TRANSFER page" / "OS upgrade via device startup menu" (MK1 and Keys wording; MKII release notes call it "LEGACY OS UPGRADE mode");
+   - Elektron's own text, named per device: MK1 manual section 14.4 "OS UPGRADE"; Analog Keys manual "EARLY STARTUP MENU", "OS UPGRADE"; MKII OS release notes "Upgrading from the STARTUP Menu".
 
-   A notice at the top of the section says this sender has not been tried on a unit yet and gives Elektron's own route for the same thing (Elektron's own text for it, which the page names per device: MK1 manual section 14.4 "OS UPGRADE"; Analog Keys manual "EARLY STARTUP MENU", "OS UPGRADE"; MKII OS release notes "Upgrading from the STARTUP Menu", which call Transfer's button "LEGACY OS UPGRADE mode". Transfer, CONNECTION, "go to the SYSEX TRANSFER page", "OS Upgrade via device startup menu" is the MK1/Keys wording); "If something goes wrong" puts that route first. Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks the confirmations:
-   - four about the route: backup, the OS UPGRADE screen, the DIN cable, Transfer closed and no sleep;
-   - a fifth, written from the file in step 1, naming the unit: e.g. "This unit is an Analog Rytm MK1 (not an MKII)", or "an Analog Keys (not an Analog Four)";
-   - a sixth, for sending the build only: "It runs OS 1.73 now", or 1.56 on the Keys.
+   **OS 1.74.** A prominent note at the top: Elektron's support pages now serve only 1.74 for the Rytm MK1 and MKII; these mods are for 1.73 (Keys: 1.56, still served); a 1.74 unit can't be loaded with these files (the page refuses a 1.74 file, and a 1.73-based file on a 1.74 unit is a downgrade, which Elektron's release notes say is not supported); going back on an MKII that is on 1.74 is **likely not possible and unverified** (the MKII bootstrap carries a "DOWNGRADE NOT POSSIBLE" string, found by a string scan, not tried on a unit; corp `installer-re/REPORT.md` section 2), so: ask Elektron support first; whether an MK1 can go back is equally unverified. Keep the 1.73 file if you have it; a 1.74 port is planned as a follow-up.
 
-   Both buttons name the device ("Send the Analog Rytm MK1 build", "Recover: send Elektron's original Analog Rytm MK1 file"). Recover needs the first five boxes, the build all six. Every box is unticked again on a new file, a new choice, a new build and at the end of every send. Then the page streams the file's own SysEx messages (`src/sender/sender.js`):
-   - one by one, unchanged, with a selectable gap: 5/10/**20**/40/80 ms;
-   - each timestamped no earlier than the previous one plus its DIN wire time (10 bits a byte at 31250 baud, 40.96 ms for 128 B) plus the gap, so the average never exceeds 31250 baud;
-   - restarting the schedule from "now" after a stall instead of bursting;
-   - never handing the browser more than 1 s of data ahead, because Chrome has no `MIDIOutput.clear()`;
-   - with progress and ETA, an abort, a screen wake lock, and a warning when the tab goes to the background;
-   - ending (done, stopped or failed) only once everything already handed to the browser is due to have left the cable, so a new send can never interleave with the tail of a stopped one.
+   **Status wording** (per recipe, from `tools/mkpackages.py`, checked against `flash/START_HERE.md` and the README at ebd197b): MK1 5c is hardware-proven (2026-10-10, "everything works"; per-row SMP CUT detail still pending); 2b is hardware-proven (2026-10-06); 4d has not been run; the MK1 Control build has no separate hardware report in the project's notes; every MKII and Keys build is "built and verified byte for byte, never run on a unit". END mode is gone from the MK1 builds (it remains on the MKII).
 
-   **Recover: send Elektron's original file** uses the same sender on the stock file the user dropped.
-
-5. **State.** Every result is bound to the state that asked for it. A counter goes up on every new file and every new choice; each engine reply carries the counter it was asked under, and a stale reply is dropped. While a build or a send runs, the file input, the drop zone, the mod boxes and Build are locked, and a dropped file is refused with a message. Before anything goes out, the page checks again, on its own thread with its own copy of `sha256.js` and `known.json`, that:
+5. **State.** Every result is bound to the state that asked for it. A counter goes up on every new file and every new choice; each engine reply carries the counter it was asked under, and a stale reply is dropped. While a build or a send runs, the file input, the drop zone, the mod boxes and Build are locked, and a dropped file is refused with a message. Before anything could go out (only the experimental sender sends), the page checks again, on its own thread with its own copy of `sha256.js` and `known.json`, that:
    - the stock file is Elektron's original for the device on screen;
    - the build belongs to that file and to the recipe on screen;
    - its bytes hash to the published sha256 for that recipe and device.
 
-   The download name carries the first 8 hex digits of the sha256 (`AR1_OS1.73_0000_0001_76a2f4d0.syx`), because the project's own build names repeat across different builds (`…_0000_0001.syx` is files 3, 4 and 4b).
+   The download name carries the first 8 hex digits of the sha256 (`AR1_OS1.73_0000_0001_36a017ba.syx`), because the project's own build names repeat across different builds (`…_0000_0001.syx` is files 3, 4, 4b, 4c and 4d).
 
    After a successful build the page points to that device's `START_HERE` (first-run checks and what not to do): `flash/START_HERE.md` (MK1), `flash/MKII/START_HERE_MKII.md`, `flash/KEYS/START_HERE_KEYS.md`, as links to github.com/bandersong/analog-rytm-chop (`blob/main/…`). The page itself still needs no network.
+
+## The experimental sender (off by default)
+
+Decision (2026-10-10): the page's own Web MIDI sender and its Recover button have never touched a real unit, so the default page shows none of it: no controls, no MIDI permission request, no MIDI claims. The code is kept for later testing:
+- address ending **`#experimental-sender`** mounts the section from `<template id="experimentalSenderTpl">` (read at load and on `hashchange`); any other hash does nothing;
+- `src/sender/sender.js` and its tests are unchanged; `test/browser/race.js` loads the page with the flag;
+- `test/page.test.js` proves the default page has no sender controls and never calls `navigator.requestMIDIAccess`, and that the flag mounts it and still waits for a click.
+
+Whether a desktop Chrome shows the SysEx permission prompt for a `file://` page was never checked; with the flag, use the local server (`python3 -m http.server --bind 127.0.0.1 --directory web/dist 8000`) if it doesn't.
+
+What the sender does (unchanged since M0):
+
+**Route C (startup menu, DIN MIDI).** The page walks the user through the startup menu:
+- Hold FUNC (on the Keys: FUNCTION) at power-on, then press TRIG 4 = OS UPGRADE.
+- Send over DIN MIDI into the unit's MIDI IN. USB does not work in the startup menu.
+
+A notice at the top of the section says this sender has not been tried on a unit yet and gives Elektron's own route for the same thing (Elektron's own text for it, which the page names per device: MK1 manual section 14.4 "OS UPGRADE"; Analog Keys manual "EARLY STARTUP MENU", "OS UPGRADE"; MKII OS release notes "Upgrading from the STARTUP Menu", which call Transfer's button "LEGACY OS UPGRADE mode". Transfer, CONNECTION, "go to the SYSEX TRANSFER page", "OS Upgrade via device startup menu" is the MK1/Keys wording); "If something goes wrong" puts that route first. Route warnings in the page: close Transfer, disable sleep, keep the tab in front, don't power off. The user ticks the confirmations:
+- four about the route: backup, the OS UPGRADE screen, the DIN cable, Transfer closed and no sleep;
+- a fifth, written from the file in step 1, naming the unit: e.g. "This unit is an Analog Rytm MK1 (not an MKII)", or "an Analog Keys (not an Analog Four)";
+- a sixth, for sending the build only: "It runs OS 1.73 now", or 1.56 on the Keys.
+
+Both buttons name the device ("Send the Analog Rytm MK1 build", "Recover: send Elektron's original Analog Rytm MK1 file"). Recover needs the first five boxes, the build all six. Every box is unticked again on a new file, a new choice, a new build and at the end of every send. Then the page streams the file's own SysEx messages (`src/sender/sender.js`):
+- one by one, unchanged, with a selectable gap: 5/10/**20**/40/80 ms;
+- each timestamped no earlier than the previous one plus its DIN wire time (10 bits a byte at 31250 baud, 40.96 ms for 128 B) plus the gap, so the average never exceeds 31250 baud;
+- restarting the schedule from "now" after a stall instead of bursting;
+- never handing the browser more than 1 s of data ahead, because Chrome has no `MIDIOutput.clear()`;
+- with progress and ETA, an abort, a screen wake lock, and a warning when the tab goes to the background;
+- ending (done, stopped or failed) only once everything already handed to the browser is due to have left the cable, so a new send can never interleave with the tail of a stopped one.
+
+**Recover: send Elektron's original file** uses the same sender on the stock file the user dropped.
+
 
 Not in M0 (next): **route A**, USB while the OS runs (Transfer's drop route: the `0x50`/`0x51` OsUpgrade RPC described in corp `installer-re/REPORT.md`). Also not in M0:
 - M0b: measuring Transfer's own pacing on the startup-menu route.
@@ -101,8 +122,8 @@ Not in M0 (next): **route A**, USB while the OS runs (Transfer's drop route: the
 | `src/engine/eftrun.js` | runs elektron-firmware-tool's `main()` in a fresh WebAssembly instance per call |
 | `src/engine/sha256.js`, `zip.js` | SHA-256/HMAC (FIPS 180-4, RFC 2104) and a .zip reader (APPNOTE), own code |
 | `src/engine/known.json` | hand-entered pins: stock sha256s, published output sha256s with their source file, never-write ranges |
-| `src/sender/sender.js` | the Web MIDI sender |
-| `src/ui/` | page template, style, page script |
+| `src/sender/sender.js` | the Web MIDI sender (experimental, off by default) |
+| `src/ui/` | page template (its `<template id="experimentalSenderTpl">` holds the experimental sender's markup), style, page script (all sender code is in `mountSender()`) |
 | `src/wasm/eft_api.c` | a read-only `eft_identify()` (device byte, container, version) over the tool's parser |
 | `generated/eft.js` | elektron-firmware-tool + `eft_api.c` compiled by emscripten 6.0.10 (`SINGLE_FILE`), with `eft.build.txt` (flags, source hashes) |
 | `generated/packages/` | one JSON package per published build, and `index.json` (sha256 of each package text, feature rules) |
@@ -219,13 +240,18 @@ node --test web/test/*.test.js     # 51 tests, about 2 minutes; read-only (all o
 ONLY=keys-chord node --test web/test/engine.test.js
 ```
 
-Stock files are found by sha256 in `stock/` and `upstream/rytm1_mods/stock/`, or in `STOCK_DIR`.
+Stock files are found by sha256 in `stock/` and `upstream/rytm1_mods/stock/`, or in `STOCK_DIR` (a path-delimited list). The project's `flash/*.syx` images are not in git, so the superseded-build checks read them from `SYX_ROOT` (a checkout that holds them; default: this repo). The checksum files (`flash/**/SHA256SUMS`, `START_HERE_KEYS.md`) are always read from this repo. Example from a worktree:
+
+```bash
+STOCK_DIR="<main checkout>/upstream/rytm1_mods/stock:<main checkout>/stock" SYX_ROOT="<main checkout>" node --test web/test/*.test.js
+```
 
 | File | Covers |
 |---|---|
 | `engine.test.js` | every published target from its stock file → the published sha256 (11 targets) |
 | `negative.test.js` | refusals listed below |
-| `sender.test.js` | the sender against a mock `MIDIOutput` with a fake clock (listed below) |
+| `sender.test.js` | the experimental sender against a mock `MIDIOutput` with a fake clock (listed below) |
+| `page.test.js` | the default page has no sender controls or MIDI-sender wording, its script never calls `requestMIDIAccess` (with or without the flag, until a click), other hashes don't switch the sender on, and `#experimental-sender` does |
 | `scan.test.js` | the no-Elektron-bytes scan |
 | `known.test.js` | pins against the project's SHA256SUMS files; packages against pins; SHA-256/HMAC against node crypto and RFC 4231 |
 | `bundle.test.js` | `dist/index.html` is current, self-contained, carries NOTICE and every licence text in full (EFT's MIT, emscripten, musl, the GPL) plus the source pointer, and its embedded engine builds `keys-joy-min` in a worker-like sandbox |
@@ -244,7 +270,7 @@ Stock files are found by sha256 in `stock/` and `upstream/rytm1_mods/stock/`, or
 - an unclaimed edit;
 - an undeclared stock copy, and a failing copy check;
 - one of this project's own outputs dropped as stock;
-- this project's older and superseded flash builds (`flash/`, `flash/_superseded/`) dropped as stock: each is named as "a modded build from this project, not Elektron's stock file", and a one-byte-changed copy is not.
+- this project's older and superseded flash builds (`flash/`, `flash/_superseded/`) dropped as stock, including 4b, 5, 4c and 5b (MK1) and the two older MKII builds: each is named as "a modded build from this project, not Elektron's stock file", and a one-byte-changed copy is not.
 
 It also checks the feature rules.
 
@@ -264,7 +290,7 @@ It also checks the feature rules.
 
 No device, virtual port or system setting is used.
 
-Browser state test (VM): `CHROME=… PUPPETEER=… [INLINE=1] [DIST=…] SHOTS=… node web/test/browser/race.js` checks, with a mock MIDI port and both engine modes, that the page never offers or sends bytes other than the published file for the device and recipe on screen:
+Browser state test (VM): `CHROME=… PUPPETEER=… [INLINE=1] [DIST=…] SHOTS=… node web/test/browser/race.js` loads the page with `#experimental-sender` and checks, with a mock MIDI port and both engine modes, that the page never offers or sends bytes other than the published file for the device and recipe on screen:
 - another device's stock file dropped 0 and 100 ms into a build (the panel's SAFE-1 case), then after the build, and a synthetic drop event right after Build. A drop the page handles during the build must be refused. With the on-page engine the page itself is busy packing, so the browser may deliver the drop only after the build; then it must be taken as a new file, with the old build gone;
 - the mod boxes changed 0.5 s and 3 s into a build (a click and a scripted change event);
 - the exclusion rule both ways;
@@ -278,6 +304,7 @@ Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/brows
 - the page from `file://` builds `mk1-samplefocus-cut`, `mk2-samplefocus` and `keys-joy-min` to their published sha256 (checked with `crypto.subtle` in the page);
 - a 1.72 file is refused;
 - no horizontal scroll at 375 px;
+- the default page: no sender controls, no call to `navigator.requestMIDIAccess` during the whole run, the OS 1.74 note, the Transfer steps, and only the identified unit's note shown;
 - no console errors.
 
 ## Known gaps
@@ -286,7 +313,8 @@ Browser end-to-end (VM): `CHROME=… PUPPETEER=… SHOTS=… node web/test/brows
   - a real MIDI interface or unit;
   - desktop Chrome/Edge permission behaviour from `file://`;
   - Windows/Linux browsers.
-- **Route C pacing is unknown** (corp `installer-re`: no Elektron source gives a gap). 20 ms is a conservative default, not a measured one; M0b should measure Transfer's own stream.
-- **The page cannot see whether the unit received the file.** It is not known whether the bootstrap ever answers.
+- **Experimental sender only:** route C pacing is unknown (corp `installer-re`: no Elektron source gives a gap). 20 ms is a conservative default, not a measured one; M0b should measure Transfer's own stream.
+- **Experimental sender only:** the page cannot see whether the unit received the file. It is not known whether the bootstrap ever answers.
 - **Licences:** the packages, and some of the mod code in them, include code from gdeo607/rytm1_mods, which has no licence (GitHub reports none, 2026-10-08). It is credited (`NOTICE`, the page's footer and licence section) and used as-is; this project's GPL-3.0-or-later grant covers its own code only. Local only until the project has its name. The page's Corresponding Source pointer names the `web/` folder; the public address goes in `tools/bundle.js` (`SOURCE_NOTE`) once there is one.
-- **The page cannot ask the unit what it is or which OS it runs** (M0 has no USB route). The fifth and sixth boxes are the user's word for it.
+- **Experimental sender only:** the page cannot ask the unit what it is or which OS it runs (M0 has no USB route). The fifth and sixth boxes are the user's word for it.
+- **Elektron's pages** (the two support articles linked from step 4, the release-note and manual references, "only 1.74 is served") were read from copies saved on 2026-10-08; they were not re-fetched for this build.
