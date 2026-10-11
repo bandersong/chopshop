@@ -11,7 +11,7 @@ where the source is, are in the "Licences and credits" section at the end of thi
 
 Built by web/tools/bundle.js from (sha256):
   fcb6e71a449216af187de830c01022ad3ff07ba85c7b38f490cb71d2be7a3d78  src/ui/index.html
-  8b535b1d84b17a786170fc7184df147020d8ad79789deca9a74e5afd12771494  src/ui/style.css
+  9b8a0a5b2fe0eec74c16319f8d58c03c08fd72c625fbcdc53671c2a365f2fd00  src/ui/style.css
   368135613033187529174013cc2130a1fe41894e12714d67fc5344f2f4d41337  src/ui/app.js
   563a551f8ec23c28f442bf7880c2e93e3a166e34b966fc0b8ecf949f43e033e1  src/sender/sender.js
   15fd039db745c1642316db0b355045ace169be5cd3149d06c8bc8b2d5d43b931  src/engine/sha256.js
@@ -60,7 +60,7 @@ Built by web/tools/bundle.js from (sha256):
   --pad: #7d918c;
   --knob: #d4534a;
   --knob-cap: #ff8f84;
-  --page: 760px;
+  --page: min(1120px, 94vw);
   --display: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   accent-color: var(--blue);
@@ -90,7 +90,7 @@ Built by web/tools/bundle.js from (sha256):
 html { background: var(--bg); text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.55 var(--body); overflow-wrap: break-word;
+  font: clamp(16px, 0.9vw + 11px, 18px)/1.6 var(--body); overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
 }
 ::selection { background: var(--signal); color: var(--signal-fg); }
@@ -365,6 +365,10 @@ footer.wrap { padding-top: 8px; padding-bottom: 48px; }
     border: 1px solid CanvasText;
   }
 }
+
+/* wide screens: cards and the hero use the full column; running text stays readable */
+section p, section li, .card p, .card li { max-width: 80ch; }
+@media (min-width: 900px) { section { padding: 28px 32px; } header.wrap { padding-top: 4.2rem; } }
 </style>
 </head>
 <body>

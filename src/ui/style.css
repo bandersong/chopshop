@@ -25,7 +25,7 @@
   --pad: #7d918c;
   --knob: #d4534a;
   --knob-cap: #ff8f84;
-  --page: 760px;
+  --page: min(1120px, 94vw);
   --display: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   accent-color: var(--blue);
@@ -55,7 +55,7 @@
 html { background: var(--bg); text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.55 var(--body); overflow-wrap: break-word;
+  font: clamp(16px, 0.9vw + 11px, 18px)/1.6 var(--body); overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
 }
 ::selection { background: var(--signal); color: var(--signal-fg); }
@@ -330,3 +330,7 @@ footer.wrap { padding-top: 8px; padding-bottom: 48px; }
     border: 1px solid CanvasText;
   }
 }
+
+/* wide screens: cards and the hero use the full column; running text stays readable */
+section p, section li, .card p, .card li { max-width: 80ch; }
+@media (min-width: 900px) { section { padding: 28px 32px; } header.wrap { padding-top: 4.2rem; } }
