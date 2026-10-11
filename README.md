@@ -2,7 +2,7 @@
 
 Chopshop builds unofficial mods for the Elektron **Analog Rytm** (MK1 and MKII, OS 1.73) and the **Analog Keys** (OS 1.56) from your own copy of Elektron's OS file, in your browser. Then you flash the checked file with Elektron Transfer.
 
-**Use it: https://chopshop.pages.dev/** (one page; it also works offline if you save it).
+**Use it: https://chopshop-synth.pages.dev/** (one page; it also works offline if you save it).
 
 Unofficial: not made, checked or endorsed by Elektron. Changing your unit's firmware is at your own risk.
 
