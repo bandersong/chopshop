@@ -1,5 +1,5 @@
 /* Regression test for the page's state handling, in a real browser (SAFE-1/2/4/5/6/7/8, F2, F5).
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * The invariant: whatever the user does and whenever the replies arrive, the page never
  * offers, and never sends, bytes other than the published file for the device shown in

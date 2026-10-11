@@ -1,5 +1,5 @@
 /* dist/index.html is what the sources give, and its embedded engine builds a published file.
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later. Read-only. */
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later. Read-only. */
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert');

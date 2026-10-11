@@ -1,5 +1,5 @@
 /* Everything the engine must refuse, refuses - each at the layer meant to catch it.
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  * Read-only: every damaged file and package is made in memory. */
 'use strict';
 const test = require('node:test');

@@ -1,5 +1,5 @@
 /* Test helpers: load the engine exactly as the page does, find the stock files.
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  * Tests only READ files (they run read-only on the host): everything they make stays in memory. */
 'use strict';
 const fs = require('fs');

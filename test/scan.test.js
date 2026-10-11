@@ -1,5 +1,5 @@
 /* The no-Elektron-bytes scan over everything the installer ships.
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Shipped byte strings ("S"): every package's mod bytes (each data part, decoded), every
  * package file as text, the bundle dist/index.html, the WebAssembly binary inside
@@ -212,7 +212,7 @@ test('no Elektron bytes in the packages or the bundle (T1 exact, T2 runs >= 16 B
   assert.deepStrictEqual([...wasm.subarray(0, 4)], [0x00, 0x61, 0x73, 0x6d]);
   shipped.push(['WebAssembly (eft.wasm, decoded)', wasm]);
   const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e =>
-    e.isDirectory() ? (['dist', 'node_modules', 'build'].includes(e.name) ? [] : walk(path.join(d, e.name)))
+    e.isDirectory() ? (['dist', 'node_modules', 'build', '.git'].includes(e.name) ? [] : walk(path.join(d, e.name)))
                     : [path.join(d, e.name)]);
   const textFiles = walk(L.WEB).filter(f => !/generated\/packages\//.test(f));
   for (const f of textFiles) shipped.push([path.relative(L.WEB, f), new Uint8Array(fs.readFileSync(f))]);
