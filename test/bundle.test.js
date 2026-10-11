@@ -12,7 +12,7 @@ const dist = path.join(L.WEB, 'dist', 'index.html');
 
 test('dist/index.html is exactly what tools/bundle.js makes from the current sources', () => {
   const { build } = require(path.join(L.WEB, 'tools', 'bundle.js'));
-  assert.ok(build() === fs.readFileSync(dist, 'utf8'), 'dist/index.html is stale: run node web/tools/bundle.js');
+  assert.ok(build() === fs.readFileSync(dist, 'utf8'), 'dist/index.html is stale: run node tools/bundle.js');
 });
 
 test('the page is self-contained: no external script, style, font or fetch target', () => {
@@ -38,8 +38,8 @@ test('the page carries NOTICE and every licence text in full, and says where the
   assert.ok(html.split('The above copyright notice and this permission notice shall be').length - 1 >= 3, 'EFT, emscripten and musl permission notices');
   assert.ok(html.includes('Rich Felker'), 'musl copyright line');
   assert.ok(html.includes('GNU GENERAL PUBLIC LICENSE') && html.includes('Version 3, 29 June 2007'), 'GPL text');
-  assert.ok(html.includes('Corresponding Source: the page is built by web/tools/bundle.js'), 'source pointer');
-  const head = html.slice(0, html.indexOf('Built by web/tools/bundle.js'));
+  assert.ok(html.includes('Corresponding Source: https://github.com/bandersong/chopshop . The page is built by tools/bundle.js'), 'source pointer');
+  const head = html.slice(0, html.indexOf('Built by tools/bundle.js'));
   assert.ok(/GPL-3\.0-or-later/.test(head) && /Marcel Bierling \(MIT License\)/.test(head) && /Rich Felker/.test(head),
             'the top-of-file comment names the licences');
 });

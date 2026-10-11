@@ -6,7 +6,9 @@ const fs = require('fs');
 const path = require('path');
 
 const WEB = path.resolve(__dirname, '..');
-const REPO = path.resolve(WEB, '..');
+/* In the standalone repo the project's public checksum files and START_HERE pages are mirrored under mods-repo/;
+ * inside the mods repo (web/ folder) they are read from the repo root. */
+const REPO = fs.existsSync(path.join(WEB, 'mods-repo')) ? path.join(WEB, 'mods-repo') : path.resolve(WEB, '..');
 /* The project's flash/*.syx images are not in git ("images stay local"): SYX_ROOT names a checkout that holds them
  * (read only); the checksum files and START_HERE pages are always read from this repo (REPO). */
 const SYX_ROOT = process.env.SYX_ROOT || REPO;

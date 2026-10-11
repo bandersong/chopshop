@@ -11,8 +11,8 @@
  * The page thread gets its own copy of sha256.js and of known.json (RYTM_PAGE_KNOWN) for
  * the last check before sending. The page carries every notice and licence text that
  * applies to the code inside it (LICENCES below): one file, so they travel with it.
- *   node web/tools/bundle.js            writes web/dist/index.html
- *   node web/tools/bundle.js --check    exits 1 if dist/index.html is not what the inputs give
+ *   node tools/bundle.js            writes dist/index.html
+ *   node tools/bundle.js --check    exits 1 if dist/index.html is not what the inputs give
  */
 'use strict';
 const fs = require('fs');
@@ -38,12 +38,11 @@ const SOURCE_NOTE =
   'option) any later version. It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; ' +
   'without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU ' +
   'General Public License below for more details.\n\n' +
-  'Corresponding Source: the page is built by web/tools/bundle.js from the project\'s web/ folder (src/, tools/, ' +
+  'Corresponding Source: https://github.com/bandersong/chopshop . The page is built by tools/bundle.js from that repository (src/, tools/, ' +
   'generated/, third_party/). Its JavaScript is in this file as written. The WebAssembly part is ' +
   'elektron-firmware-tool\'s C sources (third_party/elektron-firmware-tool/) plus src/wasm/eft_api.c, compiled by ' +
-  'tools/build-wasm.sh with emscripten 6.0.10 (flags and source hashes: generated/eft.build.txt). The project has ' +
-  'no public address yet (not published); the address of the source will be written here before ' +
-  'this page is shared.';
+  'tools/build-wasm.sh with emscripten 6.0.10 (flags and source hashes: generated/eft.build.txt). ' +
+  'Page: https://chopshop.pages.dev/ .';
 
 function licenceHtml() {
   const parts = ['<h3>This page</h3>\n<pre>' + esc(SOURCE_NOTE) + '</pre>'];
@@ -91,7 +90,7 @@ function build() {
     'University of Illinois/NCSA) and parts of musl libc, Copyright (c) 2005-2020 Rich Felker,\n' +
     'et al. (MIT License), compiled to WebAssembly. Their full notices and licence texts, and\n' +
     'where the source is, are in the "Licences and credits" section at the end of this file.\n\n' +
-    'Built by web/tools/bundle.js from (sha256):\n' +
+    'Built by tools/bundle.js from (sha256):\n' +
     inputs.map(p => `  ${sha(rd(p))}  ${p}`).join('\n') + '\n-->\n';
   let html = rd('src/ui/index.html');
   if (html.split('<!--@LICENCES@-->').length !== 2) throw new Error('index.html needs exactly one <!--@LICENCES@-->');
@@ -109,7 +108,7 @@ const html = build();
 const out = path.join(WEB, 'dist', 'index.html');
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(out) ? fs.readFileSync(out, 'utf8') : '';
-  if (cur !== html) { console.error('dist/index.html is out of date: run node web/tools/bundle.js'); process.exit(1); }
+  if (cur !== html) { console.error('dist/index.html is out of date: run node tools/bundle.js'); process.exit(1); }
   console.log(`dist/index.html is up to date (${Buffer.byteLength(html)} B, sha256 ${sha(html)})`);
 } else {
   fs.mkdirSync(path.dirname(out), { recursive: true });
