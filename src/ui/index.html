@@ -9,6 +9,18 @@
 </head>
 <body>
 <header class="wrap">
+    <svg aria-hidden="true" class="faceplate" viewBox="0 0 328 64">
+  <circle class="knob" cx="32" cy="32" r="22" fill="#d4534a"/>
+  <circle class="knob-cap" cx="32" cy="32" r="14.5" fill="#ff8f84"/>
+  <circle class="knob-hole" cx="32" cy="32" r="3.2" fill="#1c1210"/>
+  <rect class="knob-tick" x="29.6" y="7.5" width="4.8" height="11.5" rx="1" fill="#1c1210"/>
+  <rect class="pad on" x="76" y="12" width="34" height="40" rx="3" fill="#b0261f"/>
+  <rect class="pad on" x="118" y="12" width="34" height="40" rx="3" fill="#b0261f"/>
+  <rect class="pad" x="160" y="12" width="34" height="40" rx="3" fill="#7d918c"/>
+  <rect class="pad cv" x="202" y="12" width="34" height="40" rx="3" fill="#d99a00"/>
+  <rect class="pad" x="244" y="12" width="34" height="40" rx="3" fill="#7d918c"/>
+  <rect class="pad au" x="286" y="12" width="34" height="40" rx="3" fill="#1b5ea8"/>
+</svg>
   <h1>Chopshop</h1>
   <p class="lede"><b>Chopshop</b> builds unofficial mods for the Elektron <b>Analog Rytm</b> (MK1 and MKII, OS 1.73) and the <b>Analog Keys</b> (OS 1.56) from Elektron's own OS file, right here in your browser. Then you flash the checked file with Elektron Transfer.</p>
   <p class="fine"><b>Supported units:</b> Analog Rytm MK1 and MKII (OS 1.73) and Analog Keys (OS 1.56), and nothing else. The Analog Four is not supported.</p>
@@ -73,7 +85,7 @@
       <p class="mono" id="dlSha"></p>
       <p><a id="dlLink" class="button primary" download>Download</a></p>
       <p id="dlNext" class="fine"></p>
-      <p class="fine">Flash this file with Elektron Transfer: the steps are in step 4. Keep Elektron's original file too: it is your way back.</p>
+      <p class="fine">Flash this file with Elektron Transfer: the steps are in step 4. Keep Elektron's original file too: the recovery route sends it. Going back to stock over a mod build has not been tried on a unit yet.</p>
     </div>
   </div>
 </section>
@@ -86,24 +98,24 @@
     <h3>Before you start</h3>
     <ul>
       <li><b>Back up your projects</b> (and +Drive) in Elektron Transfer first.</li>
-      <li><b>Flash the Control build first</b> (step 2, no boxes ticked). If the unit starts and plays normally, the route works.</li>
+      <li><b>Flash the Control build first</b> (step 2, no boxes ticked). If the unit starts and plays normally, the route works. Then add one mod at a time, each only after the one before behaved (your device's START_HERE has the order).</li>
       <li><b>Don't power off the unit</b> while it installs, or during the first start after it.</li>
-      <li>Keep Elektron's original OS file: it is your way back.</li>
+      <li>Keep Elektron's original OS file: the recovery route sends it. Going back to stock over a mod build has not been tried on a unit yet.</li>
     </ul>
   </div>
 
   <h3>The steps</h3>
   <ol class="steps" id="flashSteps">
     <li>Connect the unit to the computer with USB, start Elektron Transfer, choose the unit as MIDI in and MIDI out, and click Connect.</li>
-    <li>Drag the downloaded <code>.syx</code> file onto Transfer's big DROP area ("Drop files here"). Transfer then sends it to the unit by itself.</li>
-    <li>When Transfer says the file has arrived, press <b>YES</b> on the unit and follow its screen. Do not turn it off until the update is done.</li>
+    <li>Drag the downloaded <code>.syx</code> file onto Transfer's big DROP area ("Drop files here"). Then press <b>YES</b> on the unit, as the project's notes for your device say.</li>
+    <li>Follow the unit's screen. Do not switch it off during the update or during the first start after it.</li>
     <li>If Transfer refuses the file as "same version", nothing was written. Stop, or use the startup-menu route below.</li>
   </ol>
   <p class="fine">These are the steps of the project's own notes for each device and of Elektron's article <a href="https://support.elektron.se/support/solutions/articles/43000662890-how-to-update-your-device" target="_blank" rel="noopener noreferrer">How to update your device</a> (opens Elektron's site; this page itself needs no network).</p>
 
   <div class="devnote card" data-dev="mk1">
     <h3>Analog Rytm MK1 (OS 1.73)</h3>
-    <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.73 file. Hold <b>FUNC</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE). In Elektron Transfer click "go to the SYSEX TRANSFER page", then "OS upgrade via device startup menu", and follow the screen. This needs a DIN MIDI interface and a MIDI cable into the unit's MIDI IN: <b>USB does not work in the startup menu</b>.</p>
+    <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.73 file. Hold <b>FUNC</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE). In Elektron Transfer click "go to the SYSEX TRANSFER page", then "OS upgrade via device startup menu" (the project's notes call this CONNECTION page button "LEGACY OS UPGRADE"), and follow the screen. This needs a DIN MIDI interface and a MIDI cable into the unit's MIDI IN: <b>USB does not work in the startup menu</b>.</p>
     <p class="fine">Elektron's text: Analog Rytm MK1 manual, section 14.4 "OS UPGRADE", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's first-run checks for these files: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/START_HERE.md" target="_blank" rel="noopener noreferrer">flash/START_HERE.md</a>.</p>
   </div>
 
