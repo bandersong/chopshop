@@ -42,7 +42,7 @@ const SOURCE_NOTE =
   'generated/, third_party/). Its JavaScript is in this file as written. The WebAssembly part is ' +
   'elektron-firmware-tool\'s C sources (third_party/elektron-firmware-tool/) plus src/wasm/eft_api.c, compiled by ' +
   'tools/build-wasm.sh with emscripten 6.0.10 (flags and source hashes: generated/eft.build.txt). ' +
-  'Page: https://chopshop.pages.dev/ .';
+  'Page: https://chopshop-synth.pages.dev/ .';
 
 function licenceHtml() {
   const parts = ['<h3>This page</h3>\n<pre>' + esc(SOURCE_NOTE) + '</pre>'];
