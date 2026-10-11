@@ -10,8 +10,8 @@ et al. (MIT License), compiled to WebAssembly. Their full notices and licence te
 where the source is, are in the "Licences and credits" section at the end of this file.
 
 Built by web/tools/bundle.js from (sha256):
-  fcb6e71a449216af187de830c01022ad3ff07ba85c7b38f490cb71d2be7a3d78  src/ui/index.html
-  9b8a0a5b2fe0eec74c16319f8d58c03c08fd72c625fbcdc53671c2a365f2fd00  src/ui/style.css
+  064d05e7885b97587702f87cf7a38ab4010427ad03e8e9f331945eaef3d7c1b2  src/ui/index.html
+  1c3312d402b18c6d2e887e9ce92932444de901796b216bb0ecebeb27bc0f23f7  src/ui/style.css
   368135613033187529174013cc2130a1fe41894e12714d67fc5344f2f4d41337  src/ui/app.js
   563a551f8ec23c28f442bf7880c2e93e3a166e34b966fc0b8ecf949f43e033e1  src/sender/sender.js
   15fd039db745c1642316db0b355045ace169be5cd3149d06c8bc8b2d5d43b931  src/engine/sha256.js
@@ -369,6 +369,17 @@ footer.wrap { padding-top: 8px; padding-bottom: 48px; }
 /* wide screens: cards and the hero use the full column; running text stays readable */
 section p, section li, .card p, .card li { max-width: 80ch; }
 @media (min-width: 900px) { section { padding: 28px 32px; } header.wrap { padding-top: 4.2rem; } }
+
+/* hardware-status strip in the hero; the MKII chip is deliberately loud */
+.status-row { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; padding: 0; }
+.st { padding: 6px 12px; border: 1px solid var(--line); border-left-width: 4px; border-radius: 2px 10px 2px 10px; background: var(--well); font-size: 0.9rem; line-height: 1.3; }
+.st b { display: block; font-family: var(--display); text-transform: uppercase; letter-spacing: 0.06em; }
+.st-ok { border-left-color: var(--ok); }
+.st-no { border-color: var(--signal); border-left-color: var(--signal); background: var(--warn-bg); font-weight: 700; }
+.st-no b { color: var(--signal); }
+.devnote.bad::before { content: "Not tested on a unit."; color: var(--signal); }
+.devnote.bad { border-left: 5px solid var(--signal); border-color: var(--signal); }
+.big-no { font-size: 1.2rem; line-height: 1.35; color: var(--signal); }
 </style>
 </head>
 <body>
@@ -388,6 +399,11 @@ section p, section li, .card p, .card li { max-width: 80ch; }
   <h1>Chopshop</h1>
   <p class="lede"><b>Chopshop</b> builds unofficial mods for the Elektron <b>Analog Rytm</b> (MK1 and MKII, OS 1.73) and the <b>Analog Keys</b> (OS 1.56) from Elektron's own OS file, right here in your browser. Then you flash the checked file with Elektron Transfer.</p>
   <p class="fine"><b>Supported units:</b> Analog Rytm MK1 and MKII (OS 1.73) and Analog Keys (OS 1.56), and nothing else. The Analog Four is not supported.</p>
+  <ul class="status-row" aria-label="Hardware testing status">
+    <li class="st st-ok"><b>Analog Rytm MK1</b> run on a unit (see each build)</li>
+    <li class="st st-ok"><b>Analog Keys</b> run on a unit (see each build)</li>
+    <li class="st st-no"><b>Analog Rytm MKII</b> NOT run on a unit yet</li>
+  </ul>
   <p class="fine">Nothing is uploaded: your file never leaves this computer, and the page works offline. Unofficial: not made, checked or endorsed by Elektron. Changing your unit's firmware is at your own risk.</p>
 </header>
 
@@ -483,9 +499,10 @@ section p, section li, .card p, .card li { max-width: 80ch; }
     <p class="fine">Elektron's text: Analog Rytm MK1 manual, section 14.4 "OS UPGRADE", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's first-run checks for these files: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/START_HERE.md" target="_blank" rel="noopener noreferrer">flash/START_HERE.md</a>.</p>
   </div>
 
-  <div class="devnote card" data-dev="mk2">
+  <div class="devnote card bad" data-dev="mk2">
     <h3>Analog Rytm MKII (OS 1.73)</h3>
-    <p><b>No MKII build has been run on an MKII.</b> They are built and verified byte for byte, nothing more. Flash the Control build first and read the notes before you try the others.</p>
+    <p class="big-no"><b>No MKII build has been run on an MKII, not even by the author.</b></p>
+    <p>They are built and verified byte for byte, nothing more. Flash the Control build first and read the notes before you try the others.</p>
     <p><b>If the unit doesn't start, or Transfer refuses the file:</b> use Elektron's startup-menu route with Elektron's original 1.73 file. Hold <b>FUNC</b> while you switch the unit on, then press <b>TRIG 4</b> (OS UPGRADE), and in Elektron Transfer use the CONNECTION page's "LEGACY OS UPGRADE" mode (Elektron's wording in the MKII release notes). This needs a DIN MIDI interface into the unit's MIDI IN: <b>USB does not work in the startup menu</b>.</p>
     <p class="fine">Elektron's text: the Analog Rytm MKII OS release notes, "Upgrading from the STARTUP Menu", and the article <a href="https://support.elektron.se/support/solutions/articles/43000662701-how-to-update-your-device-via-sysex-transfer" target="_blank" rel="noopener noreferrer">How to update your device via sysex transfer</a>. The project's notes: <a href="https://github.com/bandersong/analog-rytm-chop/blob/main/flash/MKII/START_HERE_MKII.md" target="_blank" rel="noopener noreferrer">flash/MKII/START_HERE_MKII.md</a>.</p>
   </div>
