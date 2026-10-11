@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "Chord memory + JOY RANDOM",
  "summary": "Chord memory, plus FUNCTION + OCTAVE DOWN: new random joystick assignments for the active track ([NO/RELOAD] + [SOUND] undoes it).",
- "status": "Built and verified byte for byte; never run on an Analog Keys.",
+ "status": "Built and verified byte for byte; run on the author's Analog Keys, where it worked.",
  "features": [
   "chord",
   "joy"

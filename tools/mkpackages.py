@@ -111,22 +111,22 @@ RECIPES = [
          summary="Elektron's own Analog Keys code, only unpacked and packed again by this "
                  "tool. Flash it first.",
          status="Same file as the project's KEYS 1_CONTROL. Built and verified byte for byte; "
-                "never run on an Analog Keys."),
+                "run on the author's Analog Keys, where it worked."),
     dict(id="keys-chord", device="keys", tag="0010", features=["chord"],
          title="Chord memory",
          summary="Hold 2-4 keys + FUNCTION + OCTAVE UP captures a chord; every key then "
                  "plays it with itself as the root. FUNCTION + OCTAVE UP with nothing held "
                  "or latched turns it off.",
-         status="Built and verified byte for byte; never run on an Analog Keys."),
+         status="Built and verified byte for byte; run on the author's Analog Keys, where it worked."),
     dict(id="keys-joy", device="keys", tag="0010_0011", features=["chord", "joy"],
          title="Chord memory + JOY RANDOM",
          summary="Chord memory, plus FUNCTION + OCTAVE DOWN: new random joystick "
                  "assignments for the active track ([NO/RELOAD] + [SOUND] undoes it).",
-         status="Built and verified byte for byte; never run on an Analog Keys."),
+         status="Built and verified byte for byte; run on the author's Analog Keys, where it worked."),
     dict(id="keys-joy-min", device="keys", tag="0011", features=["joy"],
          title="JOY RANDOM only",
          summary="Only the joystick roll (FUNCTION + OCTAVE DOWN), without chord memory.",
-         status="Built and verified byte for byte; never run on an Analog Keys."),
+         status="Built and verified byte for byte. JOY RANDOM alone (without chord memory) has not been run separately; the chord + JOY build has, and worked."),
 ]
 
 FEATURES = {

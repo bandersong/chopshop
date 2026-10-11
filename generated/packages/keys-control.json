@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "Control build (no mods)",
  "summary": "Elektron's own Analog Keys code, only unpacked and packed again by this tool. Flash it first.",
- "status": "Same file as the project's KEYS 1_CONTROL. Built and verified byte for byte; never run on an Analog Keys.",
+ "status": "Same file as the project's KEYS 1_CONTROL. Built and verified byte for byte; run on the author's Analog Keys, where it worked.",
  "features": [],
  "mods": [],
  "params": {},

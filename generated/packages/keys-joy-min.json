@@ -5,7 +5,7 @@
  "os": "1.56",
  "title": "JOY RANDOM only",
  "summary": "Only the joystick roll (FUNCTION + OCTAVE DOWN), without chord memory.",
- "status": "Built and verified byte for byte; never run on an Analog Keys.",
+ "status": "Built and verified byte for byte. JOY RANDOM alone (without chord memory) has not been run separately; the chord + JOY build has, and worked.",
  "features": [
   "joy"
  ],
