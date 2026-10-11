@@ -2,7 +2,7 @@
 /* bundle.js - assemble dist/index.html: one self-contained page, no server needed.
  *
  * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
- * SPDX-License-Identifier: GPL-3.0-or-later.
+ * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Inlines the stylesheet, the sender, the page script and, as one string, the engine
  * (sha256, zip, eftrun, engine, the WebAssembly tool generated/eft.js, known.json and

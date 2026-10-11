@@ -1,6 +1,6 @@
 /* End-to-end in a real browser: open dist/index.html from file://, drop a stock file,
  * pick mods, build, and check the downloadable file's sha256 inside the page.
- * Part of Chopshop, the browser installer. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Not part of `node --test`: it needs Chrome and puppeteer-core, which live in the build
  * VM only (never installed on the host):

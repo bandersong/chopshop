@@ -56,4 +56,4 @@ See [DEVELOPING.md](DEVELOPING.md): layout, package format, tests, adding a mod 
 
 ## Licence and credits
 
-GPL-3.0-or-later ([LICENSE](LICENSE)); details in [NOTICE](NOTICE). Built on `elektron-firmware-tool` (MIT) compiled to WebAssembly, and on gdeo607's `rytm1_mods`, which has no licence: credited and used as-is, and the GPL grant does not cover it. Elektron, Analog Rytm, Analog Four and Analog Keys are trademarks of Elektron Music Machines; this project is not affiliated with them.
+Copyright (C) 2026 Jesus Triana. GPL-3.0-or-later ([LICENSE](LICENSE)); details in [NOTICE](NOTICE). Built on `elektron-firmware-tool` (MIT) compiled to WebAssembly, and on gdeo607's `rytm1_mods`, which has no licence: credited and used as-is, and the GPL grant does not cover it. Elektron, Analog Rytm, Analog Four and Analog Keys are trademarks of Elektron Music Machines; this project is not affiliated with them.

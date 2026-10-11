@@ -1,7 +1,7 @@
 /* eft_api.c - a small read-only identify call over elektron-firmware-tool.
  *
  * Part of the browser installer (working name "web"). Copyright (C) 2026
- * bandersong. SPDX-License-Identifier: GPL-3.0-or-later.
+ * bandersong. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * The installer runs elektron-firmware-tool's own main() (MIT, Marcel Bierling)
  * for every extract, rebuild and repack, with the same arguments the project's

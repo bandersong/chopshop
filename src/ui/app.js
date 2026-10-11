@@ -1,7 +1,7 @@
 /* app.js - the page: drop a file, choose mods, build and check; flash with Elektron Transfer.
  *
  * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
- * SPDX-License-Identifier: GPL-3.0-or-later.
+ * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * The engine (EFT in WebAssembly, the packages, the checks) runs in a Web Worker made
  * from its own source text, so the page stays responsive while it packs and it works

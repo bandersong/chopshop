@@ -2,7 +2,7 @@
 """Generate the installer's mod packages from rytm1_mods' BUILT images.
 
 Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
-SPDX-License-Identifier: GPL-3.0-or-later.
+SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
 
 Nothing here is typed in by hand: every byte a package carries is read out of an
 image that tools/build.py built and tools/verify.py passed (build/mainos_<tag>.bin),
