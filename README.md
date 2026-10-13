@@ -56,6 +56,10 @@ The mods never change the unit's recovery code, and the page checks that byte fo
 
 See [DEVELOPING.md](DEVELOPING.md): layout, package format, tests, adding a mod or an OS version. The mods themselves live in https://github.com/bandersong/analog-rytm-chop .
 
+## Banned from Elektronauts since 2026
+
+![Elektronauts login page: You can't log in as bandersong from that IP address](docs/elektronauts-login-blocked.png)
+
 ## Licence and credits
 
 Copyright (C) 2026 Jesus Triana. GPL-3.0-or-later ([LICENSE](LICENSE)); details in [NOTICE](NOTICE). Built on `elektron-firmware-tool` (MIT) compiled to WebAssembly, and on gdeo607's `rytm1_mods`, which has no licence: credited and used as-is, and the GPL grant does not cover it. Elektron, Analog Rytm, Analog Four and Analog Keys are trademarks of Elektron Music Machines; this project is not affiliated with them.
