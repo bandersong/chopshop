@@ -1,7 +1,7 @@
 /* zip.js - read the .syx out of a .zip (Elektron ships OS updates as *_dist.zip).
  *
  * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
- * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
+ * SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Written from PKWARE's APPNOTE (end-of-central-directory record, central directory,
  * local headers). Stored (method 0) and deflate (method 8) entries; deflate is

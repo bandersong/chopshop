@@ -1,7 +1,7 @@
 /* engine.js - identify a stock OS file, apply a mod package, rebuild and verify.
  *
  * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
- * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
+ * SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * The checks mirror rytm1_mods' tools/build.py and tools/verify.py (read for their
  * rules; no code taken): stock checksum; MAIN OS size and checksum; every site holds

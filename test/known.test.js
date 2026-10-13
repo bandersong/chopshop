@@ -1,5 +1,5 @@
 /* known.json against the project's published checksums, and the packages against known.json.
- * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later. Read-only. */
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later. Read-only. */
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert');
