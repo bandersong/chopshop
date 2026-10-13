@@ -1,7 +1,7 @@
 /* eftrun.js - run elektron-firmware-tool (compiled to WebAssembly) like a command.
  *
  * Part of Chopshop, the browser installer. Copyright (C) 2026 bandersong.
- * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
+ * SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Each call starts a FRESH instance of the tool, writes the input files into its
  * private in-memory file system, runs its main() with the given arguments (the same

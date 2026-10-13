@@ -1,6 +1,6 @@
 /* Every published target, rebuilt in the engine from the user's stock file, must hash
  * to the published sha256. Part of Chopshop, the browser installer.
- * SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later. Read-only: inputs are read, outputs stay in memory.
+ * SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later. Read-only: inputs are read, outputs stay in memory.
  * ONLY=<recipe id,...> limits the run (the full set takes a few minutes). */
 'use strict';
 const test = require('node:test');

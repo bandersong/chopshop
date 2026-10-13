@@ -1,5 +1,5 @@
 /* The no-Elektron-bytes scan over everything the installer ships.
- * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Jesus Triana. SPDX-License-Identifier: GPL-3.0-or-later.
+ * Part of Chopshop, the browser installer. SPDX-FileCopyrightText: 2026 Bandersong. SPDX-License-Identifier: GPL-3.0-or-later.
  *
  * Shipped byte strings ("S"): every package's mod bytes (each data part, decoded), every
  * package file as text, the bundle dist/index.html, the WebAssembly binary inside
