@@ -4,6 +4,8 @@ Chopshop builds unofficial mods for the Elektron **Analog Rytm** (MK1 and MKII, 
 
 **Use it: https://chopshop-synth.pages.dev/** (one page; it also works offline if you save it).
 
+**Demo video:** [![ChopShop Demo](https://i.ytimg.com/vi/_a39Z8hSeAc/hqdefault.jpg)](https://youtu.be/_a39Z8hSeAc)
+
 Unofficial: not made, checked or endorsed by Elektron. Changing your unit's firmware is at your own risk.
 
 ## Read this first: OS 1.74
